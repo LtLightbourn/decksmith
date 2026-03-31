@@ -11,7 +11,7 @@ export default defineConfig({
       exclude: ['/api/*'],
       changefreq: 'weekly',
       priority: 1.0,
-      lastmod: new Date().toISOString().split('T')[0],
+      lastmod: new Date(),
       generateRobotsTxt: false,
     }),
   ],
@@ -25,10 +25,5 @@ export default defineConfig({
         },
       },
     },
-  },
-  test: {
-    environment: 'jsdom',
-    globals: true,
-    setupFiles: './src/test/setup.ts',
   },
 })

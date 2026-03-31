@@ -600,7 +600,7 @@ function BattlefieldCardView({
   bc, battlefieldRef, onUpdatePosition, onContextMenu,
 }: {
   bc: BattlefieldCard
-  battlefieldRef: React.RefObject<HTMLDivElement>
+  battlefieldRef: React.RefObject<HTMLDivElement | null>
   onUpdatePosition: (uid: string, pos: { x: number; y: number }) => void
   onContextMenu: (uid: string, x: number, y: number) => void
 }) {
