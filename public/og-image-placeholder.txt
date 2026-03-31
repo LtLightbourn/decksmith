@@ -1,0 +1,8 @@
+Create public/og-image.png at 1200x630px for social media previews.
+
+This image appears when sharing on Reddit, Discord, Twitter/X, and Facebook.
+
+Recommended: dark background matching the app aesthetic (#0a0805),
+Decksmith logo centered, tagline "Build Your Commander Deck" below.
+
+This file can be deleted once og-image.png is created.

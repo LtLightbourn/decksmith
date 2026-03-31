@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /deck-builder
+Sitemap: https://decksmith.gg/sitemap.xml
