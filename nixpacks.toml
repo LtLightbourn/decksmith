@@ -1,5 +1,2 @@
 [variables]
-NIXPACKS_NODE_VERSION = "22.12"
-
-[phases.install]
-cmds = ["npm install --include=optional"]
+NIXPACKS_NODE_VERSION = "22"
