@@ -441,7 +441,7 @@ app.post('/api/claude', requireAuth, async (req, res) => {
 // ── Serve built frontend in production ───────────────────────────────────
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(join(__dirname, 'dist')))
-  app.get('*', (_req, res) => {
+  app.use((_req, res) => {
     res.sendFile(join(__dirname, 'dist', 'index.html'))
   })
 }
