@@ -19,6 +19,16 @@ config({ path: join(__dirname, '.env') })
 
 const app = express()
 const PORT = process.env.PORT ?? 3001
+
+// Force HTTPS in production (Railway terminates TLS and sets x-forwarded-proto)
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.headers['x-forwarded-proto'] === 'http') {
+      return res.redirect(301, `https://${req.headers.host}${req.url}`)
+    }
+    next()
+  })
+}
 const ANTHROPIC_API = 'https://api.anthropic.com/v1/messages'
 const USAGE_LIMIT = 3
 
