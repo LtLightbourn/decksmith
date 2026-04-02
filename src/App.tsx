@@ -684,7 +684,12 @@ function AppWithLanding() {
   // Show a blank dark screen while Clerk hydrates to prevent a landing-page
   // flash for already-signed-in returning users.
   if (AUTH_ENABLED && !isLoaded) {
-    return <div style={{ position: 'fixed', inset: 0, background: '#06040200' }} />
+    return (
+      <>
+        <AuthBridge />
+        <div style={{ position: 'fixed', inset: 0, background: '#06040200' }} />
+      </>
+    )
   }
 
   const showLanding = !isSignedIn && !enteredApp
