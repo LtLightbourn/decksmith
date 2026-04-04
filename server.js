@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync, existsSync } from 'fs'
 import express from 'express'
 import cors from 'cors'
 import Stripe from 'stripe'
-import { createClerkClient } from '@clerk/backend'
+import { createClerkClient, verifyToken as clerkVerifyToken } from '@clerk/backend'
 import { Redis } from '@upstash/redis'
 import {
   sendLimitReachedEmail,
@@ -209,7 +209,7 @@ async function requireAuth(req, res, next) {
   }
 
   try {
-    const payload = await clerkClient.verifyToken(token)
+    const payload = await clerkVerifyToken(token, { secretKey: process.env.CLERK_SECRET_KEY })
     console.log('[auth] token verified, userId:', payload.sub)
     req.userId = payload.sub
     next()
