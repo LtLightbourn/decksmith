@@ -131,7 +131,7 @@ export default function UpgradeModal({ onClose, feature }: Props) {
               <span className="text-[11px] font-cinzel ml-1" style={{ color: '#6a5e44' }}>
                 / month
               </span>
-              <p className="text-[9px] font-cinzel mt-1 tracking-widest uppercase" style={{ color: '#4a4030' }}>
+              <p className="text-[9px] font-cinzel mt-1 tracking-widest uppercase" style={{ color: '#7a6a4a' }}>
                 Cancel anytime
               </p>
             </div>
@@ -163,8 +163,8 @@ export default function UpgradeModal({ onClose, feature }: Props) {
               className="w-full mt-2 py-2 rounded-sm font-cinzel uppercase tracking-widest text-[10px] transition-opacity hover:opacity-70"
               style={{
                 background: 'transparent',
-                border: '1px solid rgba(60,50,30,0.35)',
-                color: '#3a3428',
+                border: '1px solid rgba(80,65,40,0.5)',
+                color: '#7a6a4a',
               }}
             >
               Not now
@@ -175,7 +175,7 @@ export default function UpgradeModal({ onClose, feature }: Props) {
               className="mt-4 pt-3 text-center"
               style={{ borderTop: '1px solid rgba(60,50,30,0.25)' }}
             >
-              <span className="text-[9px] font-cinzel" style={{ color: '#3a3028' }}>
+              <span className="text-[9px] font-cinzel" style={{ color: '#6a5e44' }}>
                 Looking for more? Grandmaster is coming soon —{' '}
               </span>
               <button

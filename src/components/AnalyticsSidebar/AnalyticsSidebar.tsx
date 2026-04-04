@@ -204,7 +204,7 @@ export default function AnalyticsSidebar() {
                 <p className="text-[8px] font-cinzel uppercase tracking-widest mb-1" style={{ color: '#5a5040' }}>
                   Upgrade for full analytics
                 </p>
-                <p className="text-[8px] font-body italic" style={{ color: '#3a3428' }}>
+                <p className="text-[8px] font-body italic" style={{ color: '#6a5e44' }}>
                   Avg CMC · Color pips · Power level · Cost breakdown
                 </p>
               </div>
