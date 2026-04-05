@@ -388,38 +388,38 @@ for (const route of [
 
 // ── Claude API proxy (free tier — deck builds only) ───────────────────────
 app.post('/api/claude', requireAuth, async (req, res) => {
-  const apiKey = process.env.ANTHROPIC_KEY
-  if (!apiKey) {
-    res.status(500).json({ error: 'ANTHROPIC_KEY not set in server environment' })
-    return
-  }
-
-  const userId = req.userId
-  const [count, userIsPro] = await Promise.all([getUsageCount(userId), isPro(userId)])
-
-  // Strip client-only flag before forwarding to Anthropic
-  const { isChatMessage, ...anthropicBody } = req.body
-
-  // Chat refinement requires Pro
-  if (clerkClient && !userIsPro && isChatMessage) {
-    return res.status(402).json({ error: 'pro_required', feature: 'merlin_chat' })
-  }
-
-  if (clerkClient && !userIsPro && count >= USAGE_LIMIT) {
-    // Send limit-reached email once (non-blocking)
-    claimEmailSlot(`email:limit:${userId}`).then(claimed => {
-      if (claimed) {
-        getUserInfo(userId).then(({ email, firstName }) => {
-          sendLimitReachedEmail(email, firstName)
-        })
-      }
-    })
-
-    res.status(402).json({ error: 'Usage limit reached', limit: USAGE_LIMIT })
-    return
-  }
-
   try {
+    const apiKey = process.env.ANTHROPIC_KEY
+    if (!apiKey) {
+      res.status(500).json({ error: 'ANTHROPIC_KEY not set in server environment' })
+      return
+    }
+
+    const userId = req.userId
+    const [count, userIsPro] = await Promise.all([getUsageCount(userId), isPro(userId)])
+
+    // Strip client-only flag before forwarding to Anthropic
+    const { isChatMessage, ...anthropicBody } = req.body
+
+    // Chat refinement requires Pro
+    if (clerkClient && !userIsPro && isChatMessage) {
+      return res.status(402).json({ error: 'pro_required', feature: 'merlin_chat' })
+    }
+
+    if (clerkClient && !userIsPro && count >= USAGE_LIMIT) {
+      // Send limit-reached email once (non-blocking)
+      claimEmailSlot(`email:limit:${userId}`).then(claimed => {
+        if (claimed) {
+          getUserInfo(userId).then(({ email, firstName }) => {
+            sendLimitReachedEmail(email, firstName)
+          })
+        }
+      })
+
+      res.status(402).json({ error: 'Usage limit reached', limit: USAGE_LIMIT })
+      return
+    }
+
     const upstream = await fetch(ANTHROPIC_API, {
       method: 'POST',
       headers: {
@@ -430,7 +430,13 @@ app.post('/api/claude', requireAuth, async (req, res) => {
       body: JSON.stringify(anthropicBody),
     })
 
-    const data = await upstream.json()
+    let data
+    try {
+      data = await upstream.json()
+    } catch {
+      res.status(502).json({ error: 'Upstream returned non-JSON response', status: upstream.status })
+      return
+    }
 
     if (!upstream.ok) {
       res.status(upstream.status).json(data)
@@ -443,8 +449,8 @@ app.post('/api/claude', requireAuth, async (req, res) => {
 
     res.json(data)
   } catch (err) {
-    console.error('[proxy] fetch error:', err)
-    res.status(502).json({ error: 'Upstream request failed', detail: String(err) })
+    console.error('[proxy] error:', err)
+    res.status(500).json({ error: 'Internal server error', detail: String(err) })
   }
 })
 
