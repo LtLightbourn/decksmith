@@ -197,24 +197,18 @@ async function requireAuth(req, res, next) {
   }
 
   const authHeader = req.headers.authorization
-  console.log('[auth] header present:', !!authHeader)
-  console.log('[auth] header value:', authHeader?.slice(0, 30))
-
   const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null
 
   if (!token) {
-    console.log('[auth] no authorization header — returning 401')
     res.status(401).json({ error: 'Authentication required' })
     return
   }
 
   try {
     const payload = await clerkVerifyToken(token, { secretKey: process.env.CLERK_SECRET_KEY })
-    console.log('[auth] token verified, userId:', payload.sub)
     req.userId = payload.sub
     next()
   } catch (err) {
-    console.log('[auth] token verification failed:', err?.message)
     res.status(401).json({ error: 'Invalid or expired token' })
   }
 }

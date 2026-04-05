@@ -76,7 +76,6 @@ type TokenGetter = () => Promise<string | null>
 let _getToken: TokenGetter | null = null
 
 export function registerTokenGetter(fn: TokenGetter): void {
-  console.log('[claudeApi] tokenGetter registered:', !!fn)
   _getToken = fn
 }
 
@@ -102,10 +101,8 @@ export async function fetchStripeStatus(): Promise<{
 } | null> {
   try {
     const headers: Record<string, string> = {}
-    console.log('[claudeApi] fetchStripeStatus — tokenGetter registered:', !!_getToken)
     if (_getToken) {
       const token = await _getToken()
-      console.log('[claudeApi] token retrieved:', !!token, token?.slice(0, 20))
       if (token) headers['Authorization'] = `Bearer ${token}`
     }
     const response = await fetch(`${API_BASE}/api/stripe/status`, { headers })
@@ -119,10 +116,8 @@ export async function fetchStripeStatus(): Promise<{
 export async function createCheckoutSession(): Promise<{ url: string } | null> {
   try {
     const headers: Record<string, string> = { 'Content-Type': 'application/json' }
-    console.log('[claudeApi] createCheckoutSession — tokenGetter registered:', !!_getToken)
     if (_getToken) {
       const token = await _getToken()
-      console.log('[claudeApi] token retrieved:', !!token, token?.slice(0, 20))
       if (token) headers['Authorization'] = `Bearer ${token}`
     }
     const response = await fetch(`${API_BASE}/api/stripe/create-checkout-session`, {
