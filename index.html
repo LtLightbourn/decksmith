@@ -30,6 +30,36 @@
     <!-- Google Search Console: replace content with your verification code from search.google.com/search-console -->
     <!-- <meta name="google-site-verification" content="YOUR_CODE" /> -->
 
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Decksmith",
+      "url": "https://decksmith.gg",
+      "description": "Build Magic: The Gathering Commander decks tailored to your playstyle, pod, and power level. Meet Merlin — your personal deck advisor. Free to start.",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "Web",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Free",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "name": "Decksmith Arcane",
+          "price": "5",
+          "priceCurrency": "USD",
+          "billingDuration": "P1M"
+        }
+      ],
+      "image": "https://decksmith.gg/og-image.png",
+      "screenshot": "https://decksmith.gg/og-image.png"
+    }
+    </script>
+
     <style>html, body, #root { height: 100%; margin: 0; padding: 0; overflow: hidden; }</style>
   </head>
   <body>
