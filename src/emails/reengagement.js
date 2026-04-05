@@ -1,17 +1,17 @@
 /**
- * Email sent on a user's first interaction with the API (usageCount === 0).
+ * Re-engagement email sent 3 days after signup if the user hasn't built a deck.
  * Returns { subject, html }
  */
-export function welcomeEmail({ firstName, appUrl }) {
+export function reengagementEmail({ firstName, appUrl }) {
   return {
-    subject: 'Welcome to Decksmith — your first deck awaits',
+    subject: `Your forge is cold, ${firstName} — Merlin is waiting`,
     html: `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="x-apple-disable-message-reformatting">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to Decksmith</title>
+  <title>Merlin is waiting</title>
 </head>
 <body style="margin:0;padding:0;background-color:#0a0805;font-family:Georgia,'Times New Roman',serif;">
 
@@ -42,66 +42,39 @@ export function welcomeEmail({ firstName, appUrl }) {
               <h1 style="margin:0 0 18px;font-family:Georgia,'Times New Roman',serif;
                          font-size:24px;font-weight:bold;color:#c9a060;line-height:1.25;
                          letter-spacing:0.5px;">
-                Welcome,<br>${firstName}
+                The Forge Awaits,<br>${firstName}
               </h1>
 
               <!-- Divider -->
               <div style="height:1px;background-color:#2e2418;margin:0 0 22px;"></div>
 
-              <!-- Intro -->
-              <p style="margin:0 0 26px;font-size:15px;color:#7a6a4a;line-height:1.75;">
-                Decksmith is ready. You have
-                <strong style="color:#c9a060;">3 free AI deck builds</strong>
-                &mdash; enough to find your commander and your playstyle.
-                Here's how to make the most of them:
+              <!-- Body copy -->
+              <p style="margin:0 0 20px;font-size:15px;color:#7a6a4a;line-height:1.75;">
+                You signed up for Decksmith a few days ago but haven't built your first deck yet.
+                Merlin's been waiting by the forge.
               </p>
 
-              <!-- 3-step guide -->
+              <!-- Prompt ideas -->
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-                     style="margin:0 0 30px;">
-
-                ${[
-                  {
-                    n: '1',
-                    title: 'Set your playstyle',
-                    desc: 'Click the ♟ button in the top bar. Answer five quick questions about how you like to play. Merlin uses this for every deck it builds for you.',
-                  },
-                  {
-                    n: '2',
-                    title: 'Ask Merlin for a deck',
-                    desc: 'Click "Ask Merlin" and describe what you want. Try: <em style="color:#6a5a38;">"A Simic ramp deck for a casual pod, no infinite combos, budget under $100."</em> Merlin returns a complete 100-card list.',
-                  },
-                  {
-                    n: '3',
-                    title: 'Refine, proxy, and play',
-                    desc: 'Use the chat to swap cards, print a proxy sheet, or test opening hands in the playtester. Your deck synced automatically.',
-                  },
-                ].map(step => `
+                     style="margin:0 0 28px;background-color:#141008;border:1px solid #2a2010;border-radius:2px;">
                 <tr>
-                  <td style="padding:0 0 18px;">
-                    <table role="presentation" cellpadding="0" cellspacing="0" border="0"
-                           width="100%">
-                      <tr>
-                        <td width="36" style="vertical-align:top;padding-top:1px;">
-                          <p style="margin:0;width:26px;height:26px;background-color:#1e1608;
-                                    border:1px solid #4a3a18;border-radius:50%;
-                                    font-family:Georgia,serif;font-size:13px;font-weight:bold;
-                                    color:#c9a060;text-align:center;line-height:24px;">
-                            ${step.n}
-                          </p>
-                        </td>
-                        <td>
-                          <p style="margin:0 0 4px;font-family:Georgia,'Times New Roman',serif;
-                                    font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
-                                    color:#c9a060;">${step.title}</p>
-                          <p style="margin:0;font-family:Georgia,'Times New Roman',serif;
-                                    font-size:13px;color:#6a5a3a;line-height:1.65;">${step.desc}</p>
-                        </td>
-                      </tr>
-                    </table>
+                  <td style="padding:18px 20px;">
+                    <p style="margin:0 0 12px;font-family:Georgia,'Times New Roman',serif;font-size:10px;
+                               letter-spacing:2px;text-transform:uppercase;color:#6a5020;">
+                      Try one of these to start
+                    </p>
+                    ${[
+                      '"A Simic ramp deck for a casual pod, bracket 2, budget under $80"',
+                      '"Political Mardu deck that plays threat assessment, no combos"',
+                      '"Surprise me — I want something I\'ve never played before"',
+                    ].map(prompt => `
+                    <p style="margin:0 0 10px;font-family:Georgia,'Times New Roman',serif;font-size:13px;
+                               font-style:italic;color:#6a5a3a;line-height:1.6;padding-left:12px;
+                               border-left:2px solid #3a2e10;">
+                      ${prompt}
+                    </p>`).join('')}
                   </td>
-                </tr>`).join('')}
-
+                </tr>
               </table>
 
               <!-- CTA button -->
@@ -117,6 +90,10 @@ export function welcomeEmail({ firstName, appUrl }) {
                   </td>
                 </tr>
               </table>
+
+              <p style="margin:20px 0 0;font-size:12px;color:#3a3020;font-style:italic;line-height:1.6;">
+                You have 3 free builds — no credit card needed to start.
+              </p>
 
             </td>
           </tr>

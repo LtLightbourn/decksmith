@@ -7,6 +7,7 @@ import { Resend } from 'resend'
 import { limitReachedEmail } from '../emails/limitReached.js'
 import { welcomeArcaneEmail } from '../emails/welcomeArcane.js'
 import { welcomeEmail } from '../emails/welcome.js'
+import { reengagementEmail } from '../emails/reengagement.js'
 
 const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
@@ -17,18 +18,20 @@ const APP_URL = process.env.APP_URL ?? 'http://localhost:5173'
 
 // ── Internal send helper ──────────────────────────────────────────────────────
 
-async function sendEmail(to, template) {
+async function sendEmail(to, template, options = {}) {
   if (!resend || !to) {
     console.log('[email] Resend not configured — skipping email')
     return
   }
   try {
-    const { data, error } = await resend.emails.send({
+    const payload = {
       from: FROM,
       to,
       subject: template.subject,
       html: template.html,
-    })
+    }
+    if (options.scheduledAt) payload.scheduledAt = options.scheduledAt
+    const { data, error } = await resend.emails.send(payload)
     if (error) {
       console.error('[email] send error:', error)
     } else {
@@ -52,4 +55,7 @@ export async function sendWelcomeArcaneEmail(email, firstName) {
 
 export async function sendWelcomeEmail(email, firstName) {
   await sendEmail(email, welcomeEmail({ firstName, appUrl: APP_URL }))
+  // Schedule re-engagement email 3 days later if they haven't built a deck
+  const threeDaysFromNow = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString()
+  await sendEmail(email, reengagementEmail({ firstName, appUrl: APP_URL }), { scheduledAt: threeDaysFromNow })
 }
