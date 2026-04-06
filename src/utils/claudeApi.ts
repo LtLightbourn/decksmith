@@ -372,9 +372,12 @@ Strict rules:
 - All cards must be legal in Commander format
 - All cards must fit within the commander's color identity
 - No numbers, no quantities, no section headers inside CARDS
-- Deck composition must follow this rough structure: 30-35 lands, 25-30 creatures, 8-12 instants, 6-10 sorceries, 5-8 artifacts, 4-6 enchantments, remaining slots for planeswalkers or other spells
-- Basic lands should make up no more than 25-30 of the land slots — fill the rest with nonbasic lands that fit the strategy (utility lands, dual lands, etc.)
-- Every card must serve a purpose — no filler, no padding with basic lands beyond a reasonable land count`
+- Deck composition must follow this structure: 32-36 lands, 20-28 creatures, 6-10 instants, 5-8 sorceries, 4-7 artifacts, 3-6 enchantments — adjust based on the strategy (combo decks run more tutors/draw, aggro runs more creatures, control runs more interaction)
+- Include at least 8-10 interaction pieces: removal (single-target and board wipes), protection, or counterspells appropriate to the color identity
+- Include at least 8-10 ramp pieces: mana rocks, land ramp, mana dorks — appropriate to the colors
+- Include at least 6-8 draw/card advantage pieces
+- Basic lands should make up no more than 20-25 of the land slots — fill the rest with nonbasic lands (utility lands, dual lands, fetches if budget allows)
+- Every non-land card must serve the deck strategy — no filler`
 
   let userPrompt: string
   if (input.vibe) {
@@ -468,9 +471,12 @@ Strict rules:
 - All cards must be legal in Commander format
 - All cards must fit within the commander's color identity
 - No numbers, no quantities, no section headers inside CARDS
-- Deck composition must follow this rough structure: 30-35 lands, 25-30 creatures, 8-12 instants, 6-10 sorceries, 5-8 artifacts, 4-6 enchantments, remaining slots for planeswalkers or other spells
-- Basic lands should make up no more than 25-30 of the land slots — fill the rest with nonbasic lands that fit the strategy (utility lands, dual lands, etc.)
-- Every card must serve a purpose — no filler, no padding with basic lands beyond a reasonable land count`
+- Deck composition must follow this structure: 32-36 lands, 20-28 creatures, 6-10 instants, 5-8 sorceries, 4-7 artifacts, 3-6 enchantments — adjust based on the strategy
+- Include at least 8-10 interaction pieces: removal, board wipes, or counterspells appropriate to the color identity
+- Include at least 8-10 ramp pieces: mana rocks, land ramp, mana dorks
+- Include at least 6-8 draw/card advantage pieces
+- Basic lands should make up no more than 20-25 of the land slots — fill the rest with nonbasic lands
+- Every non-land card must serve the deck strategy — no filler`
 
   const text = await callClaudePro(
     '/api/surprise-deck',
