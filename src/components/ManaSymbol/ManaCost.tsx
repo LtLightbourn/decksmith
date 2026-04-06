@@ -17,7 +17,7 @@ const COLOR_CLASS: Record<string, string> = {
 
 export default function ManaCost({ cost, size = 'sm' }: Props) {
   const pips = parseCost(cost)
-  const sz = size === 'sm' ? 'w-[14px] h-[14px] text-[8px]' : 'w-[18px] h-[18px] text-[10px]'
+  const sz = size === 'sm' ? 'w-[14px] h-[14px] text-micro' : 'w-[18px] h-[18px] text-label'
 
   return (
     <span className="inline-flex items-center gap-[2px] flex-wrap">

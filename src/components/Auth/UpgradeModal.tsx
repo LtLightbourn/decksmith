@@ -97,7 +97,7 @@ export default function UpgradeModal({ onClose, feature }: Props) {
               >
                 {getTitle(feature)}
               </h2>
-              <p className="text-[11px] font-body italic" style={{ color: '#6a5e44', lineHeight: 1.6 }}>
+              <p className="text-label font-body italic" style={{ color: '#6a5e44', lineHeight: 1.6 }}>
                 {getBody(feature, usageLimit)}
               </p>
             </div>
@@ -109,8 +109,8 @@ export default function UpgradeModal({ onClose, feature }: Props) {
             >
               {ARCANE_FEATURES.map(feat => (
                 <li key={feat} className="flex items-start gap-2">
-                  <span style={{ color: '#c9a060', fontSize: 10, marginTop: 3 }}>✦</span>
-                  <span className="text-[11px] font-cinzel" style={{ color: '#a09060' }}>
+                  <span className="text-label" style={{ color: '#c9a060', marginTop: 3 }}>✦</span>
+                  <span className="text-label font-cinzel" style={{ color: '#a09060' }}>
                     {feat}
                   </span>
                 </li>
@@ -128,17 +128,17 @@ export default function UpgradeModal({ onClose, feature }: Props) {
               >
                 $5
               </span>
-              <span className="text-[11px] font-cinzel ml-1" style={{ color: '#6a5e44' }}>
+              <span className="text-label font-cinzel ml-1" style={{ color: '#6a5e44' }}>
                 / month
               </span>
-              <p className="text-[9px] font-cinzel mt-1 tracking-widest uppercase text-gold-muted">
+              <p className="text-micro font-cinzel mt-1 tracking-widest uppercase text-gold-muted">
                 Cancel anytime
               </p>
             </div>
 
             {/* Error */}
             {error && (
-              <p className="text-[10px] font-cinzel text-center mb-3" style={{ color: '#c06060' }}>
+              <p className="text-label font-cinzel text-center mb-3" style={{ color: '#c06060' }}>
                 {error}
               </p>
             )}
@@ -147,7 +147,7 @@ export default function UpgradeModal({ onClose, feature }: Props) {
             <button
               onClick={handleUpgrade}
               disabled={loading}
-              className="w-full py-[10px] rounded-sm font-cinzel uppercase tracking-widest text-[11px] transition-opacity hover:opacity-90 disabled:opacity-50"
+              className="w-full py-[10px] rounded-sm font-cinzel uppercase tracking-widest text-label transition-opacity hover:opacity-90 disabled:opacity-50"
               style={{
                 background: 'linear-gradient(135deg, rgba(100,72,18,0.9), rgba(80,55,10,0.95))',
                 border: '1px solid rgba(180,140,55,0.5)',
@@ -160,7 +160,7 @@ export default function UpgradeModal({ onClose, feature }: Props) {
 
             <button
               onClick={onClose}
-              className="w-full mt-2 py-2 rounded-sm font-cinzel uppercase tracking-widest text-[10px] transition-opacity hover:opacity-70"
+              className="w-full mt-2 py-2 rounded-sm font-cinzel uppercase tracking-widest text-label transition-opacity hover:opacity-70"
               style={{
                 background: 'transparent',
                 border: '1px solid rgba(80,65,40,0.5)',
@@ -175,12 +175,12 @@ export default function UpgradeModal({ onClose, feature }: Props) {
               className="mt-4 pt-3 text-center"
               style={{ borderTop: '1px solid rgba(60,50,30,0.25)' }}
             >
-              <span className="text-[9px] font-cinzel" style={{ color: '#6a5e44' }}>
+              <span className="text-micro font-cinzel" style={{ color: '#6a5e44' }}>
                 Looking for more? Grandmaster is coming soon —{' '}
               </span>
               <button
                 onClick={() => setWaitlistOpen(true)}
-                className="text-[9px] font-cinzel transition-opacity hover:opacity-80"
+                className="text-micro font-cinzel transition-opacity hover:opacity-80"
                 style={{ color: '#7a6070', textDecoration: 'underline', textDecorationColor: 'rgba(120,90,110,0.4)' }}
               >
                 Join the waitlist →

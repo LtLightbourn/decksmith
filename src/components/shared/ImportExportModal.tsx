@@ -42,7 +42,6 @@ export default function ImportExportModal({ onClose }: Props) {
     border: '1px solid rgba(70,58,36,0.5)',
     color: '#b0a070',
     fontFamily: 'monospace',
-    fontSize: 11,
     outline: 'none',
     padding: '8px 10px',
     width: '100%',
@@ -66,8 +65,8 @@ export default function ImportExportModal({ onClose }: Props) {
 
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-3 border-b" style={{ borderColor: 'rgba(80,65,40,0.4)' }}>
-          <span className="font-cinzel text-[11px] tracking-[3px] uppercase text-gold">✦ Import / Export</span>
-          <button onClick={onClose} style={{ color: '#5a5040', fontSize: 14 }} aria-label="Close">✕</button>
+          <span className="font-cinzel text-label tracking-[3px] uppercase text-gold">✦ Import / Export</span>
+          <button onClick={onClose} className="text-body" style={{ color: '#5a5040' }} aria-label="Close">✕</button>
         </div>
 
         {/* Mode tabs */}
@@ -76,7 +75,7 @@ export default function ImportExportModal({ onClose }: Props) {
             <button
               key={m}
               onClick={() => setMode(m)}
-              className="flex-1 py-2 text-[10px] font-cinzel uppercase tracking-widest"
+              className="flex-1 py-2 text-label font-cinzel uppercase tracking-widest"
               style={{
                 color: mode === m ? '#c9a060' : '#5a5040',
                 borderBottom: mode === m ? '1px solid #c9a060' : '1px solid transparent',
@@ -89,10 +88,10 @@ export default function ImportExportModal({ onClose }: Props) {
         <div className="p-5 space-y-3">
           {mode === 'export' ? (
             <>
-              <textarea readOnly value={exportText} style={INPUT_STYLE} />
+              <textarea readOnly className="text-label" value={exportText} style={INPUT_STYLE} />
               <button
                 onClick={handleCopy}
-                className="w-full py-2 text-[10px] font-cinzel uppercase tracking-widest"
+                className="w-full py-2 text-label font-cinzel uppercase tracking-widest"
                 style={{ background: 'rgba(30,44,18,0.8)', border: '1px solid rgba(70,110,40,0.4)', color: '#80b060', borderRadius: 2 }}
               >
                 ✦ Copy to Clipboard
@@ -100,10 +99,11 @@ export default function ImportExportModal({ onClose }: Props) {
             </>
           ) : (
             <>
-              <p className="text-[10px] font-body italic" style={{ color: '#6a5e44' }}>
+              <p className="text-label font-body italic" style={{ color: '#6a5e44' }}>
                 Paste a decklist in MTGO/Moxfield format (e.g. "1 Sol Ring")
               </p>
               <textarea
+                className="text-label"
                 value={importText}
                 onChange={e => setImportText(e.target.value)}
                 placeholder={'1 Sol Ring\n1 Arcane Signet\n...'}
@@ -111,10 +111,10 @@ export default function ImportExportModal({ onClose }: Props) {
               />
               {errors.length > 0 && (
                 <div>
-                  <p className="text-[9px] font-cinzel uppercase tracking-widest mb-1" style={{ color: '#cc4444' }}>
+                  <p className="text-micro font-cinzel uppercase tracking-widest mb-1" style={{ color: '#cc4444' }}>
                     Cards not found ({errors.length}):
                   </p>
-                  <p className="text-[10px] font-body italic" style={{ color: '#7a4040' }}>
+                  <p className="text-label font-body italic" style={{ color: '#7a4040' }}>
                     {errors.slice(0, 10).join(', ')}{errors.length > 10 ? '...' : ''}
                   </p>
                 </div>
@@ -122,7 +122,7 @@ export default function ImportExportModal({ onClose }: Props) {
               <button
                 onClick={handleImport}
                 disabled={importing || !importText.trim()}
-                className="w-full py-2 text-[10px] font-cinzel uppercase tracking-widest"
+                className="w-full py-2 text-label font-cinzel uppercase tracking-widest"
                 style={{
                   background: 'rgba(60,40,90,0.8)', border: '1px solid rgba(140,100,200,0.4)',
                   color: '#c0a0f0', borderRadius: 2,

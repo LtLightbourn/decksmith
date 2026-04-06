@@ -60,7 +60,7 @@ export default function CardRow({ card }: Props) {
 
         {/* Name */}
         <span
-          className="flex-1 truncate text-[11px] font-body"
+          className="flex-1 truncate text-label font-body"
           style={{ color: '#c0b090', letterSpacing: '0.3px' }}
         >
           {card.name}
@@ -68,7 +68,7 @@ export default function CardRow({ card }: Props) {
 
         {/* Type badge */}
         <span
-          className="flex-shrink-0 text-[9px] font-cinzel uppercase tracking-widest"
+          className="flex-shrink-0 text-micro font-cinzel uppercase tracking-widest"
           style={{ color: typeColor(card.typeLine) }}
         >
           {shortType(card.typeLine)}
@@ -78,7 +78,7 @@ export default function CardRow({ card }: Props) {
         {isLegendary && !commander && (
           <button
             onClick={handleSetCommander}
-            className="flex-shrink-0 text-[9px] font-cinzel px-1"
+            className="flex-shrink-0 text-micro font-cinzel px-1"
             style={{ color: '#c9a060', borderLeft: '1px solid rgba(120,95,55,0.3)' }}
             title="Set as commander"
           >
@@ -89,7 +89,7 @@ export default function CardRow({ card }: Props) {
         {/* Add button */}
         <button
           onClick={handleAdd}
-          className="flex-shrink-0 text-[15px] leading-none"
+          className="flex-shrink-0 text-body leading-none"
           style={{ color: '#6a7a5a' }}
           title="Add to deck"
         >

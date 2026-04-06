@@ -8,7 +8,7 @@ type Tab = 'print' | 'collection'
 const TOGGLE_BTN = (active: boolean, onClick: () => void, children: React.ReactNode) => (
   <button
     onClick={onClick}
-    className="px-2 py-1 text-[9px] font-cinzel uppercase tracking-wide rounded-sm transition-all"
+    className="px-2 py-1 text-micro font-cinzel uppercase tracking-wide rounded-sm transition-all"
     style={{
       background: active ? 'rgba(140,110,50,0.25)' : 'rgba(14,10,5,0.6)',
       border: active ? '1px solid rgba(180,140,50,0.4)' : '1px solid rgba(50,40,24,0.4)',
@@ -92,7 +92,6 @@ export default function ProxySheetModal() {
   if (!proxySheetOpen) return null
 
   const SECTION_LABEL: React.CSSProperties = {
-    fontSize: 8,
     fontFamily: 'Cinzel, serif',
     letterSpacing: 2,
     textTransform: 'uppercase',
@@ -131,16 +130,16 @@ export default function ProxySheetModal() {
           style={{ borderColor: 'rgba(80,65,40,0.4)', background: 'rgba(8,6,4,0.5)' }}
         >
           <div>
-            <h2 className="font-cinzel-deco text-[13px] tracking-widest text-gold">
+            <h2 className="font-cinzel-deco text-body tracking-widest text-gold">
               ⎙ Proxy Sheet Generator
             </h2>
-            <p className="text-[9px] font-body italic mt-px" style={{ color: '#6a5e44' }}>
+            <p className="text-micro font-body italic mt-px" style={{ color: '#6a5e44' }}>
               {commander?.name ?? 'No commander'} · {activeDeckName}
             </p>
           </div>
           <button
             onClick={() => setProxySheetOpen(false)}
-            className="text-[16px]"
+            className="text-heading"
             style={{ color: '#5a5040', lineHeight: 1 }}
           >✕</button>
         </div>
@@ -151,7 +150,7 @@ export default function ProxySheetModal() {
             <button
               key={t}
               onClick={() => setTab(t)}
-              className="flex-1 py-2 text-[10px] font-cinzel uppercase tracking-widest"
+              className="flex-1 py-2 text-label font-cinzel uppercase tracking-widest"
               style={{
                 color: tab === t ? '#c9a060' : '#4a4030',
                 borderBottom: tab === t ? '1px solid #c9a060' : '1px solid transparent',
@@ -168,12 +167,12 @@ export default function ProxySheetModal() {
           <div className="flex-1 overflow-y-auto">
             {/* Options */}
             <div className="px-5 pt-4 pb-3 border-b" style={{ borderColor: 'rgba(50,40,28,0.4)' }}>
-              <p style={SECTION_LABEL} className="mb-3">Print Options</p>
+              <p className="text-micro mb-3" style={SECTION_LABEL}>Print Options</p>
 
               <div className="grid grid-cols-2 gap-x-6 gap-y-3">
                 {/* Paper size */}
                 <div>
-                  <p className="text-[8px] font-cinzel uppercase mb-1.5 text-gold-faint">Paper Size</p>
+                  <p className="text-micro font-cinzel uppercase mb-1.5 text-gold-faint">Paper Size</p>
                   <div className="flex gap-1">
                     {(['letter', 'a4'] as PaperSize[]).map(p => TOGGLE_BTN(
                       options.paper === p,
@@ -185,7 +184,7 @@ export default function ProxySheetModal() {
 
                 {/* Print mode */}
                 <div>
-                  <p className="text-[8px] font-cinzel uppercase mb-1.5 text-gold-faint">Cards to Print</p>
+                  <p className="text-micro font-cinzel uppercase mb-1.5 text-gold-faint">Cards to Print</p>
                   <div className="flex gap-1">
                     {TOGGLE_BTN(
                       options.printMode === 'proxy',
@@ -202,7 +201,7 @@ export default function ProxySheetModal() {
 
                 {/* Card names */}
                 <div>
-                  <p className="text-[8px] font-cinzel uppercase mb-1.5 text-gold-faint">Card Name Below Image</p>
+                  <p className="text-micro font-cinzel uppercase mb-1.5 text-gold-faint">Card Name Below Image</p>
                   <div className="flex gap-1">
                     {TOGGLE_BTN(options.cardNames, () => setOptions(o => ({ ...o, cardNames: true })), 'Show')}
                     {TOGGLE_BTN(!options.cardNames, () => setOptions(o => ({ ...o, cardNames: false })), 'Hide')}
@@ -211,7 +210,7 @@ export default function ProxySheetModal() {
 
                 {/* Cut lines */}
                 <div>
-                  <p className="text-[8px] font-cinzel uppercase mb-1.5 text-gold-faint">Cut Lines</p>
+                  <p className="text-micro font-cinzel uppercase mb-1.5 text-gold-faint">Cut Lines</p>
                   <div className="flex gap-1">
                     {TOGGLE_BTN(options.cutLines, () => setOptions(o => ({ ...o, cutLines: true })), 'Show')}
                     {TOGGLE_BTN(!options.cutLines, () => setOptions(o => ({ ...o, cutLines: false })), 'Hide')}
@@ -223,11 +222,11 @@ export default function ProxySheetModal() {
             {/* Card list preview */}
             <div className="px-5 pt-3 pb-2">
               <div className="flex items-center justify-between mb-2">
-                <p style={SECTION_LABEL}>
+                <p className="text-micro" style={SECTION_LABEL}>
                   {printCards.reduce((s, c) => s + c.qty, 0)} cards · {totalSheets} page{totalSheets !== 1 ? 's' : ''} (3×3)
                 </p>
                 {printCards.length === 0 && options.printMode === 'proxy' && (
-                  <span className="text-[8px] font-body italic" style={{ color: '#5a3a3a' }}>
+                  <span className="text-micro font-body italic" style={{ color: '#5a3a3a' }}>
                     No cards marked for proxy
                   </span>
                 )}
@@ -238,7 +237,7 @@ export default function ProxySheetModal() {
                 style={{ maxHeight: 200, background: 'rgba(10,7,3,0.5)', border: '1px solid rgba(50,40,24,0.3)' }}
               >
                 {printCards.length === 0 ? (
-                  <p className="px-3 py-4 text-[10px] font-body italic text-center" style={{ color: '#4a3a28' }}>
+                  <p className="px-3 py-4 text-label font-body italic text-center" style={{ color: '#4a3a28' }}>
                     {options.printMode === 'proxy'
                       ? 'Enable Proxy Mode in the deck panel and check cards you need to print.'
                       : 'No cards in deck.'}
@@ -250,10 +249,10 @@ export default function ProxySheetModal() {
                       className="flex items-center gap-2 px-3 py-1 border-b"
                       style={{ borderColor: 'rgba(40,32,20,0.3)' }}
                     >
-                      <span className="text-[9px] font-cinzel w-4 text-right flex-shrink-0" style={{ color: '#6a5e44' }}>
+                      <span className="text-micro font-cinzel w-4 text-right flex-shrink-0" style={{ color: '#6a5e44' }}>
                         {c.qty}×
                       </span>
-                      <span className="flex-1 truncate text-[10px] font-body" style={{ color: '#a89860' }}>
+                      <span className="flex-1 truncate text-label font-body" style={{ color: '#a89860' }}>
                         {c.name}
                       </span>
                     </div>
@@ -267,10 +266,10 @@ export default function ProxySheetModal() {
               {progress && (
                 <div className="mb-3">
                   <div className="flex justify-between mb-1">
-                    <span className="text-[9px] font-cinzel" style={{ color: '#8a7a5a' }}>
+                    <span className="text-micro font-cinzel" style={{ color: '#8a7a5a' }}>
                       Gathering card images…
                     </span>
-                    <span className="text-[9px] font-cinzel" style={{ color: '#6a5a3a' }}>
+                    <span className="text-micro font-cinzel" style={{ color: '#6a5a3a' }}>
                       {progress.fetched}/{progress.total}
                     </span>
                   </div>
@@ -290,7 +289,7 @@ export default function ProxySheetModal() {
               )}
 
               {error && (
-                <p className="text-[9px] font-body italic mb-3 text-center" style={{ color: '#8a3030' }}>
+                <p className="text-micro font-body italic mb-3 text-center" style={{ color: '#8a3030' }}>
                   {error}
                 </p>
               )}
@@ -298,7 +297,7 @@ export default function ProxySheetModal() {
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating || printCards.length === 0}
-                className="w-full py-2.5 font-cinzel uppercase tracking-widest text-[10px] rounded-sm transition-all"
+                className="w-full py-2.5 font-cinzel uppercase tracking-widest text-label rounded-sm transition-all"
                 style={{
                   background: isGenerating || printCards.length === 0
                     ? 'rgba(30,24,14,0.5)'
@@ -321,12 +320,12 @@ export default function ProxySheetModal() {
         {/* ── COLLECTION TAB ── */}
         {tab === 'collection' && (
           <div className="flex-1 overflow-y-auto px-5 py-4">
-            <p className="text-[9px] font-body italic mb-3" style={{ color: '#6a5e44' }}>
+            <p className="text-micro font-body italic mb-3" style={{ color: '#6a5e44' }}>
               Cards marked as owned (not checked for proxy) across all saved decks.
             </p>
 
             {ownedCards.length === 0 ? (
-              <p className="text-center text-[10px] font-body italic py-8" style={{ color: '#4a3a28' }}>
+              <p className="text-center text-label font-body italic py-8" style={{ color: '#4a3a28' }}>
                 Enable Proxy Mode, save your decks, and uncheck the cards you own. They'll appear here.
               </p>
             ) : (
@@ -338,7 +337,7 @@ export default function ProxySheetModal() {
                   className="px-3 py-1.5 border-b"
                   style={{ background: 'rgba(20,15,8,0.7)', borderColor: 'rgba(50,40,24,0.4)' }}
                 >
-                  <p style={SECTION_LABEL}>{ownedCards.length} owned cards</p>
+                  <p className="text-micro" style={SECTION_LABEL}>{ownedCards.length} owned cards</p>
                 </div>
                 <div className="overflow-y-auto" style={{ maxHeight: 380 }}>
                   {ownedCards.map((c, i) => (
@@ -347,10 +346,10 @@ export default function ProxySheetModal() {
                       className="flex items-center gap-3 px-3 py-1.5 border-b"
                       style={{ borderColor: 'rgba(40,32,20,0.3)', background: i % 2 === 0 ? 'transparent' : 'rgba(15,10,5,0.3)' }}
                     >
-                      <span className="flex-1 truncate text-[10px] font-body" style={{ color: '#a89860' }}>
+                      <span className="flex-1 truncate text-label font-body" style={{ color: '#a89860' }}>
                         {c.name}
                       </span>
-                      <span className="flex-shrink-0 text-[8px] font-body italic text-gold-faint">
+                      <span className="flex-shrink-0 text-micro font-body italic text-gold-faint">
                         {c.deckNames.join(', ')}
                       </span>
                     </div>

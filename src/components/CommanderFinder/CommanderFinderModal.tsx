@@ -33,7 +33,6 @@ const TEXTAREA_STYLE: React.CSSProperties = {
   color: '#c0b090',
   borderRadius: 2,
   fontFamily: 'Georgia, serif',
-  fontSize: 12,
   outline: 'none',
   padding: '8px 12px',
   width: '100%',
@@ -167,7 +166,7 @@ export default function CommanderFinderModal() {
             >
               Find My Commander
             </h2>
-            <p className="font-body text-[10px] italic" style={{ color: '#6a5e44' }}>
+            <p className="font-body text-label italic" style={{ color: '#6a5e44' }}>
               {phase === 'results'
                 ? `${suggestions.length} commanders match your vision`
                 : 'Describe how you want to play — Merlin will suggest commanders'}
@@ -176,7 +175,7 @@ export default function CommanderFinderModal() {
           {phase === 'results' && (
             <button
               onClick={handleReset}
-              className="text-[9px] font-cinzel uppercase tracking-widest px-3 py-1.5 transition-colors"
+              className="text-micro font-cinzel uppercase tracking-widest px-3 py-1.5 transition-colors"
               style={{
                 background: 'rgba(20,16,10,0.8)',
                 border: '1px solid rgba(60,50,30,0.4)',
@@ -189,7 +188,7 @@ export default function CommanderFinderModal() {
           )}
           <button
             onClick={handleClose}
-            className="text-[16px] transition-colors ml-1"
+            className="text-heading transition-colors ml-1"
             style={{ color: '#5a5040', lineHeight: 1 }}
             title="Close"
           >✕</button>
@@ -200,11 +199,12 @@ export default function CommanderFinderModal() {
           <div className="p-6 flex flex-col gap-4">
             <div>
               <label
-                className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-2 text-gold-muted"
+                className="text-micro font-cinzel tracking-[2px] uppercase block mb-2 text-gold-muted"
               >
                 How do you want to play?
               </label>
               <textarea
+                className="text-label"
                 style={TEXTAREA_STYLE}
                 placeholder={`Describe your playstyle or theme...\n\ne.g. "I want a spooky aristocrats deck that sacrifices creatures and drains life. Casual budget, no combos."`}
                 value={description}
@@ -214,13 +214,13 @@ export default function CommanderFinderModal() {
                   if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) handleFind()
                 }}
               />
-              <p className="mt-1 text-[9px] font-body text-gold-dim">
+              <p className="mt-1 text-micro font-body text-gold-dim">
                 Mention colors, themes, archetypes, budget, or playstyle — any detail helps.
               </p>
             </div>
 
             {error && (
-              <p className="text-[10px] font-body text-center" style={{ color: '#cc4444' }}>
+              <p className="text-label font-body text-center" style={{ color: '#cc4444' }}>
                 {error}
               </p>
             )}
@@ -228,7 +228,7 @@ export default function CommanderFinderModal() {
             <div className="flex gap-2">
               <button
                 onClick={handleClose}
-                className="flex-1 py-2 text-[10px] font-cinzel uppercase tracking-widest transition-colors"
+                className="flex-1 py-2 text-label font-cinzel uppercase tracking-widest transition-colors"
                 style={{
                   background: 'rgba(20,16,10,0.8)',
                   border: '1px solid rgba(60,50,30,0.4)',
@@ -241,7 +241,7 @@ export default function CommanderFinderModal() {
               <button
                 onClick={handleFind}
                 disabled={phase === 'loading' || !description.trim()}
-                className="py-2 px-6 text-[10px] font-cinzel uppercase tracking-widest transition-all"
+                className="py-2 px-6 text-label font-cinzel uppercase tracking-widest transition-all"
                 style={{
                   flex: 2,
                   background: phase === 'loading'
@@ -356,14 +356,14 @@ function CommanderCard({ suggestion: s, featured, selected, building, onSelect, 
         {/* Name + featured badge */}
         <div className="flex items-start gap-2 flex-wrap">
           <span
-            className="font-cinzel text-[12px] font-bold leading-tight"
+            className="font-cinzel text-label font-bold leading-tight"
             style={{ color: featured ? '#e0b840' : '#c0a070' }}
           >
             {s.name}
           </span>
           {featured && (
             <span
-              className="text-[8px] font-cinzel uppercase tracking-widest px-1.5 py-0.5 rounded-sm flex-shrink-0"
+              className="text-micro font-cinzel uppercase tracking-widest px-1.5 py-0.5 rounded-sm flex-shrink-0"
               style={{
                 background: 'rgba(120,80,10,0.5)',
                 border: '1px solid rgba(200,150,30,0.4)',
@@ -381,7 +381,7 @@ function CommanderCard({ suggestion: s, featured, selected, building, onSelect, 
             {s.colors.map(c => (
               <span
                 key={c}
-                className="text-[9px] font-cinzel font-bold rounded-sm w-4 h-4 flex items-center justify-center flex-shrink-0"
+                className="text-micro font-cinzel font-bold rounded-sm w-4 h-4 flex items-center justify-center flex-shrink-0"
                 style={{
                   background: MANA_COLOR[c] ? `${MANA_COLOR[c]}22` : 'rgba(60,50,30,0.4)',
                   border: `1px solid ${MANA_COLOR[c] ?? '#6a5040'}66`,
@@ -395,14 +395,14 @@ function CommanderCard({ suggestion: s, featured, selected, building, onSelect, 
         )}
 
         {/* Strategy */}
-        <p className="font-body text-[10px] leading-relaxed text-gold-muted">
+        <p className="font-body text-label leading-relaxed text-gold-muted">
           {s.strategy}
         </p>
 
         {/* Why */}
         {selected && (
           <p
-            className="font-body text-[10px] italic leading-relaxed mt-0.5 rounded px-2 py-1.5"
+            className="font-body text-label italic leading-relaxed mt-0.5 rounded px-2 py-1.5"
             style={{
               color: '#b0a0d0',
               background: 'rgba(60,35,90,0.25)',
@@ -424,7 +424,7 @@ function CommanderCard({ suggestion: s, featured, selected, building, onSelect, 
           <button
             onClick={onBuild}
             disabled={building}
-            className="flex-1 py-1.5 text-[9px] font-cinzel uppercase tracking-widest transition-all rounded-sm"
+            className="flex-1 py-1.5 text-micro font-cinzel uppercase tracking-widest transition-all rounded-sm"
             style={{
               background: building
                 ? 'rgba(60,40,10,0.5)'
@@ -445,7 +445,7 @@ function CommanderCard({ suggestion: s, featured, selected, building, onSelect, 
 function Badge({ label, color }: { label: string; color: string }) {
   return (
     <span
-      className="text-[8px] font-cinzel uppercase tracking-wider px-1.5 py-0.5 rounded-sm"
+      className="text-micro font-cinzel uppercase tracking-wider px-1.5 py-0.5 rounded-sm"
       style={{
         background: `${color}18`,
         border: `1px solid ${color}44`,

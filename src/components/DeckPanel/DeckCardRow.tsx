@@ -63,11 +63,11 @@ export default function DeckCardRow({ dc }: Props) {
             }}
             title={isProxied ? 'Remove from proxy list' : 'Add to proxy list'}
           >
-            {isProxied && <span style={{ fontSize: 7, color: '#c9a060', lineHeight: 1 }}>✓</span>}
+            {isProxied && <span className="text-micro" style={{ color: '#c9a060', lineHeight: 1 }}>✓</span>}
           </button>
         )}
         {/* Qty */}
-        <span className="text-[10px] font-cinzel w-5 text-center flex-shrink-0" style={{ color: '#6a5e44' }}>
+        <span className="text-label font-cinzel w-5 text-center flex-shrink-0" style={{ color: '#6a5e44' }}>
           {dc.qty}
         </span>
 
@@ -79,7 +79,7 @@ export default function DeckCardRow({ dc }: Props) {
         {/* Name with TCGPlayer hover link */}
         <span className="group flex-1 flex items-center gap-0.5 min-w-0">
           <span
-            className="truncate text-[11px] font-body"
+            className="truncate text-label font-body"
             style={{ color: isFlagged ? '#d0a870' : '#b8a880', letterSpacing: '0.3px' }}
           >
             {dc.card.name}
@@ -89,8 +89,8 @@ export default function DeckCardRow({ dc }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={e => e.stopPropagation()}
-            className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
-            style={{ color: '#5a7a5a', fontSize: 8, lineHeight: 1 }}
+            className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity text-micro"
+            style={{ color: '#5a7a5a', lineHeight: 1 }}
             title="View on TCGPlayer"
           >
             ↗
@@ -103,7 +103,7 @@ export default function DeckCardRow({ dc }: Props) {
         )}
         {!isLoadingPrice && effectivePrice != null && (
           <span
-            className="flex-shrink-0 text-[8px] font-body"
+            className="flex-shrink-0 text-micro font-body"
             style={{ color: priceDisplayColor(effectivePrice) }}
           >
             {formatPrice(effectivePrice)}
@@ -113,7 +113,7 @@ export default function DeckCardRow({ dc }: Props) {
         {/* Bracket flag badge */}
         {isFlagged && flag && (
           <span
-            className="flex-shrink-0 text-[7px] font-cinzel font-bold px-1 py-px rounded-sm"
+            className="flex-shrink-0 text-micro font-cinzel font-bold px-1 py-px rounded-sm"
             style={{
               background: `rgba(${hexToRgb(flagColor)}, 0.18)`,
               border: `1px solid rgba(${hexToRgb(flagColor)}, 0.45)`,
@@ -130,14 +130,14 @@ export default function DeckCardRow({ dc }: Props) {
         <div className="flex items-center gap-1 flex-shrink-0">
           <button
             onClick={() => decrementCard(dc.card.id)}
-            className="w-4 h-4 flex items-center justify-center text-[12px] leading-none rounded-sm hover:bg-[rgba(180,50,50,0.2)] transition-colors"
+            className="w-4 h-4 flex items-center justify-center text-label leading-none rounded-sm hover:bg-[rgba(180,50,50,0.2)] transition-colors"
             style={{ color: '#7a5040' }}
           >
             −
           </button>
           <button
             onClick={() => incrementCard(dc.card.id)}
-            className="w-4 h-4 flex items-center justify-center text-[12px] leading-none rounded-sm hover:bg-[rgba(80,120,50,0.2)] transition-colors"
+            className="w-4 h-4 flex items-center justify-center text-label leading-none rounded-sm hover:bg-[rgba(80,120,50,0.2)] transition-colors"
             style={{ color: '#4a7a4a' }}
           >
             +

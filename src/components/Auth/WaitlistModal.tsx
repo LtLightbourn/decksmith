@@ -61,12 +61,12 @@ export default function WaitlistModal({ onClose }: Props) {
               <p className="font-cinzel-deco text-[14px] tracking-wide mb-2" style={{ color: '#c0a0e0' }}>
                 You're on the list.
               </p>
-              <p className="text-[11px] font-body italic" style={{ color: '#6a5a7a', lineHeight: 1.6 }}>
+              <p className="text-label font-body italic" style={{ color: '#6a5a7a', lineHeight: 1.6 }}>
                 We'll be in touch. ✦
               </p>
               <button
                 onClick={onClose}
-                className="mt-5 px-5 py-2 rounded-sm font-cinzel uppercase tracking-widest text-[10px]"
+                className="mt-5 px-5 py-2 rounded-sm font-cinzel uppercase tracking-widest text-label"
                 style={{ background: 'transparent', border: '1px solid rgba(80,60,100,0.4)', color: '#5a4a6a' }}
               >
                 Close
@@ -82,7 +82,7 @@ export default function WaitlistModal({ onClose }: Props) {
                 >
                   Get Early Access to Grandmaster
                 </h2>
-                <p className="text-[11px] font-body italic" style={{ color: '#6a5a7a', lineHeight: 1.6 }}>
+                <p className="text-label font-body italic" style={{ color: '#6a5a7a', lineHeight: 1.6 }}>
                   Be the first to know when Grandmaster launches. We'll reach out before it goes public.
                 </p>
               </div>
@@ -94,7 +94,7 @@ export default function WaitlistModal({ onClose }: Props) {
                   placeholder="your@email.com"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 rounded-sm text-[12px] mb-3"
+                  className="w-full px-3 py-2 rounded-sm text-label mb-3"
                   style={{
                     background: 'rgba(12,8,18,0.8)',
                     border: '1px solid rgba(80,60,110,0.45)',
@@ -105,7 +105,7 @@ export default function WaitlistModal({ onClose }: Props) {
                 />
 
                 {error && (
-                  <p className="text-[10px] font-cinzel text-center mb-3" style={{ color: '#c06060' }}>
+                  <p className="text-label font-cinzel text-center mb-3" style={{ color: '#c06060' }}>
                     {error}
                   </p>
                 )}
@@ -113,7 +113,7 @@ export default function WaitlistModal({ onClose }: Props) {
                 <button
                   type="submit"
                   disabled={loading || !email.trim()}
-                  className="w-full py-[10px] rounded-sm font-cinzel uppercase tracking-widest text-[11px] transition-opacity hover:opacity-90 disabled:opacity-50"
+                  className="w-full py-[10px] rounded-sm font-cinzel uppercase tracking-widest text-label transition-opacity hover:opacity-90 disabled:opacity-50"
                   style={{
                     background: 'linear-gradient(135deg, rgba(60,40,90,0.9), rgba(45,28,75,0.95))',
                     border: '1px solid rgba(120,90,180,0.45)',
@@ -126,7 +126,7 @@ export default function WaitlistModal({ onClose }: Props) {
                 <button
                   type="button"
                   onClick={onClose}
-                  className="w-full mt-2 py-2 rounded-sm font-cinzel uppercase tracking-widest text-[10px] transition-opacity hover:opacity-70"
+                  className="w-full mt-2 py-2 rounded-sm font-cinzel uppercase tracking-widest text-label transition-opacity hover:opacity-70"
                   style={{ background: 'transparent', border: '1px solid rgba(50,40,70,0.35)', color: '#3a3048' }}
                 >
                   Not now

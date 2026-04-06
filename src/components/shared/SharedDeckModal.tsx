@@ -140,11 +140,11 @@ export default function SharedDeckModal({ deck, onClose }: Props) {
 
           {/* Deck info over gradient */}
           <div className="absolute bottom-0 left-0 right-0 px-5 pb-3">
-            <p className="font-cinzel-deco text-[13px] leading-tight" style={{ color: '#e0c070', textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}>
+            <p className="font-cinzel-deco text-body leading-tight" style={{ color: '#e0c070', textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}>
               {deck.n}
             </p>
             {deck.c && (
-              <p className="font-cinzel text-[10px] mt-0.5" style={{ color: '#a08050' }}>
+              <p className="font-cinzel text-label mt-0.5" style={{ color: '#a08050' }}>
                 ♛ {deck.c}
               </p>
             )}
@@ -154,7 +154,7 @@ export default function SharedDeckModal({ deck, onClose }: Props) {
         {/* Metadata row */}
         <div className="flex items-center gap-3 px-5 py-3 border-b" style={{ borderColor: 'rgba(60,50,30,0.4)' }}>
           <div
-            className="px-2 py-0.5 rounded-sm text-[9px] font-cinzel uppercase tracking-widest"
+            className="px-2 py-0.5 rounded-sm text-micro font-cinzel uppercase tracking-widest"
             style={{
               background: `${bracketColor}18`,
               border: `1px solid ${bracketColor}44`,
@@ -163,10 +163,10 @@ export default function SharedDeckModal({ deck, onClose }: Props) {
           >
             B{deck.b} · {bracketInfo.name}
           </div>
-          <span className="text-[9px] font-cinzel text-gold-faint">
+          <span className="text-micro font-cinzel text-gold-faint">
             {totalCards} cards
           </span>
-          <span className="text-[8px] font-body italic ml-auto" style={{ color: '#3a3020' }}>
+          <span className="text-micro font-body italic ml-auto" style={{ color: '#3a3020' }}>
             Shared deck
           </span>
         </div>
@@ -175,13 +175,13 @@ export default function SharedDeckModal({ deck, onClose }: Props) {
         <div className="px-5 py-4">
           {phase === 'preview' && (
             <>
-              <p className="font-body text-[11px] italic mb-4" style={{ color: '#6a5e44' }}>
+              <p className="font-body text-label italic mb-4" style={{ color: '#6a5e44' }}>
                 Someone shared this Commander deck with you. Load it into Decksmith to explore and edit it.
               </p>
               <div className="flex gap-2">
                 <button
                   onClick={onClose}
-                  className="flex-1 py-2 text-[10px] font-cinzel uppercase tracking-widest rounded-sm transition-colors"
+                  className="flex-1 py-2 text-label font-cinzel uppercase tracking-widest rounded-sm transition-colors"
                   style={{
                     background: 'rgba(20,16,10,0.8)',
                     border: '1px solid rgba(60,50,30,0.4)',
@@ -192,7 +192,7 @@ export default function SharedDeckModal({ deck, onClose }: Props) {
                 </button>
                 <button
                   onClick={handleImport}
-                  className="py-2 px-6 text-[10px] font-cinzel uppercase tracking-widest rounded-sm transition-all"
+                  className="py-2 px-6 text-label font-cinzel uppercase tracking-widest rounded-sm transition-all"
                   style={{
                     flex: 2,
                     background: 'linear-gradient(135deg, rgba(60,44,14,0.8), rgba(40,28,6,0.9))',
@@ -208,10 +208,10 @@ export default function SharedDeckModal({ deck, onClose }: Props) {
 
           {phase === 'loading' && (
             <div className="text-center py-2">
-              <p className="font-cinzel text-[11px] mb-1 text-gold">
+              <p className="font-cinzel text-label mb-1 text-gold">
                 Loading deck...
               </p>
-              <p className="font-body text-[10px] italic mb-3" style={{ color: '#6a5e44' }}>
+              <p className="font-body text-label italic mb-3" style={{ color: '#6a5e44' }}>
                 Fetching cards from Scryfall ({progress.loaded}/{progress.total})
               </p>
               {/* Progress bar */}

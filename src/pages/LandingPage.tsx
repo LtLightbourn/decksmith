@@ -328,8 +328,8 @@ export default function LandingPage({ onEnterApp }: Props) {
             border: '1px solid rgba(140,105,40,0.26)',
             borderRadius: 2,
           }}>
-            <span style={{ fontSize: 9, color: '#c9a060' }}>✦</span>
-            <span style={{ fontSize: 9, fontFamily: '"Cinzel", serif', textTransform: 'uppercase', letterSpacing: '3px', color: '#7a6838' }}>
+            <span className="text-micro" style={{ color: '#c9a060' }}>✦</span>
+            <span className="text-micro" style={{ fontFamily: '"Cinzel", serif', textTransform: 'uppercase', letterSpacing: '3px', color: '#7a6838' }}>
               Powered by Claude AI
             </span>
           </div>
@@ -393,9 +393,8 @@ export default function LandingPage({ onEnterApp }: Props) {
                   color: '#c9a060',
                   lineHeight: 1,
                 }}>{s.n}</div>
-                <div style={{
+                <div className="text-micro" style={{
                   marginTop: 5,
-                  fontSize: 9,
                   fontFamily: '"Cinzel", serif',
                   textTransform: 'uppercase',
                   letterSpacing: '2px',
@@ -459,12 +458,11 @@ export default function LandingPage({ onEnterApp }: Props) {
           </div>
 
           {/* Tech attribution footnote */}
-          <p style={{
+          <p className="text-label" style={{
             textAlign: 'center',
             marginTop: 36,
             fontFamily: '"Crimson Pro", Georgia, serif',
             fontStyle: 'italic',
-            fontSize: 12,
             color: '#3a3020',
           }}>
             Merlin is powered by{' '}
@@ -513,7 +511,7 @@ export default function LandingPage({ onEnterApp }: Props) {
             >
               {STEPS.map(step => (
                 <div key={step.n} style={{ textAlign: 'center', padding: '0 8px' }}>
-                  <div style={{
+                  <div className="text-body" style={{
                     width: 46,
                     height: 46,
                     borderRadius: '50%',
@@ -524,15 +522,13 @@ export default function LandingPage({ onEnterApp }: Props) {
                     justifyContent: 'center',
                     margin: '0 auto 18px',
                     fontFamily: '"Cinzel Decorative", serif',
-                    fontSize: 15,
                     color: '#c9a060',
                     position: 'relative',
                     zIndex: 1,
                   }}>{step.n}</div>
                   <div style={{ fontSize: 22, marginBottom: 12 }}>{step.icon}</div>
-                  <h3 style={{
+                  <h3 className="text-label" style={{
                     fontFamily: '"Cinzel", serif',
-                    fontSize: 11,
                     textTransform: 'uppercase',
                     letterSpacing: '1.5px',
                     color: '#c9a060',
@@ -588,9 +584,8 @@ export default function LandingPage({ onEnterApp }: Props) {
               flexDirection: 'column',
             }}>
               <div style={{ marginBottom: 18 }}>
-                <div style={{
+                <div className="text-label" style={{
                   fontFamily: '"Cinzel Decorative", serif',
-                  fontSize: 12,
                   color: '#7a6a4a',
                   textTransform: 'uppercase',
                   letterSpacing: '2px',
@@ -598,7 +593,7 @@ export default function LandingPage({ onEnterApp }: Props) {
                 }}>Free</div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
                   <span style={{ fontFamily: '"Cinzel Decorative", serif', fontSize: 30, color: '#c9a060' }}>$0</span>
-                  <span style={{ fontFamily: '"Cinzel", serif', fontSize: 10, color: '#3a3428' }}>forever</span>
+                  <span className="text-label" style={{ fontFamily: '"Cinzel", serif', color: '#3a3428' }}>forever</span>
                 </div>
               </div>
 
@@ -607,7 +602,7 @@ export default function LandingPage({ onEnterApp }: Props) {
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', flex: 1, display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {FREE_FEATURES.map(f => (
                   <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 9 }}>
-                    <span style={{ color: '#c9a060', fontSize: 9, marginTop: 3, flexShrink: 0 }}>✦</span>
+                    <span className="text-micro" style={{ color: '#c9a060', marginTop: 3, flexShrink: 0 }}>✦</span>
                     <span style={{ fontFamily: '"Cinzel", serif', fontSize: 10.5, color: '#7a6a4a', lineHeight: 1.5 }}>{f}</span>
                   </li>
                 ))}
@@ -648,9 +643,8 @@ export default function LandingPage({ onEnterApp }: Props) {
               }}>Most Popular</div>
 
               <div style={{ marginBottom: 18 }}>
-                <div style={{
+                <div className="text-label" style={{
                   fontFamily: '"Cinzel Decorative", serif',
-                  fontSize: 12,
                   color: '#c9a060',
                   textTransform: 'uppercase',
                   letterSpacing: '2px',
@@ -658,7 +652,7 @@ export default function LandingPage({ onEnterApp }: Props) {
                 }}>Arcane</div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
                   <span style={{ fontFamily: '"Cinzel Decorative", serif', fontSize: 30, color: '#f0d080' }}>$5</span>
-                  <span style={{ fontFamily: '"Cinzel", serif', fontSize: 10, color: '#5a5040' }}>/ month</span>
+                  <span className="text-label" style={{ fontFamily: '"Cinzel", serif', color: '#5a5040' }}>/ month</span>
                 </div>
                 <p style={{ margin: '4px 0 0', fontFamily: '"Cinzel", serif', fontSize: 8.5, color: '#2a2418', textTransform: 'uppercase', letterSpacing: '1px' }}>
                   Cancel anytime
@@ -670,7 +664,7 @@ export default function LandingPage({ onEnterApp }: Props) {
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', flex: 1, display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {PRO_FEATURES.map(f => (
                   <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 9 }}>
-                    <span style={{ color: '#f0d080', fontSize: 9, marginTop: 3, flexShrink: 0 }}>✦</span>
+                    <span className="text-micro" style={{ color: '#f0d080', marginTop: 3, flexShrink: 0 }}>✦</span>
                     <span style={{ fontFamily: '"Cinzel", serif', fontSize: 10.5, color: '#9a8a5a', lineHeight: 1.5 }}>{f}</span>
                   </li>
                 ))}
@@ -709,20 +703,19 @@ export default function LandingPage({ onEnterApp }: Props) {
               }}>Coming Soon</div>
 
               <div style={{ marginBottom: 18 }}>
-                <div style={{
+                <div className="text-label" style={{
                   fontFamily: '"Cinzel Decorative", serif',
-                  fontSize: 12,
                   color: '#8a70aa',
                   textTransform: 'uppercase',
                   letterSpacing: '2px',
                   marginBottom: 8,
                 }}>Grandmaster</div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-                  <span style={{ fontFamily: '"Cinzel", serif', fontSize: 16, color: '#5a4870', letterSpacing: '1px' }}>
+                  <span className="text-heading" style={{ fontFamily: '"Cinzel", serif', color: '#5a4870', letterSpacing: '1px' }}>
                     Coming Soon
                   </span>
                 </div>
-                <p style={{ margin: '6px 0 0', fontFamily: '"Cinzel", serif', fontSize: 9, color: '#3a3050', lineHeight: 1.5 }}>
+                <p className="text-micro" style={{ margin: '6px 0 0', fontFamily: '"Cinzel", serif', color: '#3a3050', lineHeight: 1.5 }}>
                   For dedicated brewers, content creators, and LGS staff
                 </p>
               </div>
@@ -741,7 +734,7 @@ export default function LandingPage({ onEnterApp }: Props) {
                   'Private Discord and direct feedback line',
                 ].map(f => (
                   <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 9 }}>
-                    <span style={{ color: '#4a3860', fontSize: 10, marginTop: 3, flexShrink: 0 }}>⊘</span>
+                    <span className="text-label" style={{ color: '#4a3860', marginTop: 3, flexShrink: 0 }}>⊘</span>
                     <span style={{ fontFamily: '"Cinzel", serif', fontSize: 10.5, color: '#4a3a60', lineHeight: 1.5 }}>{f}</span>
                   </li>
                 ))}
@@ -749,7 +742,7 @@ export default function LandingPage({ onEnterApp }: Props) {
 
               <button
                 onClick={() => setWaitlistOpen(true)}
-                className="w-full py-[10px] rounded-sm font-cinzel uppercase tracking-widest text-[11px] transition-opacity hover:opacity-80"
+                className="w-full py-[10px] rounded-sm font-cinzel uppercase tracking-widest text-label transition-opacity hover:opacity-80"
                 style={{
                   background: 'rgba(30,20,50,0.7)',
                   border: '1px solid rgba(90,70,130,0.4)',
@@ -781,17 +774,15 @@ export default function LandingPage({ onEnterApp }: Props) {
           >
             {/* Logo + tagline */}
             <div style={{ textAlign: 'center' }} className="md:text-left">
-              <div style={{
+              <div className="text-body" style={{
                 fontFamily: '"Cinzel Decorative", serif',
-                fontSize: 15,
                 color: '#c9a060',
                 letterSpacing: '2px',
                 marginBottom: 5,
               }}>⚔ Decksmith</div>
-              <p style={{
+              <p className="text-label" style={{
                 fontFamily: '"Crimson Pro", Georgia, serif',
                 fontStyle: 'italic',
-                fontSize: 12,
                 color: '#2a2418',
                 margin: 0,
               }}>Forge your legacy · card by card</p>
@@ -854,10 +845,9 @@ function SectionHeader({ title, subtitle }: { title: string; subtitle?: string }
         lineHeight: 1.3,
       }}>{title}</h2>
       {subtitle && (
-        <p style={{
+        <p className="text-body" style={{
           fontFamily: '"Crimson Pro", Georgia, serif',
           fontStyle: 'italic',
-          fontSize: 14,
           color: '#4a4030',
           margin: '0 0 14px',
         }}>{subtitle}</p>

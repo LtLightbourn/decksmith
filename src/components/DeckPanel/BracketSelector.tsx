@@ -24,7 +24,7 @@ export default function BracketSelector() {
   return (
     <div className="flex-shrink-0 px-2 py-2 border-b" style={{ borderColor: 'rgba(50,42,28,0.5)' }}>
       <div className="flex items-center gap-1 mb-1.5">
-        <span className="text-[8px] font-cinzel tracking-[2px] uppercase" style={{ color: '#6a5e44' }}>
+        <span className="text-micro font-cinzel tracking-[2px] uppercase" style={{ color: '#6a5e44' }}>
           Bracket Target
         </span>
         {locked && (
@@ -34,7 +34,7 @@ export default function BracketSelector() {
                 new CustomEvent('decksmith:pro-required', { detail: { feature: 'bracket-control' } }),
               )
             }
-            className="text-[9px] ml-1"
+            className="text-micro ml-1"
             style={{ color: '#5a4030', lineHeight: 1 }}
             title="Bracket control requires Pro"
           >
@@ -72,16 +72,15 @@ export default function BracketSelector() {
               }}
             >
               <span
-                className="font-cinzel-deco font-bold leading-none"
+                className="font-cinzel-deco font-bold leading-none text-body"
                 style={{
-                  fontSize: 13,
                   color: isSelected ? info.color : '#4a4030',
                 }}
               >
                 {b}
               </span>
               <span
-                className="font-cinzel text-[7px] tracking-wide uppercase mt-0.5 truncate w-full text-center px-0.5"
+                className="font-cinzel text-micro tracking-wide uppercase mt-0.5 truncate w-full text-center px-0.5"
                 style={{ color: isSelected ? info.color : '#3a3428', opacity: isSelected ? 0.85 : 0.7 }}
               >
                 {info.name}

@@ -99,18 +99,17 @@ function LoadingContent({ phraseIdx, fading }: { phraseIdx: number; fading: bool
       </div>
 
       <h3
-        className="font-cinzel-deco uppercase tracking-widest mb-3"
-        style={{ color: '#c9a060', fontSize: 15, letterSpacing: 3 }}
+        className="font-cinzel-deco uppercase tracking-widest mb-3 text-body"
+        style={{ color: '#c9a060', letterSpacing: 3 }}
       >
         Merlin at Work
       </h3>
 
       {/* Cycling phrase */}
       <p
-        className="font-body italic"
+        className="font-body italic text-label"
         style={{
           color: '#8a7a5a',
-          fontSize: 12,
           minHeight: 20,
           opacity: fading ? 0 : 1,
           transform: fading ? 'translateY(-4px)' : 'translateY(0)',
@@ -147,15 +146,15 @@ function ConfirmContent({ onConfirm, onCancel }: { onConfirm: () => void; onCanc
       <div style={{ fontSize: 36, marginBottom: 16 }}>🎲</div>
 
       <h3
-        className="font-cinzel-deco uppercase tracking-widest mb-3"
-        style={{ color: '#c9a060', fontSize: 14, letterSpacing: 2 }}
+        className="font-cinzel-deco uppercase tracking-widest mb-3 text-body"
+        style={{ color: '#c9a060', letterSpacing: 2 }}
       >
         Let Fate Decide?
       </h3>
 
       <p
-        className="font-body italic mb-6"
-        style={{ color: '#7a6a4a', fontSize: 12, lineHeight: 1.7 }}
+        className="font-body italic mb-6 text-label"
+        style={{ color: '#7a6a4a', lineHeight: 1.7 }}
       >
         Start a new random deck? Your current deck will be cleared.
       </p>
@@ -163,7 +162,7 @@ function ConfirmContent({ onConfirm, onCancel }: { onConfirm: () => void; onCanc
       <div className="flex gap-3">
         <button
           onClick={onCancel}
-          className="flex-1 py-2 text-[10px] font-cinzel uppercase tracking-widest transition-colors"
+          className="flex-1 py-2 text-label font-cinzel uppercase tracking-widest transition-colors"
           style={{
             background: 'rgba(20,16,10,0.8)',
             border: '1px solid rgba(60,50,30,0.4)',
@@ -175,7 +174,7 @@ function ConfirmContent({ onConfirm, onCancel }: { onConfirm: () => void; onCanc
         </button>
         <button
           onClick={onConfirm}
-          className="py-2 px-5 text-[10px] font-cinzel uppercase tracking-widest transition-all"
+          className="py-2 px-5 text-label font-cinzel uppercase tracking-widest transition-all"
           style={{
             flex: 2,
             background: 'linear-gradient(135deg, rgba(120,80,10,0.8), rgba(80,50,5,0.9))',

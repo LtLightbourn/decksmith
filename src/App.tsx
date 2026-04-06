@@ -293,7 +293,7 @@ function AppShell() {
             >
               ⚔ Decksmith ⚔
             </h1>
-            <p className="hidden md:block text-[9px] font-body italic mt-[2px]" style={{ color: 'rgba(160,120,50,0.4)', letterSpacing: 4 }}>
+            <p className="hidden md:block text-micro font-body italic mt-[2px]" style={{ color: 'rgba(160,120,50,0.4)', letterSpacing: 4 }}>
               forge your legacy · card by card
             </p>
           </div>
@@ -303,7 +303,7 @@ function AppShell() {
             <span className="hidden md:inline animate-flicker text-xl" style={{ filter: 'drop-shadow(0 0 8px rgba(255,150,50,0.8))' }}>🔥</span>
             {/* Import/export — mobile only shortcut */}
             <button
-              className="md:hidden text-[14px] text-gold-faint"
+              className="md:hidden text-body text-gold-faint"
               onClick={() => setImportExportOpen(true)}
               title="Import / Export"
               aria-label="Import / Export"
@@ -318,15 +318,15 @@ function AppShell() {
               }}
               title={playerName ? `${playerName}'s Grimoire` : 'Open Grimoire'}
             >
-              <span style={{ fontSize: 11 }}>📖</span>
+              <span className="text-label">📖</span>
               {playerName && (
-                <span className="hidden md:inline text-[8px] font-cinzel tracking-wide" style={{ color: '#a08040' }}>
+                <span className="hidden md:inline text-micro font-cinzel tracking-wide" style={{ color: '#a08040' }}>
                   {playerName}
                 </span>
               )}
               {deckHistory.length > 0 && (
                 <span
-                  className="text-[7px] font-cinzel rounded-sm px-1"
+                  className="text-micro font-cinzel rounded-sm px-1"
                   style={{ background: 'rgba(140,100,30,0.3)', color: '#8a6a30' }}
                 >
                   {deckHistory.length}
@@ -347,7 +347,7 @@ function AppShell() {
             placeholder="Search the arcane archives..."
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="flex-1 px-3 py-[6px] text-[12px] rounded-sm"
+            className="flex-1 px-3 py-[6px] text-label rounded-sm"
             style={{
               background: 'rgba(12,10,6,0.7)',
               border: '1px solid rgba(70,58,36,0.5)',
@@ -372,8 +372,8 @@ function AppShell() {
               }}
               title={profileLabel ? `Playstyle: ${profileLabel}` : 'Set your playstyle profile'}
             >
-              <span style={{ fontSize: 11 }}>♟</span>
-              <span className="hidden sm:inline text-[9px] font-cinzel uppercase tracking-wide">
+              <span className="text-label">♟</span>
+              <span className="hidden sm:inline text-micro font-cinzel uppercase tracking-wide">
                 {profileLabel ?? 'Playstyle'}
               </span>
             </button>
@@ -392,8 +392,8 @@ function AppShell() {
                 }}
                 title="Let Merlin build you a surprise deck"
               >
-                <span style={{ fontSize: 13 }}>🎲</span>
-                <span className="text-[10px] font-cinzel uppercase tracking-[1px]">Surprise Me</span>
+                <span className="text-body">🎲</span>
+                <span className="text-label font-cinzel uppercase tracking-[1px]">Surprise Me</span>
               </button>
             </ProGate>
           </div>
@@ -410,7 +410,7 @@ function AppShell() {
             }}
           >
             <MerlinSprite orbState="idle" size={0.55} />
-            <span className="text-[10px] font-cinzel uppercase tracking-[1px]">Ask Merlin</span>
+            <span className="text-label font-cinzel uppercase tracking-[1px]">Ask Merlin</span>
           </button>
         </div>
 
@@ -465,18 +465,18 @@ function AppShell() {
           className="hidden md:flex flex-shrink-0 items-center gap-3 px-4 py-[5px] border-t"
           style={{ borderColor: 'rgba(50,42,28,0.5)', background: 'rgba(6,4,2,0.6)' }}
         >
-          <span className="text-[9px] font-cinzel tracking-widest uppercase text-gold-dim">
+          <span className="text-micro font-cinzel tracking-widest uppercase text-gold-dim">
             The Undying Archives
           </span>
           <div className="flex-1 gold-line" />
 
           {commander && (
-            <span className="text-[9px] font-cinzel" style={{ color: '#8a7040' }}>
+            <span className="text-micro font-cinzel" style={{ color: '#8a7040' }}>
               ♛ {commander.name}
             </span>
           )}
 
-          <span className="text-[9px] font-cinzel" style={{ color: isOver ? '#cc4444' : '#5a5040' }}>
+          <span className="text-micro font-cinzel" style={{ color: isOver ? '#cc4444' : '#5a5040' }}>
             {totalCards} / 99 cards
           </span>
 
@@ -484,7 +484,7 @@ function AppShell() {
           <div className="relative">
             <button
               onClick={() => setDeckMenuOpen(d => !d)}
-              className="text-[9px] font-cinzel uppercase tracking-widest px-2 py-[3px] rounded-sm"
+              className="text-micro font-cinzel uppercase tracking-widest px-2 py-[3px] rounded-sm"
               style={{ color: '#c9a060', border: '1px solid rgba(120,95,55,0.3)', background: 'rgba(30,22,12,0.6)' }}
             >
               ◆ {activeDeckName}
@@ -499,29 +499,29 @@ function AppShell() {
                     value={saveName}
                     onChange={e => setSaveName(e.target.value)}
                     placeholder="Deck name..."
-                    className="flex-1 px-2 py-1 text-[10px] rounded-sm"
+                    className="flex-1 px-2 py-1 text-label rounded-sm"
                     style={{ background: 'rgba(10,8,4,0.8)', border: '1px solid rgba(60,50,30,0.4)', color: '#b0a070', fontFamily: 'Georgia,serif', outline: 'none' }}
                     onKeyDown={e => e.key === 'Enter' && handleSave()}
                   />
                   <button
                     onClick={handleSave}
-                    className="px-2 py-1 text-[10px] font-cinzel rounded-sm"
+                    className="px-2 py-1 text-label font-cinzel rounded-sm"
                     style={{ background: 'rgba(30,44,18,0.8)', border: '1px solid rgba(70,110,40,0.4)', color: '#80b060' }}
                   >Save</button>
                 </div>
                 {savedDecks.length === 0 && (
-                  <p className="px-3 py-2 text-[10px] font-body italic text-gold-dim">No saved decks yet</p>
+                  <p className="px-3 py-2 text-label font-body italic text-gold-dim">No saved decks yet</p>
                 )}
                 {savedDecks.map(d => (
                   <div key={d.id} className="flex items-center gap-1 px-2 py-1 hover:bg-[rgba(180,140,60,0.06)]">
                     <button
                       onClick={() => { loadDeck(d.id); setDeckMenuOpen(false) }}
-                      className="flex-1 text-left text-[10px] font-cinzel"
+                      className="flex-1 text-left text-label font-cinzel"
                       style={{ color: '#b0a060' }}
                     >{d.name}</button>
                     <button
                       onClick={() => deleteSavedDeck(d.id)}
-                      className="text-[10px]"
+                      className="text-label"
                       style={{ color: '#6a4040' }}
                       aria-label={`Delete ${d.name}`}
                     >✕</button>
@@ -530,7 +530,7 @@ function AppShell() {
                 <div className="border-t p-2" style={{ borderColor: 'rgba(60,50,30,0.4)' }}>
                   <button
                     onClick={() => { clearDeck(); setDeckMenuOpen(false) }}
-                    className="text-[9px] font-cinzel uppercase tracking-widest w-full text-left"
+                    className="text-micro font-cinzel uppercase tracking-widest w-full text-left"
                     style={{ color: '#6a4040' }}
                   >✕ Clear Deck</button>
                 </div>
@@ -540,7 +540,7 @@ function AppShell() {
 
           <button
             onClick={() => setImportExportOpen(true)}
-            className="text-[9px] font-cinzel uppercase tracking-widest text-gold-faint"
+            className="text-micro font-cinzel uppercase tracking-widest text-gold-faint"
           >
             ⇅ Export
           </button>
@@ -572,8 +572,8 @@ function AppShell() {
               borderTop: mobileTab === tab.id ? '2px solid rgba(180,140,60,0.5)' : '2px solid transparent',
             }}
           >
-            <span style={{ fontSize: 16 }}>{tab.icon}</span>
-            <span className="text-[9px] font-cinzel uppercase tracking-widest">{tab.label}</span>
+            <span className="text-heading">{tab.icon}</span>
+            <span className="text-micro font-cinzel uppercase tracking-widest">{tab.label}</span>
           </button>
         ))}
       </nav>
@@ -627,9 +627,9 @@ function AppShell() {
         }}
         onClick={() => setAnalyticsDrawerOpen(d => !d)}
       >
-        <span style={{ fontSize: 13, color: '#c9a060' }}>◈</span>
+        <span className="text-body" style={{ color: '#c9a060' }}>◈</span>
         <span
-          className="text-[8px] font-cinzel uppercase tracking-widest"
+          className="text-micro font-cinzel uppercase tracking-widest"
           style={{ writingMode: 'vertical-rl', color: '#8a7040' }}
         >
           Stats

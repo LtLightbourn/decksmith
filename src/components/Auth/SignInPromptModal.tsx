@@ -33,12 +33,12 @@ export default function SignInPromptModal({ onClose }: Props) {
           </div>
 
           <h2
-            className="font-cinzel-deco uppercase mb-1"
-            style={{ fontSize: 16, letterSpacing: '2px', color: '#c9a060' }}
+            className="font-cinzel-deco uppercase mb-1 text-heading"
+            style={{ letterSpacing: '2px', color: '#c9a060' }}
           >
             Merlin Awaits
           </h2>
-          <p className="text-[11px] font-body italic mb-4" style={{ color: '#6a5e44', lineHeight: 1.5 }}>
+          <p className="text-label font-body italic mb-4" style={{ color: '#6a5e44', lineHeight: 1.5 }}>
             Sign in to consult Merlin's wisdom.
             <br />
             Free accounts receive <span className="text-gold">10 builds</span> at no cost.
@@ -47,7 +47,7 @@ export default function SignInPromptModal({ onClose }: Props) {
           <div className="flex flex-col gap-2">
             <SignInButton mode="modal">
               <button
-                className="w-full py-2 rounded-sm font-cinzel uppercase tracking-widest text-[11px] transition-opacity hover:opacity-90"
+                className="w-full py-2 rounded-sm font-cinzel uppercase tracking-widest text-label transition-opacity hover:opacity-90"
                 style={{
                   background: 'linear-gradient(135deg, rgba(60,35,90,0.9), rgba(40,20,60,0.95))',
                   border: '1px solid rgba(150,100,230,0.5)',
@@ -61,7 +61,7 @@ export default function SignInPromptModal({ onClose }: Props) {
 
             <button
               onClick={onClose}
-              className="w-full py-2 rounded-sm font-cinzel uppercase tracking-widest text-[10px] transition-opacity hover:opacity-70"
+              className="w-full py-2 rounded-sm font-cinzel uppercase tracking-widest text-label transition-opacity hover:opacity-70"
               style={{
                 background: 'transparent',
                 border: '1px solid rgba(70,60,40,0.4)',

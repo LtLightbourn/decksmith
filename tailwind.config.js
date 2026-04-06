@@ -19,6 +19,12 @@ export default {
         'bg-dark': '#0a0805',
         'bg-panel': '#1c160f',
       },
+      fontSize: {
+        micro: ['9px', { lineHeight: '1.4' }],
+        label: ['11px', { lineHeight: '1.5' }],
+        body: ['13px', { lineHeight: '1.6' }],
+        heading: ['16px', { lineHeight: '1.4' }],
+      },
       fontFamily: {
         cinzel: ['"Cinzel"', 'Georgia', 'serif'],
         'cinzel-deco': ['"Cinzel Decorative"', 'Georgia', 'serif'],

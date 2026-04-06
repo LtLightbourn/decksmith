@@ -11,7 +11,7 @@ export default function ToastStack() {
       {toasts.map(t => (
         <div
           key={t.id}
-          className="toast-enter pointer-events-auto flex items-center gap-2 px-3 py-2 rounded-sm text-sm font-cinzel"
+          className="toast-enter pointer-events-auto flex items-center gap-2 px-3 py-2 rounded-sm text-label font-cinzel"
           style={{
             background: t.type === 'success' ? 'rgba(30,44,22,0.95)' :
                         t.type === 'warning' ? 'rgba(44,34,10,0.95)' :
@@ -26,7 +26,6 @@ export default function ToastStack() {
                    '#e05050',
             boxShadow: '0 4px 20px rgba(0,0,0,0.7)',
             letterSpacing: '0.5px',
-            fontSize: '11px',
             cursor: t.action ? 'default' : 'pointer',
           }}
           onClick={t.action ? undefined : () => removeToast(t.id)}
@@ -38,12 +37,11 @@ export default function ToastStack() {
           {t.action && (
             <button
               onClick={() => { t.action!.onClick(); removeToast(t.id) }}
-              className="px-2 py-0.5 rounded-sm transition-all flex-shrink-0"
+              className="px-2 py-0.5 rounded-sm transition-all flex-shrink-0 text-label"
               style={{
                 background: 'rgba(255,255,255,0.1)',
                 border: '1px solid rgba(255,255,255,0.2)',
                 color: 'inherit',
-                fontSize: 10,
                 letterSpacing: '0.5px',
               }}
             >
@@ -52,8 +50,7 @@ export default function ToastStack() {
           )}
           <button
             onClick={() => removeToast(t.id)}
-            className="flex-shrink-0 opacity-50 hover:opacity-100 transition-opacity"
-            style={{ fontSize: 11 }}
+            className="flex-shrink-0 opacity-50 hover:opacity-100 transition-opacity text-label"
           >
             ✕
           </button>

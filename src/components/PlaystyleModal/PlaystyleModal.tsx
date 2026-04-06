@@ -127,13 +127,13 @@ export default function PlaystyleModal() {
             >
               ✦ Your Arcane Profile
             </h2>
-            <p className="text-[10px] font-body italic mt-px" style={{ color: '#6a5e44' }}>
+            <p className="text-label font-body italic mt-px" style={{ color: '#6a5e44' }}>
               {playstyle ? 'Update your playstyle preferences' : 'Tell Merlin how you like to play'}
             </p>
           </div>
           <button
             onClick={() => setPlaystyleModalOpen(false)}
-            className="text-[16px] transition-colors"
+            className="text-heading transition-colors"
             style={{ color: '#5a5040', lineHeight: 1 }}
           >✕</button>
         </div>
@@ -159,13 +159,13 @@ export default function PlaystyleModal() {
 
         {/* Question */}
         <div className="flex-shrink-0 px-6 pt-3 pb-4">
-          <p className="text-[9px] font-cinzel tracking-[2px] uppercase mb-1 text-gold-faint">
+          <p className="text-micro font-cinzel tracking-[2px] uppercase mb-1 text-gold-faint">
             Question {step + 1} of 4
           </p>
           <h3 className="font-cinzel text-lg leading-snug" style={{ color: '#d4b870' }}>
             {q.headline}
           </h3>
-          <p className="text-[11px] font-body italic mt-1" style={{ color: '#6a5e44' }}>
+          <p className="text-label font-body italic mt-1" style={{ color: '#6a5e44' }}>
             {q.sub}
           </p>
         </div>
@@ -215,7 +215,7 @@ export default function PlaystyleModal() {
 
                   {/* Label */}
                   <span
-                    className="font-cinzel text-[11px] leading-snug mb-1"
+                    className="font-cinzel text-label leading-snug mb-1"
                     style={{ color: isSelected ? '#d4b870' : '#8a7a5a' }}
                   >
                     {opt.label}
@@ -223,7 +223,7 @@ export default function PlaystyleModal() {
 
                   {/* Subtext */}
                   <span
-                    className="font-body italic text-[9px] leading-snug"
+                    className="font-body italic text-micro leading-snug"
                     style={{ color: isSelected ? '#7a6a40' : '#4a4030' }}
                   >
                     {opt.sub}
@@ -231,7 +231,7 @@ export default function PlaystyleModal() {
 
                   {/* Selected checkmark */}
                   {isSelected && (
-                    <div className="absolute top-2 right-2 text-[10px] font-cinzel text-gold">
+                    <div className="absolute top-2 right-2 text-label font-cinzel text-gold">
                       ✦
                     </div>
                   )}
@@ -249,13 +249,13 @@ export default function PlaystyleModal() {
                 border: '1px solid rgba(180,140,50,0.3)',
               }}
             >
-              <p className="text-[9px] font-cinzel tracking-[2px] uppercase mb-1" style={{ color: '#6a5e44' }}>
+              <p className="text-micro font-cinzel tracking-[2px] uppercase mb-1" style={{ color: '#6a5e44' }}>
                 Your playstyle profile
               </p>
               <p className="font-cinzel-deco text-base" style={{ color: '#c9a060', letterSpacing: 3 }}>
                 {previewLabel}
               </p>
-              <p className="text-[9px] font-body italic mt-1 text-gold-faint">
+              <p className="text-micro font-body italic mt-1 text-gold-faint">
                 Merlin will remember this across all deck building sessions.
               </p>
             </div>
@@ -269,7 +269,7 @@ export default function PlaystyleModal() {
         >
           <button
             onClick={handleBack}
-            className="text-[10px] font-cinzel uppercase tracking-widest px-3 py-2 rounded-sm transition-colors"
+            className="text-label font-cinzel uppercase tracking-widest px-3 py-2 rounded-sm transition-colors"
             style={{
               background: 'rgba(16,12,6,0.8)',
               border: '1px solid rgba(50,42,28,0.4)',
@@ -282,7 +282,7 @@ export default function PlaystyleModal() {
           <button
             onClick={handleNext}
             disabled={!canProceed}
-            className="text-[10px] font-cinzel uppercase tracking-widest px-6 py-2 rounded-sm transition-all"
+            className="text-label font-cinzel uppercase tracking-widest px-6 py-2 rounded-sm transition-all"
             style={{
               background: canProceed
                 ? 'linear-gradient(135deg, rgba(80,58,18,0.9), rgba(55,38,10,0.95))'

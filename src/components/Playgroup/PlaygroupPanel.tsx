@@ -12,7 +12,7 @@ const COLOR_DOTS: Record<string, string> = {
 }
 
 function ColorPips({ colors }: { colors: string[] }) {
-  if (colors.length === 0) return <span style={{ color: '#8a7a6a', fontSize: 9 }}>◆</span>
+  if (colors.length === 0) return <span className="text-micro" style={{ color: '#8a7a6a' }}>◆</span>
   return (
     <div className="flex gap-px">
       {colors.map(c => (
@@ -156,7 +156,6 @@ export default function PlaygroupPanel() {
   }
 
   const LABEL: React.CSSProperties = {
-    fontSize: 9,
     fontFamily: 'Cinzel, serif',
     letterSpacing: 2,
     textTransform: 'uppercase',
@@ -173,16 +172,16 @@ export default function PlaygroupPanel() {
         className="flex items-center justify-between px-3 py-[5px] w-full border-b"
         style={{ borderColor: 'rgba(50,42,28,0.5)', background: 'rgba(8,6,4,0.4)' }}
       >
-        <span className="text-[9px] font-cinzel tracking-[3px] uppercase text-gold">
+        <span className="text-micro font-cinzel tracking-[3px] uppercase text-gold">
           ⚔ Your Playgroup
         </span>
         <div className="flex items-center gap-2">
           {playgroup.length > 0 && (
-            <span className="text-[8px] font-cinzel" style={{ color: '#6a5e44' }}>
+            <span className="text-micro font-cinzel" style={{ color: '#6a5e44' }}>
               {playgroup.length}/5
             </span>
           )}
-          <span className="text-[10px] text-gold-faint">{isOpen ? '▲' : '▼'}</span>
+          <span className="text-label text-gold-faint">{isOpen ? '▲' : '▼'}</span>
         </div>
       </button>
 
@@ -198,7 +197,7 @@ export default function PlaygroupPanel() {
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
                   placeholder="Add opponent's commander..."
-                  className="flex-1 px-2 py-1 text-[10px] rounded-sm"
+                  className="flex-1 px-2 py-1 text-label rounded-sm"
                   style={{
                     background: 'rgba(12,8,4,0.8)',
                     border: '1px solid rgba(70,58,36,0.5)',
@@ -210,7 +209,7 @@ export default function PlaygroupPanel() {
                   onFocus={() => suggestions.length > 0 && setShowDropdown(true)}
                 />
                 {isSearching && (
-                  <span className="self-center text-[9px]" style={{ color: '#5a5040', flexShrink: 0 }}>…</span>
+                  <span className="self-center text-micro" style={{ color: '#5a5040', flexShrink: 0 }}>…</span>
                 )}
               </div>
 
@@ -233,7 +232,7 @@ export default function PlaygroupPanel() {
                       className="flex items-center gap-2 w-full px-2 py-1.5 text-left hover:bg-[rgba(180,140,60,0.08)] transition-colors"
                     >
                       <ColorPips colors={s.colorIdentity} />
-                      <span className="text-[10px] font-body truncate" style={{ color: '#b0a070' }}>
+                      <span className="text-label font-body truncate" style={{ color: '#b0a070' }}>
                         {s.name}
                       </span>
                     </button>
@@ -253,12 +252,12 @@ export default function PlaygroupPanel() {
                   style={{ background: 'rgba(25,18,10,0.6)', border: '1px solid rgba(60,48,28,0.4)' }}
                 >
                   <ColorPips colors={c.colorIdentity} />
-                  <span className="flex-1 truncate text-[10px] font-body" style={{ color: '#a89860' }}>
+                  <span className="flex-1 truncate text-label font-body" style={{ color: '#a89860' }}>
                     {c.name}
                   </span>
                   <button
                     onClick={() => removePlaygroupCommander(c.id)}
-                    className="flex-shrink-0 text-[9px] transition-colors hover:opacity-70"
+                    className="flex-shrink-0 text-micro transition-colors hover:opacity-70"
                     style={{ color: '#6a4040' }}
                     title="Remove"
                   >
@@ -270,7 +269,7 @@ export default function PlaygroupPanel() {
               {playgroup.length > 1 && (
                 <button
                   onClick={clearPlaygroup}
-                  className="text-[8px] font-cinzel uppercase tracking-wide w-full text-right pr-1 pt-0.5"
+                  className="text-micro font-cinzel uppercase tracking-wide w-full text-right pr-1 pt-0.5"
                   style={{ color: '#5a3a3a' }}
                 >
                   Clear all
@@ -281,7 +280,7 @@ export default function PlaygroupPanel() {
 
           {/* Empty state */}
           {playgroup.length === 0 && (
-            <p className="px-3 py-3 text-[10px] font-body italic text-center text-gold-dim">
+            <p className="px-3 py-3 text-label font-body italic text-center text-gold-dim">
               Add your opponents' commanders to tailor your build to your pod.
             </p>
           )}
@@ -294,7 +293,7 @@ export default function PlaygroupPanel() {
                 {!analysis && !isAnalyzing && (
                   <button
                     onClick={handleAnalyze}
-                    className="w-full py-1.5 text-[9px] font-cinzel uppercase tracking-widest rounded-sm transition-all hover:opacity-90"
+                    className="w-full py-1.5 text-micro font-cinzel uppercase tracking-widest rounded-sm transition-all hover:opacity-90"
                     style={{
                       background: 'rgba(30,22,10,0.7)',
                       border: '1px solid rgba(100,80,40,0.4)',
@@ -306,13 +305,13 @@ export default function PlaygroupPanel() {
                 )}
 
                 {isAnalyzing && (
-                  <p className="text-[9px] font-body italic text-center py-2" style={{ color: '#6a5a3a' }}>
+                  <p className="text-micro font-body italic text-center py-2" style={{ color: '#6a5a3a' }}>
                     Merlin reads the battlefield…
                   </p>
                 )}
 
                 {analyzeError && (
-                  <p className="text-[9px] font-body italic text-center py-1" style={{ color: '#8a3030' }}>
+                  <p className="text-micro font-body italic text-center py-1" style={{ color: '#8a3030' }}>
                     {analyzeError}
                   </p>
                 )}
@@ -320,22 +319,22 @@ export default function PlaygroupPanel() {
                 {analysis && (
                   <div className="space-y-2">
                     {/* Threat rows */}
-                    <p style={LABEL} className="pt-1">Threats</p>
+                    <p className="text-micro pt-1" style={LABEL}>Threats</p>
                     {analysis.threats.map((t, i) => (
                       <div key={i} className="px-2 py-1.5 rounded-sm" style={{ background: 'rgba(20,14,6,0.6)', border: '1px solid rgba(80,50,30,0.3)' }}>
-                        <p className="text-[9px] font-cinzel" style={{ color: '#c09050' }}>{t.commander}</p>
-                        <p className="text-[9px] font-body italic mt-0.5 leading-snug text-gold-muted">{t.description}</p>
+                        <p className="text-micro font-cinzel" style={{ color: '#c09050' }}>{t.commander}</p>
+                        <p className="text-micro font-body italic mt-0.5 leading-snug text-gold-muted">{t.description}</p>
                       </div>
                     ))}
 
                     {/* Suggested interaction */}
                     {analysis.interactions.length > 0 && (
                       <>
-                        <p style={{ ...LABEL, paddingTop: 4 }}>Suggested Interaction</p>
+                        <p className="text-micro" style={{ ...LABEL, paddingTop: 4 }}>Suggested Interaction</p>
                         {analysis.interactions.map((item, i) => (
                           <div key={i} className="flex items-start gap-1.5">
-                            <span style={{ color: '#5a8a4a', fontSize: 9, marginTop: 1, flexShrink: 0 }}>▸</span>
-                            <p className="text-[9px] font-body leading-snug" style={{ color: '#8a7a5a' }}>{item}</p>
+                            <span className="text-micro" style={{ color: '#5a8a4a', marginTop: 1, flexShrink: 0 }}>▸</span>
+                            <p className="text-micro font-body leading-snug" style={{ color: '#8a7a5a' }}>{item}</p>
                           </div>
                         ))}
                       </>
@@ -344,11 +343,11 @@ export default function PlaygroupPanel() {
                     {/* Political cards */}
                     {analysis.politicalCards.length > 0 && (
                       <>
-                        <p style={{ ...LABEL, paddingTop: 4 }}>Political Cards</p>
+                        <p className="text-micro" style={{ ...LABEL, paddingTop: 4 }}>Political Cards</p>
                         {analysis.politicalCards.map((item, i) => (
                           <div key={i} className="flex items-start gap-1.5">
-                            <span style={{ color: '#8a60a0', fontSize: 9, marginTop: 1, flexShrink: 0 }}>◆</span>
-                            <p className="text-[9px] font-body leading-snug" style={{ color: '#8a7a5a' }}>{item}</p>
+                            <span className="text-micro" style={{ color: '#8a60a0', marginTop: 1, flexShrink: 0 }}>◆</span>
+                            <p className="text-micro font-body leading-snug" style={{ color: '#8a7a5a' }}>{item}</p>
                           </div>
                         ))}
                       </>
@@ -356,7 +355,7 @@ export default function PlaygroupPanel() {
 
                     <button
                       onClick={handleAnalyze}
-                      className="text-[8px] font-cinzel uppercase tracking-wide w-full text-right pt-1 opacity-60 hover:opacity-100 transition-opacity"
+                      className="text-micro font-cinzel uppercase tracking-wide w-full text-right pt-1 opacity-60 hover:opacity-100 transition-opacity"
                       style={{ color: '#6a5a3a' }}
                     >
                       ↺ Refresh
@@ -375,7 +374,7 @@ export default function PlaygroupPanel() {
                 <button
                   onClick={handleTune}
                   disabled={isTuning}
-                  className="w-full py-2 text-[9px] font-cinzel uppercase tracking-widest rounded-sm transition-all hover:opacity-90"
+                  className="w-full py-2 text-micro font-cinzel uppercase tracking-widest rounded-sm transition-all hover:opacity-90"
                   style={{
                     background: isTuning
                       ? 'rgba(30,15,50,0.5)'
@@ -390,14 +389,14 @@ export default function PlaygroupPanel() {
                 </button>
 
                 {tuneError && (
-                  <p className="text-[9px] font-body italic text-center mt-2" style={{ color: '#8a3030' }}>
+                  <p className="text-micro font-body italic text-center mt-2" style={{ color: '#8a3030' }}>
                     {tuneError}
                   </p>
                 )}
 
                 {swaps.length > 0 && (
                   <div className="mt-2 space-y-2">
-                    <p style={LABEL}>Suggested Swaps</p>
+                    <p className="text-micro" style={LABEL}>Suggested Swaps</p>
                     {swaps.map((s, i) => (
                       <div
                         key={i}
@@ -405,14 +404,14 @@ export default function PlaygroupPanel() {
                         style={{ background: 'rgba(15,10,5,0.7)', border: '1px solid rgba(70,50,30,0.35)' }}
                       >
                         <div className="flex items-baseline gap-1">
-                          <span className="text-[8px] font-cinzel uppercase tracking-wide flex-shrink-0" style={{ color: '#8a3030' }}>Cut</span>
-                          <span className="text-[10px] font-body truncate" style={{ color: '#c08070' }}>{s.cut}</span>
+                          <span className="text-micro font-cinzel uppercase tracking-wide flex-shrink-0" style={{ color: '#8a3030' }}>Cut</span>
+                          <span className="text-label font-body truncate" style={{ color: '#c08070' }}>{s.cut}</span>
                         </div>
                         <div className="flex items-baseline gap-1">
-                          <span className="text-[8px] font-cinzel uppercase tracking-wide flex-shrink-0" style={{ color: '#4a8a4a' }}>Add</span>
-                          <span className="text-[10px] font-body truncate" style={{ color: '#80c080' }}>{s.add}</span>
+                          <span className="text-micro font-cinzel uppercase tracking-wide flex-shrink-0" style={{ color: '#4a8a4a' }}>Add</span>
+                          <span className="text-label font-body truncate" style={{ color: '#80c080' }}>{s.add}</span>
                         </div>
-                        <p className="text-[8px] font-body italic leading-snug" style={{ color: '#6a5a40' }}>{s.reason}</p>
+                        <p className="text-micro font-body italic leading-snug" style={{ color: '#6a5a40' }}>{s.reason}</p>
                       </div>
                     ))}
                   </div>

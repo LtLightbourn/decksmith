@@ -144,7 +144,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
           <ProGate feature="surprise-me">
             <button
               onClick={onSurprise}
-              className="w-full py-2 text-[10px] font-cinzel uppercase tracking-widest transition-all rounded-sm"
+              className="w-full py-2 text-label font-cinzel uppercase tracking-widest transition-all rounded-sm"
               style={{
                 background: 'linear-gradient(135deg, rgba(80,55,8,0.75), rgba(55,35,4,0.85))',
                 border: '1px solid rgba(180,130,25,0.4)',
@@ -162,7 +162,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
         className="flex-shrink-0 flex items-center justify-between px-3 py-[5px] border-b relative"
         style={{ borderColor: 'rgba(50,42,28,0.5)', background: 'rgba(8,6,4,0.4)' }}
       >
-        <span className="text-[9px] font-cinzel tracking-[3px] uppercase text-gold">
+        <span className="text-micro font-cinzel tracking-[3px] uppercase text-gold">
           ✦ Deck
         </span>
         <div className="flex items-center gap-2">
@@ -171,7 +171,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
             <div className="relative">
               <button
                 onClick={() => setVersionPopoverOpen(v => !v)}
-                className="text-[8px] font-cinzel uppercase tracking-wide px-1.5 py-[2px] rounded-sm transition-all"
+                className="text-micro font-cinzel uppercase tracking-wide px-1.5 py-[2px] rounded-sm transition-all"
                 style={{
                   background: versions.length > 0 ? 'rgba(30,22,60,0.6)' : 'rgba(14,10,5,0.5)',
                   border: versions.length > 0 ? '1px solid rgba(80,60,160,0.45)' : '1px solid rgba(40,32,20,0.35)',
@@ -194,7 +194,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
             <ProGate feature="playtester">
               <button
                 onClick={() => setPlaytesterOpen(true)}
-                className="text-[8px] font-cinzel uppercase tracking-wide px-1.5 py-[2px] rounded-sm transition-all"
+                className="text-micro font-cinzel uppercase tracking-wide px-1.5 py-[2px] rounded-sm transition-all"
                 style={{
                   background: 'rgba(14,28,42,0.6)',
                   border: '1px solid rgba(40,80,120,0.4)',
@@ -212,7 +212,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
               <button
                 onClick={handleLogDeck}
                 disabled={isLoggingDeck}
-                className="text-[8px] font-cinzel uppercase tracking-wide px-1.5 py-[2px] rounded-sm transition-all"
+                className="text-micro font-cinzel uppercase tracking-wide px-1.5 py-[2px] rounded-sm transition-all"
                 style={{
                   background: isLoggingDeck ? 'rgba(20,15,8,0.5)' : 'rgba(20,30,14,0.6)',
                   border: '1px solid rgba(70,100,45,0.4)',
@@ -230,7 +230,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
             <ProGate feature="deck-sharing">
             <button
               onClick={handleShare}
-              className="text-[8px] font-cinzel uppercase tracking-wide px-1.5 py-[2px] rounded-sm transition-all"
+              className="text-micro font-cinzel uppercase tracking-wide px-1.5 py-[2px] rounded-sm transition-all"
               style={{
                 background: 'rgba(14,22,32,0.6)',
                 border: '1px solid rgba(40,70,110,0.4)',
@@ -247,7 +247,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
             <div className="relative">
               <button
                 onClick={() => setExportDropdownOpen(v => !v)}
-                className="text-[8px] font-cinzel uppercase tracking-wide px-1.5 py-[2px] rounded-sm transition-all"
+                className="text-micro font-cinzel uppercase tracking-wide px-1.5 py-[2px] rounded-sm transition-all"
                 style={{
                   background: exportDropdownOpen ? 'rgba(40,30,10,0.8)' : 'rgba(14,10,5,0.5)',
                   border: '1px solid rgba(80,65,35,0.4)',
@@ -277,7 +277,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
                 }
                 toggleProxyMode()
               }}
-              className="text-[8px] font-cinzel uppercase tracking-wide px-1.5 py-[2px] rounded-sm transition-all"
+              className="text-micro font-cinzel uppercase tracking-wide px-1.5 py-[2px] rounded-sm transition-all"
               style={{
                 background: proxyMode ? 'rgba(140,110,50,0.2)' : 'rgba(20,15,8,0.5)',
                 border: proxyMode ? '1px solid rgba(180,140,50,0.45)' : '1px solid rgba(50,40,24,0.4)',
@@ -291,7 +291,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
           {proxyMode && (
             <button
               onClick={() => setProxySheetOpen(true)}
-              className="text-[8px] font-cinzel uppercase tracking-wide px-1.5 py-[2px] rounded-sm transition-all"
+              className="text-micro font-cinzel uppercase tracking-wide px-1.5 py-[2px] rounded-sm transition-all"
               style={{
                 background: 'rgba(30,22,10,0.7)',
                 border: '1px solid rgba(140,105,40,0.4)',
@@ -302,12 +302,12 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
             </button>
           )}
           {deckValue > 0 && (
-            <span className="text-[8px] font-cinzel" style={{ color: '#6a7a5a' }}>
+            <span className="text-micro font-cinzel" style={{ color: '#6a7a5a' }}>
               ${deckValue.toFixed(0)}
             </span>
           )}
           <span
-            className="text-[9px] font-cinzel"
+            className="text-micro font-cinzel"
             style={{ color: isOver ? '#cc4444' : isComplete ? '#6a9a4a' : '#5a5040' }}
           >
             {total} / 99
@@ -341,10 +341,10 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
             border: '1px solid rgba(180,90,30,0.4)',
           }}
         >
-          <p className="text-[9px] font-cinzel leading-relaxed" style={{ color: '#c07840' }}>
+          <p className="text-micro font-cinzel leading-relaxed" style={{ color: '#c07840' }}>
             ⚠ {mismatchCount} card{mismatchCount > 1 ? 's' : ''} exceed Bracket {targetBracket} ({bracketInfo.name})
           </p>
-          <p className="text-[8px] font-body italic mt-0.5" style={{ color: '#7a5830' }}>
+          <p className="text-micro font-body italic mt-0.5" style={{ color: '#7a5830' }}>
             Review flagged cards or raise your bracket target.
           </p>
         </div>
@@ -359,16 +359,16 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
           boxShadow: commander ? 'inset 0 0 10px rgba(180,140,50,0.1), 0 0 8px rgba(180,140,50,0.08)' : 'none',
         }}
       >
-        <span style={{ color: '#c9a060', fontSize: 14 }}>♛</span>
+        <span className="text-body" style={{ color: '#c9a060' }}>♛</span>
         {commander ? (
           <CardPreview card={commander}>
             <div className="flex-1 flex items-center justify-between">
-              <span className="text-[11px] font-cinzel" style={{ color: '#c9a060', letterSpacing: '0.5px' }}>
+              <span className="text-label font-cinzel" style={{ color: '#c9a060', letterSpacing: '0.5px' }}>
                 {commander.name}
               </span>
               <button
                 onClick={() => setCommander(null)}
-                className="text-[9px]"
+                className="text-micro"
                 style={{ color: '#6a5040' }}
                 title="Remove commander"
                 aria-label="Remove commander"
@@ -378,7 +378,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
             </div>
           </CardPreview>
         ) : (
-          <span className="text-[10px] font-cinzel" style={{ color: '#6a5e44', letterSpacing: '1px' }}>
+          <span className="text-label font-cinzel" style={{ color: '#6a5e44', letterSpacing: '1px' }}>
             Commander — drag or ♛ a legendary
           </span>
         )}
@@ -387,7 +387,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
       {/* Card sections */}
       <div className="flex-1 overflow-y-auto">
         {total === 0 && (
-          <p className="p-6 text-center text-[11px] font-body" style={{ color: '#4a4030', fontStyle: 'italic' }}>
+          <p className="p-6 text-center text-label font-body" style={{ color: '#4a4030', fontStyle: 'italic' }}>
             Your deck awaits. Search and add cards to begin forging your legacy.
           </p>
         )}
@@ -405,7 +405,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
           className="flex-shrink-0 flex items-center gap-2 px-3 py-[4px] border-t"
           style={{ borderColor: 'rgba(40,32,20,0.4)', background: 'rgba(6,4,2,0.4)' }}
         >
-          <span className="text-[8px] font-body flex-1 text-gold-dim">
+          <span className="text-micro font-body flex-1 text-gold-dim">
             {pricesFetching
               ? 'Fetching prices…'
               : priceAgeMinutes === null
@@ -417,7 +417,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
           <button
             onClick={() => syncPrices(true)}
             disabled={pricesFetching}
-            className="text-[8px] font-cinzel uppercase tracking-wide"
+            className="text-micro font-cinzel uppercase tracking-wide"
             style={{ color: pricesFetching ? '#4a4030' : '#7a6a4a', cursor: pricesFetching ? 'not-allowed' : 'pointer' }}
             title="Force-refresh all prices from Scryfall"
           >
@@ -441,8 +441,8 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
 function StatChip({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col items-center">
-      <span className="text-[7px] font-cinzel uppercase tracking-widest text-gold-dim">{label}</span>
-      <span className="text-[9px] font-cinzel" style={{ color: '#8a7a5a' }}>{value}</span>
+      <span className="text-micro font-cinzel uppercase tracking-widest text-gold-dim">{label}</span>
+      <span className="text-micro font-cinzel" style={{ color: '#8a7a5a' }}>{value}</span>
     </div>
   )
 }

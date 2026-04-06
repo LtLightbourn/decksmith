@@ -49,10 +49,10 @@ function VersionRow({ version, isHovered, onHover, onRestore, onDelete, diff }: 
       <div className="flex items-start gap-2 px-3 py-2">
         {/* Info */}
         <div className="flex-1 min-w-0">
-          <p className="text-[10px] font-cinzel leading-tight" style={{ color: '#c0a060' }}>
+          <p className="text-label font-cinzel leading-tight" style={{ color: '#c0a060' }}>
             {version.label}
           </p>
-          <p className="text-[8px] font-body mt-0.5 text-gold-dim">
+          <p className="text-micro font-body mt-0.5 text-gold-dim">
             {formatDate(version.savedAt)} · {version.cardCount} cards
             {version.deckValue > 0 && ` · $${version.deckValue.toFixed(0)}`}
           </p>
@@ -60,7 +60,7 @@ function VersionRow({ version, isHovered, onHover, onRestore, onDelete, diff }: 
           {/* Diff tooltip — shown on hover */}
           {isHovered && (diff.added > 0 || diff.removed > 0 || Math.abs(diff.priceDelta) > 0.5) && (
             <div
-              className="mt-1 px-2 py-1 rounded-sm text-[8px] font-body"
+              className="mt-1 px-2 py-1 rounded-sm text-micro font-body"
               style={{
                 background: 'rgba(30,22,10,0.8)',
                 border: '1px solid rgba(100,80,35,0.3)',
@@ -86,14 +86,14 @@ function VersionRow({ version, isHovered, onHover, onRestore, onDelete, diff }: 
             <>
               <button
                 onClick={() => onDelete(version.id)}
-                className="text-[8px] font-cinzel uppercase px-1.5 py-0.5 rounded-sm transition-all"
+                className="text-micro font-cinzel uppercase px-1.5 py-0.5 rounded-sm transition-all"
                 style={{ background: 'rgba(120,30,20,0.5)', border: '1px solid rgba(180,50,40,0.5)', color: '#cc4444' }}
               >
                 Confirm
               </button>
               <button
                 onClick={() => setConfirmDelete(false)}
-                className="text-[8px] font-cinzel uppercase px-1.5 py-0.5 rounded-sm"
+                className="text-micro font-cinzel uppercase px-1.5 py-0.5 rounded-sm"
                 style={{ background: 'rgba(20,16,10,0.5)', border: '1px solid rgba(60,50,30,0.4)', color: '#5a5040' }}
               >
                 ✕
@@ -103,14 +103,14 @@ function VersionRow({ version, isHovered, onHover, onRestore, onDelete, diff }: 
             <>
               <button
                 onClick={() => onRestore(version)}
-                className="text-[8px] font-cinzel uppercase px-1.5 py-0.5 rounded-sm transition-all"
+                className="text-micro font-cinzel uppercase px-1.5 py-0.5 rounded-sm transition-all"
                 style={{ background: 'rgba(30,22,10,0.6)', border: '1px solid rgba(140,105,40,0.4)', color: '#a08040' }}
               >
                 ↩ Restore
               </button>
               <button
                 onClick={() => setConfirmDelete(true)}
-                className="text-[8px] font-cinzel uppercase px-1.5 py-0.5 rounded-sm transition-all"
+                className="text-micro font-cinzel uppercase px-1.5 py-0.5 rounded-sm transition-all"
                 style={{ background: 'transparent', border: '1px solid rgba(50,40,30,0.3)', color: '#4a3a2a' }}
               >
                 ✕
@@ -169,7 +169,7 @@ export default function VersionPopover({ onClose, onRestoreWithUndo }: Props) {
     >
       {/* Save current version */}
       <div className="px-3 py-2 border-b" style={{ borderColor: 'rgba(60,50,30,0.4)', background: 'rgba(8,6,4,0.5)' }}>
-        <p className="text-[8px] font-cinzel uppercase tracking-widest mb-1.5" style={{ color: '#6a5e44' }}>
+        <p className="text-micro font-cinzel uppercase tracking-widest mb-1.5" style={{ color: '#6a5e44' }}>
           Save Snapshot
         </p>
         <div className="flex gap-1.5">
@@ -178,7 +178,7 @@ export default function VersionPopover({ onClose, onRestoreWithUndo }: Props) {
             onChange={e => setLabelInput(e.target.value)}
             placeholder="Label (optional)..."
             onKeyDown={e => e.key === 'Enter' && handleSave()}
-            className="flex-1 px-2 py-1 text-[10px] rounded-sm"
+            className="flex-1 px-2 py-1 text-label rounded-sm"
             style={{
               background: 'rgba(12,8,4,0.8)',
               border: '1px solid rgba(60,50,30,0.4)',
@@ -189,7 +189,7 @@ export default function VersionPopover({ onClose, onRestoreWithUndo }: Props) {
           />
           <button
             onClick={handleSave}
-            className="px-2.5 py-1 text-[9px] font-cinzel uppercase tracking-widest rounded-sm transition-all"
+            className="px-2.5 py-1 text-micro font-cinzel uppercase tracking-widest rounded-sm transition-all"
             style={{
               background: 'linear-gradient(135deg, rgba(60,44,14,0.8), rgba(40,28,6,0.9))',
               border: '1px solid rgba(160,120,40,0.4)',
@@ -204,7 +204,7 @@ export default function VersionPopover({ onClose, onRestoreWithUndo }: Props) {
       {/* Version list */}
       <div className="overflow-y-auto" style={{ maxHeight: 320 }}>
         {versions.length === 0 ? (
-          <p className="px-3 py-4 text-[9px] font-body italic text-center" style={{ color: '#3a3020' }}>
+          <p className="px-3 py-4 text-micro font-body italic text-center" style={{ color: '#3a3020' }}>
             No saved versions yet.
           </p>
         ) : (
@@ -226,7 +226,7 @@ export default function VersionPopover({ onClose, onRestoreWithUndo }: Props) {
 
       {versions.length > 0 && (
         <div className="px-3 py-1.5 border-t" style={{ borderColor: 'rgba(40,32,20,0.35)', background: 'rgba(6,4,2,0.6)' }}>
-          <p className="text-[7px] font-cinzel uppercase tracking-widest text-center" style={{ color: '#3a3020' }}>
+          <p className="text-micro font-cinzel uppercase tracking-widest text-center" style={{ color: '#3a3020' }}>
             {versions.length}/10 versions · Oldest auto-dropped at limit
           </p>
         </div>

@@ -14,7 +14,7 @@ const COLOR_NAME: Record<string, string> = {
 function ColorPip({ color }: { color: string }) {
   return (
     <span
-      className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-sm text-[8px] font-cinzel uppercase"
+      className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-sm text-micro font-cinzel uppercase"
       style={{
         background: `${COLOR_HEX[color] ?? '#888'}22`,
         border: `1px solid ${COLOR_HEX[color] ?? '#888'}55`,
@@ -29,7 +29,7 @@ function ColorPip({ color }: { color: string }) {
 function ThemeChip({ label }: { label: string }) {
   return (
     <span
-      className="px-1.5 py-0.5 text-[8px] font-cinzel uppercase tracking-wide rounded-sm"
+      className="px-1.5 py-0.5 text-micro font-cinzel uppercase tracking-wide rounded-sm"
       style={{ background: 'rgba(140,100,40,0.15)', border: '1px solid rgba(140,100,40,0.3)', color: '#9a8050' }}
     >
       {label}
@@ -51,15 +51,15 @@ function HistoryEntry({
     >
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline gap-1.5 flex-wrap">
-          <span className="text-[10px] font-cinzel text-gold">
+          <span className="text-label font-cinzel text-gold">
             {entry.commander?.name ?? 'No Commander'}
           </span>
-          <span className="text-[8px] font-body italic text-gold-faint">
+          <span className="text-micro font-body italic text-gold-faint">
             {entry.name}
           </span>
           {entry.tag && (
             <span
-              className="text-[7px] font-cinzel uppercase tracking-wide px-1.5 py-0.5 rounded-sm flex-shrink-0"
+              className="text-micro font-cinzel uppercase tracking-wide px-1.5 py-0.5 rounded-sm flex-shrink-0"
               style={{
                 background: 'rgba(80,55,8,0.4)',
                 border: '1px solid rgba(160,120,30,0.35)',
@@ -71,16 +71,16 @@ function HistoryEntry({
           )}
         </div>
         {entry.summary && (
-          <p className="text-[9px] font-body italic mt-0.5 leading-snug" style={{ color: '#7a6a50' }}>
+          <p className="text-micro font-body italic mt-0.5 leading-snug" style={{ color: '#7a6a50' }}>
             {entry.summary}
           </p>
         )}
         <div className="flex items-center gap-2 mt-1 flex-wrap">
-          <span className="text-[8px] font-cinzel text-gold-dim">
+          <span className="text-micro font-cinzel text-gold-dim">
             B{entry.bracket} · {formatRelativeDate(entry.savedAt)}
           </span>
           {entry.themes.slice(0, 3).map(t => (
-            <span key={t} className="text-[7px] font-cinzel uppercase" style={{ color: '#6a5e44' }}>
+            <span key={t} className="text-micro font-cinzel uppercase" style={{ color: '#6a5e44' }}>
               {t}
             </span>
           ))}
@@ -88,7 +88,7 @@ function HistoryEntry({
       </div>
       <button
         onClick={() => onLoad(entry)}
-        className="flex-shrink-0 text-[8px] font-cinzel uppercase tracking-wide px-2 py-1 rounded-sm transition-all"
+        className="flex-shrink-0 text-micro font-cinzel uppercase tracking-wide px-2 py-1 rounded-sm transition-all"
         style={{
           background: 'rgba(30,22,10,0.6)',
           border: '1px solid rgba(120,95,50,0.35)',
@@ -168,23 +168,24 @@ export default function ProfileModal() {
           style={{ borderColor: 'rgba(80,65,40,0.4)', background: 'rgba(8,5,2,0.5)' }}
         >
           <div>
-            <h2 className="font-cinzel-deco text-[13px] tracking-widest text-gold">
+            <h2 className="font-cinzel-deco text-body tracking-widest text-gold">
               ✦ Grimoire
             </h2>
-            <p className="text-[8px] font-body italic mt-px text-gold-faint">
+            <p className="text-micro font-body italic mt-px text-gold-faint">
               {memory.totalDecks} deck{memory.totalDecks !== 1 ? 's' : ''} forged · your arcane journal
             </p>
           </div>
           <button
             onClick={() => setProfileModalOpen(false)}
-            style={{ color: '#5a5040', fontSize: 16, lineHeight: 1 }}
+            className="text-heading"
+            style={{ color: '#5a5040', lineHeight: 1 }}
           >✕</button>
         </div>
 
         <div className="flex-1 overflow-y-auto">
           {/* ── Identity ── */}
           <div className="px-5 pt-4 pb-3 border-b" style={{ borderColor: 'rgba(50,40,24,0.4)' }}>
-            <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-2" style={{ color: '#6a5e44' }}>
+            <p className="text-micro font-cinzel uppercase tracking-[2px] mb-2" style={{ color: '#6a5e44' }}>
               Arcane Name
             </p>
             <input
@@ -193,7 +194,7 @@ export default function ProfileModal() {
               onBlur={handleNameBlur}
               onKeyDown={e => e.key === 'Enter' && handleNameBlur()}
               placeholder="Enter your name..."
-              className="w-full px-3 py-2 text-[13px] font-cinzel rounded-sm"
+              className="w-full px-3 py-2 text-body font-cinzel rounded-sm"
               style={{
                 background: 'rgba(10,7,3,0.7)',
                 border: '1px solid rgba(80,65,40,0.4)',
@@ -207,14 +208,14 @@ export default function ProfileModal() {
                 className="mt-2 flex items-center gap-2 px-3 py-2 rounded-sm"
                 style={{ background: 'rgba(140,100,30,0.08)', border: '1px solid rgba(140,100,30,0.2)' }}
               >
-                <span className="font-cinzel-deco text-[24px]" style={{ color: '#c9a060', lineHeight: 1 }}>
+                <span className="font-cinzel-deco text-2xl" style={{ color: '#c9a060', lineHeight: 1 }}>
                   {memory.totalDecks}
                 </span>
                 <div>
-                  <p className="text-[10px] font-cinzel" style={{ color: '#a08040' }}>
+                  <p className="text-label font-cinzel" style={{ color: '#a08040' }}>
                     Decks Forged
                   </p>
-                  <p className="text-[8px] font-body italic text-gold-faint">
+                  <p className="text-micro font-body italic text-gold-faint">
                     your legacy grows
                   </p>
                 </div>
@@ -227,20 +228,20 @@ export default function ProfileModal() {
             feature="playstyle"
             fallback={
               <div className="px-5 py-3 border-b" style={{ borderColor: 'rgba(50,40,24,0.4)' }}>
-                <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-1 text-gold-dim">Arcane Profile</p>
-                <p className="text-[8px] font-body italic" style={{ color: '#3a3020' }}>Upgrade to Arcane to unlock your playstyle profile.</p>
+                <p className="text-micro font-cinzel uppercase tracking-[2px] mb-1 text-gold-dim">Arcane Profile</p>
+                <p className="text-micro font-body italic" style={{ color: '#3a3020' }}>Upgrade to Arcane to unlock your playstyle profile.</p>
               </div>
             }
           >
           {memory.totalDecks > 0 && (
             <div className="px-5 pt-3 pb-3 border-b" style={{ borderColor: 'rgba(50,40,24,0.4)' }}>
-              <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-2" style={{ color: '#6a5e44' }}>
+              <p className="text-micro font-cinzel uppercase tracking-[2px] mb-2" style={{ color: '#6a5e44' }}>
                 Arcane Profile
               </p>
 
               {memory.favoriteColors.length > 0 && (
                 <div className="mb-2">
-                  <p className="text-[7px] font-cinzel uppercase mb-1 text-gold-dim">Favorite Colors</p>
+                  <p className="text-micro font-cinzel uppercase mb-1 text-gold-dim">Favorite Colors</p>
                   <div className="flex flex-wrap gap-1">
                     {memory.favoriteColors.map(c => <ColorPip key={c} color={c} />)}
                   </div>
@@ -249,7 +250,7 @@ export default function ProfileModal() {
 
               {memory.preferredStrategies.length > 0 && (
                 <div className="mb-2">
-                  <p className="text-[7px] font-cinzel uppercase mb-1 text-gold-dim">Preferred Themes</p>
+                  <p className="text-micro font-cinzel uppercase mb-1 text-gold-dim">Preferred Themes</p>
                   <div className="flex flex-wrap gap-1">
                     {memory.preferredStrategies.map(t => <ThemeChip key={t} label={t} />)}
                   </div>
@@ -258,14 +259,14 @@ export default function ProfileModal() {
 
               {memory.commonCards.length > 0 && (
                 <div>
-                  <p className="text-[7px] font-cinzel uppercase mb-1 text-gold-dim">
+                  <p className="text-micro font-cinzel uppercase mb-1 text-gold-dim">
                     Cards You Always Include
                   </p>
                   <div className="flex flex-wrap gap-1">
                     {memory.commonCards.map(name => (
                       <span
                         key={name}
-                        className="text-[8px] font-body px-1.5 py-0.5 rounded-sm"
+                        className="text-micro font-body px-1.5 py-0.5 rounded-sm"
                         style={{ background: 'rgba(30,24,10,0.7)', border: '1px solid rgba(80,65,30,0.35)', color: '#8a7a55' }}
                       >
                         {name}
@@ -283,16 +284,16 @@ export default function ProfileModal() {
             feature="playstyle"
             fallback={
               <div className="px-5 py-3 border-b" style={{ borderColor: 'rgba(50,40,24,0.4)' }}>
-                <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-1 text-gold-dim">✕ Cards I Never Want</p>
-                <p className="text-[8px] font-body italic" style={{ color: '#3a3020' }}>Arcane members can block cards from all Merlin suggestions.</p>
+                <p className="text-micro font-cinzel uppercase tracking-[2px] mb-1 text-gold-dim">✕ Cards I Never Want</p>
+                <p className="text-micro font-body italic" style={{ color: '#3a3020' }}>Arcane members can block cards from all Merlin suggestions.</p>
               </div>
             }
           >
           <div className="px-5 pt-3 pb-3 border-b" style={{ borderColor: 'rgba(50,40,24,0.4)' }}>
-            <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-2" style={{ color: '#6a5e44' }}>
+            <p className="text-micro font-cinzel uppercase tracking-[2px] mb-2" style={{ color: '#6a5e44' }}>
               ✕ Cards I Never Want
             </p>
-            <p className="text-[8px] font-body italic mb-2 text-gold-dim">
+            <p className="text-micro font-body italic mb-2 text-gold-dim">
               Merlin will never suggest these cards, in any deck, ever.
             </p>
             <div className="flex gap-1 mb-2">
@@ -301,7 +302,7 @@ export default function ProfileModal() {
                 onChange={e => setBlockInput(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && handleAddBlock()}
                 placeholder="Card name..."
-                className="flex-1 px-2 py-1 text-[10px] rounded-sm"
+                className="flex-1 px-2 py-1 text-label rounded-sm"
                 style={{
                   background: 'rgba(10,7,3,0.7)',
                   border: '1px solid rgba(70,55,35,0.4)',
@@ -312,7 +313,7 @@ export default function ProfileModal() {
               />
               <button
                 onClick={handleAddBlock}
-                className="px-2 py-1 text-[9px] font-cinzel uppercase rounded-sm"
+                className="px-2 py-1 text-micro font-cinzel uppercase rounded-sm"
                 style={{
                   background: 'rgba(80,40,40,0.4)',
                   border: '1px solid rgba(120,60,60,0.4)',
@@ -323,7 +324,7 @@ export default function ProfileModal() {
               </button>
             </div>
             {neverSuggestCards.length === 0 ? (
-              <p className="text-[9px] font-body italic" style={{ color: '#3a3020' }}>No cards blocked yet.</p>
+              <p className="text-micro font-body italic" style={{ color: '#3a3020' }}>No cards blocked yet.</p>
             ) : (
               <div
                 className="rounded-sm overflow-hidden"
@@ -335,10 +336,10 @@ export default function ProfileModal() {
                     className="flex items-center justify-between px-2 py-1 border-b"
                     style={{ borderColor: 'rgba(40,30,18,0.3)' }}
                   >
-                    <span className="text-[9px] font-body" style={{ color: '#9a8060' }}>{name}</span>
+                    <span className="text-micro font-body" style={{ color: '#9a8060' }}>{name}</span>
                     <button
                       onClick={() => removeFromNeverSuggest(name)}
-                      className="text-[10px] px-1"
+                      className="text-label px-1"
                       style={{ color: '#6a4040' }}
                       title="Remove from blocklist"
                     >
@@ -356,23 +357,23 @@ export default function ProfileModal() {
             feature="deck-history"
             fallback={
               <div className="px-5 py-4 text-center">
-                <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-1 text-gold-dim">Deck History</p>
-                <p className="text-[8px] font-body italic" style={{ color: '#3a3020' }}>Arcane members can save and reload up to 20 decks from their grimoire.</p>
+                <p className="text-micro font-cinzel uppercase tracking-[2px] mb-1 text-gold-dim">Deck History</p>
+                <p className="text-micro font-body italic" style={{ color: '#3a3020' }}>Arcane members can save and reload up to 20 decks from their grimoire.</p>
               </div>
             }
           >
           <div className="px-5 pt-3 pb-2">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-[8px] font-cinzel uppercase tracking-[2px]" style={{ color: '#6a5e44' }}>
+              <p className="text-micro font-cinzel uppercase tracking-[2px]" style={{ color: '#6a5e44' }}>
                 Deck History
               </p>
-              <span className="text-[8px] font-body italic text-gold-dim">
+              <span className="text-micro font-body italic text-gold-dim">
                 {deckHistory.length} / 20
               </span>
             </div>
 
             {deckHistory.length === 0 ? (
-              <p className="text-[9px] font-body italic py-4 text-center" style={{ color: '#3a3020' }}>
+              <p className="text-micro font-body italic py-4 text-center" style={{ color: '#3a3020' }}>
                 No decks logged yet. Use "◆ Log" in the deck panel to save a deck to your grimoire.
               </p>
             ) : (

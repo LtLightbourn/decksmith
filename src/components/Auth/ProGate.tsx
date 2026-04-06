@@ -27,7 +27,7 @@ export function ProGate({ feature, children, fallback }: ProGateProps) {
       <div className="opacity-40 pointer-events-none select-none">{children}</div>
       <div className="absolute inset-0 flex items-center justify-center">
         <span
-          className="text-[9px] font-cinzel uppercase tracking-wide px-2 py-[3px] rounded-sm"
+          className="text-micro font-cinzel uppercase tracking-wide px-2 py-[3px] rounded-sm"
           style={{
             background: 'rgba(50,35,8,0.92)',
             border: '1px solid rgba(180,140,50,0.5)',

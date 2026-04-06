@@ -38,9 +38,9 @@ export default class ErrorBoundary extends React.Component<Props, State> {
           }}
         >
           <p
+            className="text-body"
             style={{
               fontFamily: 'Cinzel, Georgia, serif',
-              fontSize: 13,
               color: '#c9a060',
               letterSpacing: 2,
               marginBottom: 16,
@@ -51,9 +51,9 @@ export default class ErrorBoundary extends React.Component<Props, State> {
           </p>
           <button
             onClick={() => this.setState({ hasError: false })}
+            className="text-label"
             style={{
               fontFamily: 'Cinzel, Georgia, serif',
-              fontSize: 10,
               textTransform: 'uppercase',
               letterSpacing: 2,
               color: '#c9a060',

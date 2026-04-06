@@ -47,7 +47,7 @@ export default function SearchPanelWithTerm({ term }: Props) {
               key={c}
               onClick={() => toggleColor(c)}
               title={COLOR_LABELS[c]}
-              className="text-[10px] font-cinzel font-bold rounded-sm transition-all flex-shrink-0"
+              className="text-label font-cinzel font-bold rounded-sm transition-all flex-shrink-0"
               style={{
                 width: 26, height: 26,
                 background: filters.colors.includes(c) ? COLOR_BG[c] : 'rgba(30,24,16,0.8)',
@@ -60,7 +60,7 @@ export default function SearchPanelWithTerm({ term }: Props) {
           <select
             value={filters.cardType}
             onChange={e => setFilters(f => ({ ...f, cardType: e.target.value }))}
-            className="text-[10px] font-cinzel px-1 rounded-sm flex-shrink-0"
+            className="text-label font-cinzel px-1 rounded-sm flex-shrink-0"
             style={{ background: 'rgba(20,16,10,0.8)', border: '1px solid rgba(60,50,30,0.4)', color: '#8a7a5a', outline: 'none' }}
           >
             {CARD_TYPES.map(t => (
@@ -71,22 +71,22 @@ export default function SearchPanelWithTerm({ term }: Props) {
 
         {/* CMC + keyword */}
         <div className="flex gap-2 items-center">
-          <span className="text-[9px] font-cinzel tracking-widest" style={{ color: '#6a5e44' }}>CMC</span>
+          <span className="text-micro font-cinzel tracking-widest" style={{ color: '#6a5e44' }}>CMC</span>
           <input type="number" min={0} max={16} value={filters.cmcMin}
             onChange={e => setFilters(f => ({ ...f, cmcMin: Number(e.target.value) }))}
-            className="w-8 text-[10px] text-center rounded-sm"
+            className="w-8 text-label text-center rounded-sm"
             style={{ background: 'rgba(20,16,10,0.8)', border: '1px solid rgba(60,50,30,0.4)', color: '#8a7a5a', outline: 'none' }} />
-          <span style={{ color: '#5a5040', fontSize: 10 }}>–</span>
+          <span className="text-label" style={{ color: '#5a5040' }}>–</span>
           <input type="number" min={0} max={16} value={filters.cmcMax}
             onChange={e => setFilters(f => ({ ...f, cmcMax: Number(e.target.value) }))}
-            className="w-8 text-[10px] text-center rounded-sm"
+            className="w-8 text-label text-center rounded-sm"
             style={{ background: 'rgba(20,16,10,0.8)', border: '1px solid rgba(60,50,30,0.4)', color: '#8a7a5a', outline: 'none' }} />
           <div className="flex-1" />
           <input
             placeholder="keyword..."
             value={filters.keyword}
             onChange={e => setFilters(f => ({ ...f, keyword: e.target.value }))}
-            className="text-[10px] px-2 rounded-sm"
+            className="text-label px-2 rounded-sm"
             style={{ background: 'rgba(20,16,10,0.8)', border: '1px solid rgba(60,50,30,0.4)', color: '#8a7a5a', outline: 'none', width: 80, fontFamily: 'Georgia,serif' }}
           />
         </div>
@@ -100,7 +100,7 @@ export default function SearchPanelWithTerm({ term }: Props) {
         <ProGate feature="commander-finder">
           <button
             onClick={() => setCommanderFinderOpen(true)}
-            className="w-full py-2 text-[10px] font-cinzel uppercase tracking-widest transition-all rounded-sm"
+            className="w-full py-2 text-label font-cinzel uppercase tracking-widest transition-all rounded-sm"
             style={{
               background: 'linear-gradient(135deg, rgba(60,40,8,0.7), rgba(40,25,5,0.8))',
               border: '1px solid rgba(160,110,20,0.35)',
@@ -117,8 +117,8 @@ export default function SearchPanelWithTerm({ term }: Props) {
         className="flex-shrink-0 flex items-center justify-between px-3 py-[5px] border-b"
         style={{ borderColor: 'rgba(50,42,28,0.5)', background: 'rgba(8,6,4,0.4)' }}
       >
-        <span className="text-[9px] font-cinzel tracking-[3px] uppercase text-gold">✦ Results</span>
-        <span className="text-[9px] font-cinzel text-gold-faint">
+        <span className="text-micro font-cinzel tracking-[3px] uppercase text-gold">✦ Results</span>
+        <span className="text-micro font-cinzel text-gold-faint">
           {isFetching ? 'searching...' : results ? `${results.length} cards` : ''}
         </span>
       </div>
@@ -127,13 +127,13 @@ export default function SearchPanelWithTerm({ term }: Props) {
       <div className="flex-1 overflow-y-auto">
         {isFetching && <Skeleton rows={8} />}
         {!isFetching && isError && (
-          <p className="p-4 text-[11px] font-body text-center" style={{ color: '#7a4a4a' }}>Search failed.</p>
+          <p className="p-4 text-label font-body text-center" style={{ color: '#7a4a4a' }}>Search failed.</p>
         )}
         {!isFetching && !isError && results?.length === 0 && term.length >= 2 && (
-          <p className="p-4 text-[11px] font-body text-center italic text-gold-faint">No cards found.</p>
+          <p className="p-4 text-label font-body text-center italic text-gold-faint">No cards found.</p>
         )}
         {!isFetching && !isError && !results && (
-          <p className="p-4 text-[11px] font-body text-center italic text-gold-faint">
+          <p className="p-4 text-label font-body text-center italic text-gold-faint">
             Search the arcane archives above...
           </p>
         )}

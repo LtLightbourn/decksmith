@@ -42,14 +42,14 @@ function tcgUrl(name: string): string {
 function PriceTag({ price, name }: { price: number | null; name: string }) {
   return (
     <span className="flex items-center gap-1">
-      <span className="text-[9px] font-body" style={{ color: priceColor(price) }}>
+      <span className="text-micro font-body" style={{ color: priceColor(price) }}>
         {price != null ? `$${price.toFixed(2)}` : '—'}
       </span>
       <a
         href={tcgUrl(name)}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[8px] font-cinzel uppercase"
+        className="text-micro font-cinzel uppercase"
         style={{ color: '#5a7a5a', textDecoration: 'none', letterSpacing: '0.5px' }}
         title="Buy on TCGPlayer"
         onClick={e => e.stopPropagation()}
@@ -165,7 +165,7 @@ export default function UpgradePanel() {
     <div className="flex flex-col h-full">
       {/* Budget selector */}
       <div className="px-3 pt-3 pb-2 border-b flex-shrink-0" style={{ borderColor: 'rgba(50,42,28,0.4)' }}>
-        <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-2 text-gold-muted">
+        <p className="text-micro font-cinzel uppercase tracking-[2px] mb-2 text-gold-muted">
           Max add price
         </p>
         <div className="flex gap-1 flex-wrap">
@@ -173,7 +173,7 @@ export default function UpgradePanel() {
             <button
               key={String(b.value)}
               onClick={() => setBudget(b.value)}
-              className="px-2 py-[3px] text-[9px] font-cinzel uppercase rounded-sm transition-all"
+              className="px-2 py-[3px] text-micro font-cinzel uppercase rounded-sm transition-all"
               style={{
                 background: budget === b.value ? 'rgba(140,110,50,0.25)' : 'rgba(14,10,5,0.6)',
                 border: budget === b.value ? '1px solid rgba(180,140,50,0.4)' : '1px solid rgba(50,40,24,0.4)',
@@ -186,7 +186,7 @@ export default function UpgradePanel() {
         </div>
 
         {deckValueTotal > 0 && (
-          <p className="text-[8px] font-body mt-2" style={{ color: '#6a5e44' }}>
+          <p className="text-micro font-body mt-2" style={{ color: '#6a5e44' }}>
             Deck value: <span style={{ color: priceColor(deckValueTotal / Math.max(cards.length, 1)) }}>${deckValueTotal.toFixed(2)}</span>
           </p>
         )}
@@ -197,7 +197,7 @@ export default function UpgradePanel() {
         <button
           onClick={handleFind}
           disabled={isLoading || cards.length === 0}
-          className="w-full py-2 text-[10px] font-cinzel uppercase tracking-widest rounded-sm transition-all"
+          className="w-full py-2 text-label font-cinzel uppercase tracking-widest rounded-sm transition-all"
           style={{
             background: isLoading || cards.length === 0
               ? 'rgba(30,24,14,0.5)'
@@ -214,19 +214,19 @@ export default function UpgradePanel() {
       {/* Results */}
       <div className="flex-1 overflow-y-auto px-2 py-2 space-y-2">
         {error && (
-          <p className="text-[9px] font-body italic text-center py-3" style={{ color: '#8a3030' }}>
+          <p className="text-micro font-body italic text-center py-3" style={{ color: '#8a3030' }}>
             {error}
           </p>
         )}
 
         {!hasRun && !isLoading && (
-          <p className="text-[9px] font-body italic text-center py-4" style={{ color: '#4a3a28' }}>
+          <p className="text-micro font-body italic text-center py-4" style={{ color: '#4a3a28' }}>
             Select a budget and find upgrades tailored to your deck, bracket, and pod.
           </p>
         )}
 
         {hasRun && !isLoading && visible.length === 0 && !error && (
-          <p className="text-[9px] font-body italic text-center py-4" style={{ color: '#4a3a28' }}>
+          <p className="text-micro font-body italic text-center py-4" style={{ color: '#4a3a28' }}>
             All suggestions applied or skipped.
           </p>
         )}
@@ -247,7 +247,7 @@ export default function UpgradePanel() {
                 style={{ borderColor: 'rgba(50,40,24,0.4)', background: 'rgba(8,6,3,0.5)' }}
               >
                 <span
-                  className="text-[8px] font-cinzel uppercase tracking-widest px-1.5 py-px rounded-sm"
+                  className="text-micro font-cinzel uppercase tracking-widest px-1.5 py-px rounded-sm"
                   style={{
                     color: IMPACT_COLOR[s.impact],
                     border: `1px solid ${IMPACT_COLOR[s.impact]}55`,
@@ -256,7 +256,7 @@ export default function UpgradePanel() {
                 >
                   {s.impact}
                 </span>
-                <span className="text-[7px] font-cinzel uppercase tracking-wide text-gold-dim">
+                <span className="text-micro font-cinzel uppercase tracking-wide text-gold-dim">
                   impact
                 </span>
               </div>
@@ -264,12 +264,12 @@ export default function UpgradePanel() {
               {/* Cut row */}
               <div className="flex items-center gap-1.5 px-2 py-1.5 border-b" style={{ borderColor: 'rgba(50,40,24,0.3)' }}>
                 <span
-                  className="text-[7px] font-cinzel uppercase px-1 py-px rounded-sm flex-shrink-0"
+                  className="text-micro font-cinzel uppercase px-1 py-px rounded-sm flex-shrink-0"
                   style={{ background: 'rgba(160,50,40,0.2)', border: '1px solid rgba(160,60,50,0.4)', color: '#c05040' }}
                 >
                   CUT
                 </span>
-                <span className="flex-1 truncate text-[10px] font-body" style={{ color: '#c09070' }}>
+                <span className="flex-1 truncate text-label font-body" style={{ color: '#c09070' }}>
                   {s.cut}
                 </span>
                 <PriceTag price={s.cutPrice} name={s.cut} />
@@ -278,12 +278,12 @@ export default function UpgradePanel() {
               {/* Add row */}
               <div className="flex items-center gap-1.5 px-2 py-1.5 border-b" style={{ borderColor: 'rgba(50,40,24,0.3)' }}>
                 <span
-                  className="text-[7px] font-cinzel uppercase px-1 py-px rounded-sm flex-shrink-0"
+                  className="text-micro font-cinzel uppercase px-1 py-px rounded-sm flex-shrink-0"
                   style={{ background: 'rgba(50,140,60,0.2)', border: '1px solid rgba(60,140,70,0.4)', color: '#50a060' }}
                 >
                   ADD
                 </span>
-                <span className="flex-1 truncate text-[10px] font-body" style={{ color: '#80c080' }}>
+                <span className="flex-1 truncate text-label font-body" style={{ color: '#80c080' }}>
                   {s.add}
                 </span>
                 <PriceTag price={s.addPrice} name={s.add} />
@@ -291,7 +291,7 @@ export default function UpgradePanel() {
 
               {/* Reason */}
               <div className="px-2 py-1.5 border-b" style={{ borderColor: 'rgba(50,40,24,0.3)' }}>
-                <p className="text-[9px] font-body italic leading-snug" style={{ color: '#7a6a50' }}>
+                <p className="text-micro font-body italic leading-snug" style={{ color: '#7a6a50' }}>
                   {s.reason}
                 </p>
               </div>
@@ -301,7 +301,7 @@ export default function UpgradePanel() {
                 <button
                   onClick={() => handleApply(idx, s)}
                   disabled={isApplying}
-                  className="flex-1 py-1 text-[9px] font-cinzel uppercase tracking-wide rounded-sm transition-all"
+                  className="flex-1 py-1 text-micro font-cinzel uppercase tracking-wide rounded-sm transition-all"
                   style={{
                     background: isApplying ? 'rgba(30,24,14,0.5)' : 'rgba(30,50,20,0.6)',
                     border: '1px solid rgba(70,110,50,0.4)',
@@ -314,7 +314,7 @@ export default function UpgradePanel() {
                 <button
                   onClick={() => handleSkip(idx)}
                   disabled={isApplying}
-                  className="flex-1 py-1 text-[9px] font-cinzel uppercase tracking-wide rounded-sm transition-all"
+                  className="flex-1 py-1 text-micro font-cinzel uppercase tracking-wide rounded-sm transition-all"
                   style={{
                     background: 'rgba(30,22,10,0.4)',
                     border: '1px solid rgba(60,50,30,0.35)',

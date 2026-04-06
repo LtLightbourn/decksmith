@@ -37,8 +37,8 @@ export default function AuthHeaderButtons() {
               color: '#c9a060',
             }}
           >
-            <span style={{ fontSize: 10 }}>⚔</span>
-            <span className="text-[9px] font-cinzel uppercase tracking-wide">Sign In</span>
+            <span className="text-label">⚔</span>
+            <span className="text-micro font-cinzel uppercase tracking-wide">Sign In</span>
           </button>
         </SignInButton>
       </SignedOut>
@@ -47,7 +47,7 @@ export default function AuthHeaderButtons() {
         {/* Pro badge */}
         {isPro && (
           <span
-            className="text-[8px] font-cinzel uppercase tracking-widest hidden md:inline px-1.5 py-[3px] rounded-sm"
+            className="text-micro font-cinzel uppercase tracking-widest hidden md:inline px-1.5 py-[3px] rounded-sm"
             style={{
               background: 'linear-gradient(135deg, rgba(80,50,10,0.6), rgba(60,38,6,0.75))',
               border: '1px solid rgba(180,130,50,0.6)',
@@ -63,7 +63,7 @@ export default function AuthHeaderButtons() {
         {/* Usage counter — free users only */}
         {!isPro && usageRemaining !== null && (
           <span
-            className="text-[8px] font-cinzel hidden md:inline flex items-center gap-1"
+            className="text-micro font-cinzel hidden md:inline flex items-center gap-1"
             style={{
               color: usageRemaining === 0 ? '#c06060' : usageRemaining <= 1 ? '#c08040' : '#5a5040',
               paddingRight: 2,

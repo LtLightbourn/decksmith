@@ -255,7 +255,7 @@ export default function PlaytesterModal({ cards, commander, onClose }: Props) {
             className="flex-shrink-0 flex items-center gap-2 px-3 py-2 border-b flex-wrap"
             style={{ borderColor: 'rgba(50,42,28,0.6)', background: 'rgba(8,6,4,0.7)' }}
           >
-            <span className="text-[10px] font-cinzel text-gold">
+            <span className="text-label font-cinzel text-gold">
               Turn {turn}
             </span>
 
@@ -266,7 +266,7 @@ export default function PlaytesterModal({ cards, commander, onClose }: Props) {
                 className="w-5 h-5 flex items-center justify-center text-xs rounded-sm"
                 style={{ background: 'rgba(120,40,40,0.3)', color: '#c06060' }}
               >−</button>
-              <span className="text-[10px] font-cinzel min-w-[36px] text-center" style={{ color: '#8a9a60' }}>
+              <span className="text-label font-cinzel min-w-[36px] text-center" style={{ color: '#8a9a60' }}>
                 ❤ {lifeTotal}
               </span>
               <button
@@ -283,7 +283,7 @@ export default function PlaytesterModal({ cards, commander, onClose }: Props) {
             <ZonePill label="GY" count={graveyard.length} color="#8a6a5a" />
             <ZonePill label="Exile" count={exile.length} color="#6a6a8a" />
             {!landDropUsed && (
-              <span className="text-[8px] font-cinzel px-1.5 py-px rounded-sm" style={{ background: 'rgba(60,100,40,0.25)', border: '1px solid rgba(80,130,50,0.35)', color: '#80a060' }}>
+              <span className="text-micro font-cinzel px-1.5 py-px rounded-sm" style={{ background: 'rgba(60,100,40,0.25)', border: '1px solid rgba(80,130,50,0.35)', color: '#80a060' }}>
                 land drop available
               </span>
             )}
@@ -299,7 +299,7 @@ export default function PlaytesterModal({ cards, commander, onClose }: Props) {
 
             <button
               onClick={() => setStatsOpen(s => !s)}
-              className="text-[9px] font-cinzel px-2 py-1 rounded-sm transition-all"
+              className="text-micro font-cinzel px-2 py-1 rounded-sm transition-all"
               style={{
                 background: statsOpen ? 'rgba(100,80,140,0.25)' : 'rgba(14,10,5,0.5)',
                 border: statsOpen ? '1px solid rgba(140,100,200,0.4)' : '1px solid rgba(50,40,24,0.4)',
@@ -309,7 +309,7 @@ export default function PlaytesterModal({ cards, commander, onClose }: Props) {
 
             <button
               onClick={onClose}
-              className="text-[10px] font-cinzel px-2 py-1 rounded-sm"
+              className="text-label font-cinzel px-2 py-1 rounded-sm"
               style={{ color: '#6a4a4a', border: '1px solid rgba(80,50,50,0.3)' }}
             >✕ Close</button>
           </div>
@@ -329,7 +329,7 @@ export default function PlaytesterModal({ cards, commander, onClose }: Props) {
                   className="absolute top-2 right-2 z-10 flex flex-col items-center gap-1"
                   style={{ width: 72 }}
                 >
-                  <span className="text-[7px] font-cinzel uppercase tracking-widest" style={{ color: 'rgba(200,160,60,0.5)' }}>Commander</span>
+                  <span className="text-micro font-cinzel uppercase tracking-widest" style={{ color: 'rgba(200,160,60,0.5)' }}>Commander</span>
                   <img
                     src={commander.imageUri}
                     alt={commander.name}
@@ -341,7 +341,7 @@ export default function PlaytesterModal({ cards, commander, onClose }: Props) {
               {/* Empty state */}
               {battlefield.length === 0 && (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <p className="text-[11px] font-body italic" style={{ color: 'rgba(80,110,60,0.4)' }}>
+                  <p className="text-label font-body italic" style={{ color: 'rgba(80,110,60,0.4)' }}>
                     Click cards in hand to play them onto the battlefield
                   </p>
                 </div>
@@ -382,8 +382,8 @@ export default function PlaytesterModal({ cards, commander, onClose }: Props) {
                   <div className="flex items-start gap-2">
                     <MerlinSprite orbState={boardAssessLoading ? 'loading' : 'success'} size={0.5} />
                     {boardAssessLoading
-                      ? <span className="text-[9px] font-body italic" style={{ color: '#8060b0' }}>Merlin peers at the board…</span>
-                      : <span className="text-[9px] font-body" style={{ color: '#c0a8e8', lineHeight: 1.4 }}>{boardAssessment}</span>
+                      ? <span className="text-micro font-body italic" style={{ color: '#8060b0' }}>Merlin peers at the board…</span>
+                      : <span className="text-micro font-body" style={{ color: '#c0a8e8', lineHeight: 1.4 }}>{boardAssessment}</span>
                     }
                   </div>
                 </div>
@@ -408,7 +408,7 @@ export default function PlaytesterModal({ cards, commander, onClose }: Props) {
             style={{ borderColor: 'rgba(50,42,28,0.5)', background: 'rgba(6,5,3,0.9)', minHeight: 148 }}
           >
             <div className="flex items-center gap-1 px-2 py-1 border-b" style={{ borderColor: 'rgba(40,32,20,0.4)' }}>
-              <span className="text-[8px] font-cinzel uppercase tracking-widest text-gold-faint">
+              <span className="text-micro font-cinzel uppercase tracking-widest text-gold-faint">
                 Hand ({hand.length})
               </span>
               {turn >= 5 && (
@@ -424,14 +424,14 @@ export default function PlaytesterModal({ cards, commander, onClose }: Props) {
                   }}
                 >
                   <MerlinSprite orbState={boardAssessLoading ? 'loading' : 'idle'} size={0.4} />
-                  <span className="text-[8px] font-cinzel">How am I doing?</span>
+                  <span className="text-micro font-cinzel">How am I doing?</span>
                 </button>
               )}
             </div>
 
             <div className="flex gap-2 px-2 py-1 overflow-x-auto" style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}>
               {hand.length === 0 && (
-                <p className="text-[10px] font-body italic py-4 px-2" style={{ color: '#3a3028' }}>Empty hand</p>
+                <p className="text-label font-body italic py-4 px-2" style={{ color: '#3a3028' }}>Empty hand</p>
               )}
               {hand.map((card, i) => (
                 <HandCardView
@@ -477,12 +477,12 @@ function OpeningHandView({
             Opening Hand
           </h2>
           {mulliganCount > 0 && (
-            <p className="text-[9px] font-cinzel" style={{ color: '#6a5040' }}>
+            <p className="text-micro font-cinzel" style={{ color: '#6a5040' }}>
               Mulligan {mulliganCount} — drawing {hand.length} cards
             </p>
           )}
         </div>
-        <button onClick={onClose} className="text-[11px] font-cinzel" style={{ color: '#5a4030' }}>✕ Close</button>
+        <button onClick={onClose} className="text-label font-cinzel" style={{ color: '#5a4030' }}>✕ Close</button>
       </div>
 
       {/* Cards */}
@@ -492,12 +492,12 @@ function OpeningHandView({
             <div key={`${card.id}-${i}`} className="flex flex-col items-center gap-1">
               {card.imageUri
                 ? <img src={card.imageUri} alt={card.name} style={{ height: 160, borderRadius: 6, boxShadow: '0 4px 16px rgba(0,0,0,0.7)' }} />
-                : <div className="flex items-center justify-center rounded-md text-[10px] font-cinzel text-center px-2"
+                : <div className="flex items-center justify-center rounded-md text-label font-cinzel text-center px-2"
                     style={{ height: 160, width: 115, background: 'rgba(30,24,16,0.8)', border: '1px solid rgba(80,65,40,0.4)', color: '#8a7a5a' }}>
                     {card.name}
                   </div>
               }
-              <span className="text-[8px] font-cinzel text-center max-w-[100px] truncate" style={{ color: '#6a5e44' }}>{card.name}</span>
+              <span className="text-micro font-cinzel text-center max-w-[100px] truncate" style={{ color: '#6a5e44' }}>{card.name}</span>
             </div>
           ))}
         </div>
@@ -509,15 +509,15 @@ function OpeningHandView({
         >
           <MerlinSprite orbState={assessLoading ? 'loading' : assessment ? 'success' : 'idle'} size={0.7} />
           <div className="flex-1">
-            <p className="text-[9px] font-cinzel uppercase tracking-widest mb-1" style={{ color: '#6a5e7a' }}>Merlin's Assessment</p>
+            <p className="text-micro font-cinzel uppercase tracking-widest mb-1" style={{ color: '#6a5e7a' }}>Merlin's Assessment</p>
             {assessLoading && (
-              <p className="text-[10px] font-body italic" style={{ color: '#6050a0' }}>Reading the arcane currents…</p>
+              <p className="text-label font-body italic" style={{ color: '#6050a0' }}>Reading the arcane currents…</p>
             )}
             {!assessLoading && assessment && (
-              <p className="text-[11px] font-body leading-relaxed" style={{ color: '#c0a8e8' }}>{assessment}</p>
+              <p className="text-label font-body leading-relaxed" style={{ color: '#c0a8e8' }}>{assessment}</p>
             )}
             {!assessLoading && !assessment && (
-              <p className="text-[10px] font-body italic" style={{ color: '#4a4050' }}>Assessment unavailable</p>
+              <p className="text-label font-body italic" style={{ color: '#4a4050' }}>Assessment unavailable</p>
             )}
           </div>
         </div>
@@ -578,7 +578,7 @@ function HandCardView({ card, isLand, landDropUsed, onClick }: {
     >
       {card.imageUri
         ? <img src={card.imageUri} alt={card.name} style={{ height: 115, borderRadius: 4, boxShadow: '0 2px 10px rgba(0,0,0,0.6)' }} />
-        : <div className="flex items-center justify-center text-[9px] font-cinzel text-center px-2"
+        : <div className="flex items-center justify-center text-micro font-cinzel text-center px-2"
             style={{ height: 115, width: 82, background: 'rgba(30,24,16,0.8)', border: '1px solid rgba(80,65,40,0.4)', borderRadius: 4, color: '#8a7a5a' }}>
             {card.name}
           </div>
@@ -587,7 +587,7 @@ function HandCardView({ card, isLand, landDropUsed, onClick }: {
       {!blocked && (
         <div className="absolute inset-0 rounded flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
           style={{ background: 'rgba(0,0,0,0.5)' }}>
-          <span className="text-[8px] font-cinzel uppercase tracking-wide text-gold">Play</span>
+          <span className="text-micro font-cinzel uppercase tracking-wide text-gold">Play</span>
         </div>
       )}
     </button>
@@ -695,7 +695,7 @@ function BattlefieldCardView({
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}
           >
-            <span style={{ fontSize: 8, color: '#8a7a5a', textAlign: 'center', padding: 4, fontFamily: 'Georgia, serif' }}>
+            <span className="text-micro" style={{ color: '#8a7a5a', textAlign: 'center', padding: 4, fontFamily: 'Georgia, serif' }}>
               {bc.card.name}
             </span>
           </div>
@@ -741,7 +741,7 @@ function BfContextMenu({ x, y, uid, onTapUntap, onToGraveyard, onToExile, onToHa
         <button
           key={item.label}
           onClick={item.onClick}
-          className="w-full text-left px-3 py-[7px] text-[10px] font-cinzel hover:bg-[rgba(180,140,60,0.08)] transition-colors"
+          className="w-full text-left px-3 py-[7px] text-label font-cinzel hover:bg-[rgba(180,140,60,0.08)] transition-colors"
           style={{ color: '#a09060', borderBottom: '1px solid rgba(60,50,30,0.3)' }}
         >
           {item.label}
@@ -766,8 +766,8 @@ function StatsPanel({ cards, statsData, manaData, loading, onRunStats }: {
       style={{ width: 240, borderColor: 'rgba(50,42,28,0.5)', background: 'rgba(8,6,4,0.9)' }}
     >
       <div className="flex-shrink-0 px-3 py-2 border-b" style={{ borderColor: 'rgba(50,42,28,0.4)' }}>
-        <p className="text-[9px] font-cinzel uppercase tracking-[3px] text-gold">◈ Simulation Stats</p>
-        <p className="text-[8px] font-body italic mt-0.5 text-gold-dim">200 simulated opening hands</p>
+        <p className="text-micro font-cinzel uppercase tracking-[3px] text-gold">◈ Simulation Stats</p>
+        <p className="text-micro font-body italic mt-0.5 text-gold-dim">200 simulated opening hands</p>
       </div>
 
       <div className="flex-1 px-3 py-3 space-y-4">
@@ -775,7 +775,7 @@ function StatsPanel({ cards, statsData, manaData, loading, onRunStats }: {
           <button
             onClick={onRunStats}
             disabled={loading}
-            className="w-full py-2 font-cinzel uppercase tracking-widest text-[9px] rounded-sm transition-all"
+            className="w-full py-2 font-cinzel uppercase tracking-widest text-micro rounded-sm transition-all"
             style={{
               background: loading ? 'rgba(20,15,8,0.5)' : 'rgba(30,22,10,0.6)',
               border: '1px solid rgba(100,80,40,0.4)',
@@ -791,7 +791,7 @@ function StatsPanel({ cards, statsData, manaData, loading, onRunStats }: {
           <>
             {/* Opening hand section */}
             <div>
-              <p className="text-[8px] font-cinzel uppercase tracking-widest mb-2" style={{ color: '#6a5e44' }}>Opening Hand Lands</p>
+              <p className="text-micro font-cinzel uppercase tracking-widest mb-2" style={{ color: '#6a5e44' }}>Opening Hand Lands</p>
               <StatRow label="Avg lands" value={statsData.avgLands.toFixed(2)} />
               <StatRow label="2+ lands" value={pct(statsData.prob2Lands)} />
               <StatRow label="3+ lands" value={pct(statsData.prob3Lands)} highlight={statsData.prob3Lands > 0.7} />
@@ -803,10 +803,10 @@ function StatsPanel({ cards, statsData, manaData, loading, onRunStats }: {
             {/* Mana by turn */}
             {manaData && (
               <div>
-                <p className="text-[8px] font-cinzel uppercase tracking-widest mb-2" style={{ color: '#6a5e44' }}>Avg Mana by Turn</p>
+                <p className="text-micro font-cinzel uppercase tracking-widest mb-2" style={{ color: '#6a5e44' }}>Avg Mana by Turn</p>
                 {manaData.map(({ turn, avgMana }) => (
                   <div key={turn} className="flex items-center gap-2 mb-1">
-                    <span className="text-[8px] font-cinzel w-8 flex-shrink-0 text-gold-faint">T{turn}</span>
+                    <span className="text-micro font-cinzel w-8 flex-shrink-0 text-gold-faint">T{turn}</span>
                     <div className="flex-1 h-2 rounded-sm overflow-hidden" style={{ background: 'rgba(30,24,16,0.6)' }}>
                       <div
                         className="h-full rounded-sm"
@@ -816,7 +816,7 @@ function StatsPanel({ cards, statsData, manaData, loading, onRunStats }: {
                         }}
                       />
                     </div>
-                    <span className="text-[8px] font-cinzel w-6 text-right flex-shrink-0" style={{ color: '#8a7a5a' }}>
+                    <span className="text-micro font-cinzel w-6 text-right flex-shrink-0" style={{ color: '#8a7a5a' }}>
                       {avgMana.toFixed(1)}
                     </span>
                   </div>
@@ -828,11 +828,11 @@ function StatsPanel({ cards, statsData, manaData, loading, onRunStats }: {
 
             {/* Most common opening hand cards */}
             <div>
-              <p className="text-[8px] font-cinzel uppercase tracking-widest mb-2" style={{ color: '#6a5e44' }}>Most Common in Hand</p>
+              <p className="text-micro font-cinzel uppercase tracking-widest mb-2" style={{ color: '#6a5e44' }}>Most Common in Hand</p>
               {statsData.cardFrequency.slice(0, 8).map(({ name, frequency }) => (
                 <div key={name} className="flex items-center gap-2 mb-1">
-                  <span className="text-[8px] font-body flex-1 truncate" style={{ color: '#7a7060' }}>{name}</span>
-                  <span className="text-[8px] font-cinzel flex-shrink-0" style={{ color: frequency > 0.5 ? '#c9a060' : '#5a5040' }}>
+                  <span className="text-micro font-body flex-1 truncate" style={{ color: '#7a7060' }}>{name}</span>
+                  <span className="text-micro font-cinzel flex-shrink-0" style={{ color: frequency > 0.5 ? '#c9a060' : '#5a5040' }}>
                     {pct(frequency)}
                   </span>
                 </div>
@@ -841,7 +841,7 @@ function StatsPanel({ cards, statsData, manaData, loading, onRunStats }: {
 
             <button
               onClick={onRunStats}
-              className="w-full py-1 text-[8px] font-cinzel uppercase tracking-widest rounded-sm"
+              className="w-full py-1 text-micro font-cinzel uppercase tracking-widest rounded-sm"
               style={{ color: '#4a4030', border: '1px solid rgba(50,40,24,0.3)' }}
             >
               ⟳ Re-run
@@ -857,7 +857,7 @@ function StatsPanel({ cards, statsData, manaData, loading, onRunStats }: {
 
 function ZonePill({ label, count, color }: { label: string; count: number; color: string }) {
   return (
-    <span className="text-[8px] font-cinzel px-1.5 py-px rounded-sm flex-shrink-0"
+    <span className="text-micro font-cinzel px-1.5 py-px rounded-sm flex-shrink-0"
       style={{ background: 'rgba(20,16,10,0.6)', border: `1px solid ${color}33`, color }}>
       {label}: {count}
     </span>
@@ -874,7 +874,7 @@ function ActionBtn({ onClick, disabled, highlight, children }: {
     <button
       onClick={onClick}
       disabled={disabled}
-      className="text-[9px] font-cinzel uppercase tracking-wide px-2 py-1 rounded-sm transition-all flex-shrink-0"
+      className="text-micro font-cinzel uppercase tracking-wide px-2 py-1 rounded-sm transition-all flex-shrink-0"
       style={{
         background: highlight ? 'rgba(40,60,20,0.6)' : 'rgba(20,16,10,0.6)',
         border: highlight ? '1px solid rgba(80,120,40,0.5)' : '1px solid rgba(60,50,30,0.4)',
@@ -890,8 +890,8 @@ function ActionBtn({ onClick, disabled, highlight, children }: {
 function StatRow({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
     <div className="flex justify-between items-center mb-1">
-      <span className="text-[8px] font-body text-gold-faint">{label}</span>
-      <span className="text-[9px] font-cinzel" style={{ color: highlight ? '#c9a060' : '#8a7a5a' }}>{value}</span>
+      <span className="text-micro font-body text-gold-faint">{label}</span>
+      <span className="text-micro font-cinzel" style={{ color: highlight ? '#c9a060' : '#8a7a5a' }}>{value}</span>
     </div>
   )
 }

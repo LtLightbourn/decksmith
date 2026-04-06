@@ -28,7 +28,6 @@ const INPUT_STYLE: React.CSSProperties = {
   color: '#c0b090',
   borderRadius: 2,
   fontFamily: 'Georgia, serif',
-  fontSize: 12,
   outline: 'none',
   padding: '6px 10px',
   width: '100%',
@@ -306,11 +305,11 @@ export default function WizardModal() {
               Merlin
             </h2>
             <div className="flex items-center gap-2">
-              <p className="font-body text-[10px] italic" style={{ color: '#6a5e44' }}>
+              <p className="font-body text-label italic" style={{ color: '#6a5e44' }}>
                 {phase === 'form' ? 'Describe your vision. The wizard shall forge your deck.' : 'Your arcane deck builder'}
               </p>
               <span
-                className="text-[7px] font-cinzel uppercase tracking-wide px-1.5 py-0.5 rounded-sm flex-shrink-0"
+                className="text-micro font-cinzel uppercase tracking-wide px-1.5 py-0.5 rounded-sm flex-shrink-0"
                 style={{
                   background: 'rgba(30,22,10,0.6)',
                   border: `1px solid rgba(${bracketRgbStr(targetBracket)}, 0.35)`,
@@ -325,7 +324,7 @@ export default function WizardModal() {
           {phase === 'chat' && (
             <button
               onClick={handleReset}
-              className="text-[9px] font-cinzel uppercase tracking-widest px-3 py-1.5 transition-colors"
+              className="text-micro font-cinzel uppercase tracking-widest px-3 py-1.5 transition-colors"
               style={{
                 background: 'rgba(20,16,10,0.8)',
                 border: '1px solid rgba(60,50,30,0.4)',
@@ -338,7 +337,7 @@ export default function WizardModal() {
           )}
           <button
             onClick={() => setWizardOpen(false)}
-            className="text-[16px] transition-colors ml-1"
+            className="text-heading transition-colors ml-1"
             style={{ color: '#5a5040', lineHeight: 1 }}
             title="Close"
             aria-label="Close Merlin wizard"
@@ -355,11 +354,11 @@ export default function WizardModal() {
                 style={{ background: 'rgba(60,35,90,0.25)', border: '1px solid rgba(120,80,200,0.2)' }}
               >
                 {greetingLoading ? (
-                  <p className="text-[10px] font-body italic" style={{ color: '#6a5e7a' }}>
+                  <p className="text-label font-body italic" style={{ color: '#6a5e7a' }}>
                     Merlin stirs…
                   </p>
                 ) : (
-                  <p className="text-[10px] font-body italic leading-relaxed" style={{ color: '#b0a0d0' }}>
+                  <p className="text-label font-body italic leading-relaxed" style={{ color: '#b0a0d0' }}>
                     {greeting}
                   </p>
                 )}
@@ -372,7 +371,7 @@ export default function WizardModal() {
                 <button
                   key={t}
                   onClick={() => setTab(t)}
-                  className="flex-1 py-2 text-[10px] font-cinzel uppercase tracking-widest transition-colors"
+                  className="flex-1 py-2 text-label font-cinzel uppercase tracking-widest transition-colors"
                   style={{
                     color: tab === t ? '#c9a060' : '#5a5040',
                     borderBottom: tab === t ? '1px solid #c9a060' : '1px solid transparent',
@@ -387,10 +386,11 @@ export default function WizardModal() {
             <div className="p-5 flex-1 overflow-y-auto">
               {tab === 'vibe' && (
                 <div>
-                  <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-2 text-gold-muted">
+                  <label className="text-micro font-cinzel tracking-[2px] uppercase block mb-2 text-gold-muted">
                     Describe your deck's vibe
                   </label>
                   <textarea
+                    className="text-label"
                     style={{ ...INPUT_STYLE, minHeight: 100 }}
                     placeholder="e.g. spooky aristocrats deck that wins by draining life through sacrifice and reanimating fallen creatures..."
                     value={vibe}
@@ -402,19 +402,19 @@ export default function WizardModal() {
               {tab === 'keywords' && (
                 <div className="space-y-3">
                   <div>
-                    <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-1 text-gold-muted">Archetype</label>
-                    <select value={archetype} onChange={e => setArchetype(e.target.value as DeckArchetype)} style={SELECT_STYLE}>
+                    <label className="text-micro font-cinzel tracking-[2px] uppercase block mb-1 text-gold-muted">Archetype</label>
+                    <select className="text-label" value={archetype} onChange={e => setArchetype(e.target.value as DeckArchetype)} style={SELECT_STYLE}>
                       {ARCHETYPES.map(a => <option key={a} value={a}>{a}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-1 text-gold-muted">Colors</label>
+                    <label className="text-micro font-cinzel tracking-[2px] uppercase block mb-1 text-gold-muted">Colors</label>
                     <div className="flex gap-2">
                       {COLORS_LIST.map(c => (
                         <button
                           key={c}
                           onClick={() => toggleColor(c)}
-                          className="text-[10px] font-cinzel font-bold rounded-sm w-7 h-7 transition-all"
+                          className="text-label font-cinzel font-bold rounded-sm w-7 h-7 transition-all"
                           style={{
                             background: selectedColors.includes(c) ? '#6a4ab8' : 'rgba(30,24,16,0.8)',
                             color: selectedColors.includes(c) ? '#d0b8ff' : '#5a5040',
@@ -425,14 +425,15 @@ export default function WizardModal() {
                     </div>
                   </div>
                   <div>
-                    <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-1 text-gold-muted">Budget</label>
-                    <select value={budget} onChange={e => setBudget(e.target.value as DeckBudget)} style={SELECT_STYLE}>
+                    <label className="text-micro font-cinzel tracking-[2px] uppercase block mb-1 text-gold-muted">Budget</label>
+                    <select className="text-label" value={budget} onChange={e => setBudget(e.target.value as DeckBudget)} style={SELECT_STYLE}>
                       {BUDGETS.map(b => <option key={b} value={b}>{b}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-1 text-gold-muted">Notes (optional)</label>
+                    <label className="text-micro font-cinzel tracking-[2px] uppercase block mb-1 text-gold-muted">Notes (optional)</label>
                     <textarea
+                      className="text-label"
                       style={{ ...INPUT_STYLE, minHeight: 50 }}
                       placeholder="Any special requests..."
                       value={notes}
@@ -444,13 +445,13 @@ export default function WizardModal() {
 
               {statusMsg && (
                 <div className="mt-3 text-center">
-                  <p className="text-[10px] font-body italic" style={{ color: orbState === 'error' ? '#cc4444' : '#8a7a5a' }}>
+                  <p className="text-label font-body italic" style={{ color: orbState === 'error' ? '#cc4444' : '#8a7a5a' }}>
                     {statusMsg}
                   </p>
                   {orbState === 'error' && lastError && (
                     <button
                       onClick={() => setBugReportOpen(true)}
-                      className="mt-1 text-[9px] font-cinzel uppercase tracking-widest transition-opacity hover:opacity-80"
+                      className="mt-1 text-micro font-cinzel uppercase tracking-widest transition-opacity hover:opacity-80"
                       style={{ color: '#5a5040', textDecoration: 'underline', textDecorationColor: 'rgba(90,80,64,0.4)' }}
                     >
                       Report this error →
@@ -463,7 +464,7 @@ export default function WizardModal() {
             <div className="flex gap-2 px-5 pb-5 flex-shrink-0">
               <button
                 onClick={() => setWizardOpen(false)}
-                className="flex-1 py-2 text-[10px] font-cinzel uppercase tracking-widest transition-colors"
+                className="flex-1 py-2 text-label font-cinzel uppercase tracking-widest transition-colors"
                 style={{
                   background: 'rgba(20,16,10,0.8)',
                   border: '1px solid rgba(60,50,30,0.4)',
@@ -476,7 +477,7 @@ export default function WizardModal() {
               <button
                 onClick={handleForge}
                 disabled={orbState === 'loading'}
-                className="py-2 px-6 text-[10px] font-cinzel uppercase tracking-widest transition-all"
+                className="py-2 px-6 text-label font-cinzel uppercase tracking-widest transition-all"
                 style={{
                   flex: 2,
                   background: orbState === 'loading'
@@ -509,7 +510,7 @@ export default function WizardModal() {
               {orbState === 'loading' && (
                 <div className="flex items-center gap-2">
                   <MerlinDot />
-                  <span className="text-[10px] font-body italic" style={{ color: '#6a5e44' }}>
+                  <span className="text-label font-body italic" style={{ color: '#6a5e44' }}>
                     Merlin is pondering...
                   </span>
                 </div>
@@ -534,7 +535,7 @@ export default function WizardModal() {
                   )
                 }
               >
-                <span className="text-[10px] font-cinzel text-gold">
+                <span className="text-label font-cinzel text-gold">
                   ✦ Refining with Merlin is an Arcane feature —{' '}
                   <span style={{ textDecoration: 'underline', textDecorationColor: 'rgba(200,160,60,0.4)' }}>
                     Upgrade to keep the conversation going →
@@ -547,6 +548,7 @@ export default function WizardModal() {
             <div className="flex gap-2 px-4 py-3 flex-shrink-0">
               <textarea
                 ref={inputRef}
+                className="text-label"
                 value={chatInput}
                 onChange={e => setChatInput(e.target.value)}
                 onKeyDown={handleChatKeyDown}
@@ -557,7 +559,6 @@ export default function WizardModal() {
                   flex: 1,
                   resize: 'none',
                   minHeight: 'unset',
-                  fontSize: 11,
                   opacity: orbState === 'loading' || chatLocked ? 0.4 : 1,
                 }}
                 placeholder="Ask Merlin about your deck, or request changes... (Enter to send)"
@@ -565,6 +566,7 @@ export default function WizardModal() {
               <button
                 onClick={handleSendChat}
                 disabled={orbState === 'loading' || !chatInput.trim() || chatLocked}
+                className="text-heading"
                 style={{
                   background: orbState === 'loading' || !chatInput.trim() || chatLocked
                     ? 'rgba(40,30,60,0.5)'
@@ -573,7 +575,6 @@ export default function WizardModal() {
                   color: orbState === 'loading' || !chatInput.trim() || chatLocked ? '#5a4870' : '#c8a8f0',
                   borderRadius: 2,
                   padding: '0 14px',
-                  fontSize: 16,
                   cursor: orbState === 'loading' || !chatInput.trim() || chatLocked ? 'not-allowed' : 'pointer',
                   transition: 'all 0.15s',
                   flexShrink: 0,
@@ -613,13 +614,13 @@ function ChatBubble({ msg }: { msg: ChatMessage }) {
   return (
     <div className={`flex gap-2 ${isMerlin ? '' : 'flex-row-reverse'}`}>
       {isMerlin && (
-        <div className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[10px]"
+        <div className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-label"
           style={{ background: 'rgba(80,50,120,0.3)', border: '1px solid rgba(120,80,200,0.3)', marginTop: 2 }}>
           ✦
         </div>
       )}
       <div
-        className="font-body text-[11px] leading-relaxed rounded"
+        className="font-body text-label leading-relaxed rounded"
         style={{
           maxWidth: '82%',
           padding: '8px 12px',
