@@ -154,9 +154,12 @@ async function incrementMonthlyUsage(userId) {
 // Returns true if the email has NOT been sent yet (and marks it sent).
 async function claimEmailSlot(key) {
   if (redis) {
-    // SET ... NX returns 'OK' on success, null if key already exists
-    const result = await redis.set(key, true, { nx: true })
-    return result !== null
+    try {
+      const result = await redis.set(key, true, { nx: true })
+      return result !== null
+    } catch (err) {
+      console.error('[redis] claimEmailSlot failed, falling back to memory:', err?.message)
+    }
   }
   if (sentEmailsMemory.has(key)) return false
   sentEmailsMemory.add(key)

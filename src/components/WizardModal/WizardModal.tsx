@@ -167,10 +167,26 @@ export default function WizardModal() {
         saveVersion(`Before Merlin forge — ${result.commander}`)
       }
 
+      // Deduplicate and hard-cap basic lands before fetching — last line of defence
+      const BASIC_LAND_NAMES = new Set(['Mountain', 'Plains', 'Island', 'Swamp', 'Forest', 'Wastes'])
+      const seenCards = new Set<string>()
+      const basicCounts = new Map<string, number>()
+      const cleanedCards = result.cards.filter(name => {
+        const key = name.toLowerCase().trim()
+        if (!key || seenCards.has(key)) return false
+        seenCards.add(key)
+        if (BASIC_LAND_NAMES.has(name)) {
+          const n = (basicCounts.get(name) ?? 0) + 1
+          basicCounts.set(name, n)
+          return n <= 20
+        }
+        return true
+      })
+
       // Fetch commander and deck cards in parallel
       const [commanderCard, { found, notFound }] = await Promise.all([
         fetchCardByName(result.commander),
-        fetchCardsByNames(result.cards.slice(0, 99)),
+        fetchCardsByNames(cleanedCards.slice(0, 99)),
       ])
 
       if (!commanderCard) {
