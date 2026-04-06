@@ -450,7 +450,11 @@ app.post('/api/claude', requireAuth, async (req, res) => {
     res.json(data)
   } catch (err) {
     console.error('[proxy] error:', err)
-    res.status(500).json({ error: 'Internal server error', detail: String(err) })
+    res.status(500).json({
+      error: 'Internal server error',
+      detail: String(err),
+      cause: err?.cause ? String(err.cause) : undefined,
+    })
   }
 })
 
