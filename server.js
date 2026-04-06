@@ -52,20 +52,29 @@ const sentEmailsMemory = new Set() // tracks email:* keys in no-Redis mode
 // ── Pro status helpers ────────────────────────────────────────────────────
 async function isPro(userId) {
   if (redis) {
-    const val = await redis.get(`pro:${userId}`)
-    return val === true || val === 'true' || val === 1 || val === '1'
+    try {
+      const val = await redis.get(`pro:${userId}`)
+      return val === true || val === 'true' || val === 1 || val === '1'
+    } catch (err) {
+      console.error('[redis] isPro failed, falling back to memory:', err?.message)
+      return proUsersMemory.has(userId)
+    }
   }
   return proUsersMemory.has(userId)
 }
 
 async function setPro(userId, value) {
   if (redis) {
-    if (value) {
-      await redis.set(`pro:${userId}`, true)
-    } else {
-      await redis.del(`pro:${userId}`)
+    try {
+      if (value) {
+        await redis.set(`pro:${userId}`, true)
+      } else {
+        await redis.del(`pro:${userId}`)
+      }
+      return
+    } catch (err) {
+      console.error('[redis] setPro failed, falling back to memory:', err?.message)
     }
-    return
   }
   if (value) {
     proUsersMemory.add(userId)
@@ -77,8 +86,13 @@ async function setPro(userId, value) {
 // ── Usage count helpers ───────────────────────────────────────────────────
 async function getUsageCount(userId) {
   if (redis) {
-    const val = await redis.get(`usage:${userId}`)
-    return parseInt(val ?? '0', 10)
+    try {
+      const val = await redis.get(`usage:${userId}`)
+      return parseInt(val ?? '0', 10)
+    } catch (err) {
+      console.error('[redis] getUsageCount failed, falling back to memory:', err?.message)
+      return usageCountsMemory.get(userId) ?? 0
+    }
   }
   return usageCountsMemory.get(userId) ?? 0
 }
@@ -86,7 +100,11 @@ async function getUsageCount(userId) {
 // Returns the new count after increment
 async function incrementUsage(userId) {
   if (redis) {
-    return await redis.incr(`usage:${userId}`)
+    try {
+      return await redis.incr(`usage:${userId}`)
+    } catch (err) {
+      console.error('[redis] incrementUsage failed, falling back to memory:', err?.message)
+    }
   }
   const next = (usageCountsMemory.get(userId) ?? 0) + 1
   usageCountsMemory.set(userId, next)
