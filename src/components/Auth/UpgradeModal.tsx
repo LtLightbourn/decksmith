@@ -131,7 +131,7 @@ export default function UpgradeModal({ onClose, feature }: Props) {
               <span className="text-[11px] font-cinzel ml-1" style={{ color: '#6a5e44' }}>
                 / month
               </span>
-              <p className="text-[9px] font-cinzel mt-1 tracking-widest uppercase" style={{ color: '#7a6a4a' }}>
+              <p className="text-[9px] font-cinzel mt-1 tracking-widest uppercase text-gold-muted">
                 Cancel anytime
               </p>
             </div>

@@ -4,15 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        'stone-dark': '#1a1612',
+        'stone-dark': '#2a2010',
         'stone-mid': '#2e2a25',
         'stone-light': '#3d3830',
         'stone-mortar': '#0e0c09',
         gold: '#c9a060',
-        'gold-dim': '#7a6040',
+        'gold-muted': '#7a6a4a',
+        'gold-faint': '#5a5040',
+        'gold-dim': '#4a4030',
         'gold-bright': '#f0d060',
         'purple-ai': '#c8a8f0',
         vine: '#2d4a1e',
+        stone: '#3a3020',
+        'bg-dark': '#0a0805',
+        'bg-panel': '#1c160f',
       },
       fontFamily: {
         cinzel: ['"Cinzel"', 'Georgia', 'serif'],

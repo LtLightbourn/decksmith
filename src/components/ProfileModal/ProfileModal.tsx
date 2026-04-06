@@ -51,10 +51,10 @@ function HistoryEntry({
     >
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline gap-1.5 flex-wrap">
-          <span className="text-[10px] font-cinzel" style={{ color: '#c9a060' }}>
+          <span className="text-[10px] font-cinzel text-gold">
             {entry.commander?.name ?? 'No Commander'}
           </span>
-          <span className="text-[8px] font-body italic" style={{ color: '#5a5040' }}>
+          <span className="text-[8px] font-body italic text-gold-faint">
             {entry.name}
           </span>
           {entry.tag && (
@@ -76,7 +76,7 @@ function HistoryEntry({
           </p>
         )}
         <div className="flex items-center gap-2 mt-1 flex-wrap">
-          <span className="text-[8px] font-cinzel" style={{ color: '#4a4030' }}>
+          <span className="text-[8px] font-cinzel text-gold-dim">
             B{entry.bracket} · {formatRelativeDate(entry.savedAt)}
           </span>
           {entry.themes.slice(0, 3).map(t => (
@@ -168,10 +168,10 @@ export default function ProfileModal() {
           style={{ borderColor: 'rgba(80,65,40,0.4)', background: 'rgba(8,5,2,0.5)' }}
         >
           <div>
-            <h2 className="font-cinzel-deco text-[13px] tracking-widest" style={{ color: '#c9a060' }}>
+            <h2 className="font-cinzel-deco text-[13px] tracking-widest text-gold">
               ✦ Grimoire
             </h2>
-            <p className="text-[8px] font-body italic mt-px" style={{ color: '#5a5040' }}>
+            <p className="text-[8px] font-body italic mt-px text-gold-faint">
               {memory.totalDecks} deck{memory.totalDecks !== 1 ? 's' : ''} forged · your arcane journal
             </p>
           </div>
@@ -214,7 +214,7 @@ export default function ProfileModal() {
                   <p className="text-[10px] font-cinzel" style={{ color: '#a08040' }}>
                     Decks Forged
                   </p>
-                  <p className="text-[8px] font-body italic" style={{ color: '#5a5040' }}>
+                  <p className="text-[8px] font-body italic text-gold-faint">
                     your legacy grows
                   </p>
                 </div>
@@ -227,7 +227,7 @@ export default function ProfileModal() {
             feature="playstyle"
             fallback={
               <div className="px-5 py-3 border-b" style={{ borderColor: 'rgba(50,40,24,0.4)' }}>
-                <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-1" style={{ color: '#4a4030' }}>Arcane Profile</p>
+                <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-1 text-gold-dim">Arcane Profile</p>
                 <p className="text-[8px] font-body italic" style={{ color: '#3a3020' }}>Upgrade to Arcane to unlock your playstyle profile.</p>
               </div>
             }
@@ -240,7 +240,7 @@ export default function ProfileModal() {
 
               {memory.favoriteColors.length > 0 && (
                 <div className="mb-2">
-                  <p className="text-[7px] font-cinzel uppercase mb-1" style={{ color: '#4a4030' }}>Favorite Colors</p>
+                  <p className="text-[7px] font-cinzel uppercase mb-1 text-gold-dim">Favorite Colors</p>
                   <div className="flex flex-wrap gap-1">
                     {memory.favoriteColors.map(c => <ColorPip key={c} color={c} />)}
                   </div>
@@ -249,7 +249,7 @@ export default function ProfileModal() {
 
               {memory.preferredStrategies.length > 0 && (
                 <div className="mb-2">
-                  <p className="text-[7px] font-cinzel uppercase mb-1" style={{ color: '#4a4030' }}>Preferred Themes</p>
+                  <p className="text-[7px] font-cinzel uppercase mb-1 text-gold-dim">Preferred Themes</p>
                   <div className="flex flex-wrap gap-1">
                     {memory.preferredStrategies.map(t => <ThemeChip key={t} label={t} />)}
                   </div>
@@ -258,7 +258,7 @@ export default function ProfileModal() {
 
               {memory.commonCards.length > 0 && (
                 <div>
-                  <p className="text-[7px] font-cinzel uppercase mb-1" style={{ color: '#4a4030' }}>
+                  <p className="text-[7px] font-cinzel uppercase mb-1 text-gold-dim">
                     Cards You Always Include
                   </p>
                   <div className="flex flex-wrap gap-1">
@@ -283,7 +283,7 @@ export default function ProfileModal() {
             feature="playstyle"
             fallback={
               <div className="px-5 py-3 border-b" style={{ borderColor: 'rgba(50,40,24,0.4)' }}>
-                <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-1" style={{ color: '#4a4030' }}>✕ Cards I Never Want</p>
+                <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-1 text-gold-dim">✕ Cards I Never Want</p>
                 <p className="text-[8px] font-body italic" style={{ color: '#3a3020' }}>Arcane members can block cards from all Merlin suggestions.</p>
               </div>
             }
@@ -292,7 +292,7 @@ export default function ProfileModal() {
             <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-2" style={{ color: '#6a5e44' }}>
               ✕ Cards I Never Want
             </p>
-            <p className="text-[8px] font-body italic mb-2" style={{ color: '#4a4030' }}>
+            <p className="text-[8px] font-body italic mb-2 text-gold-dim">
               Merlin will never suggest these cards, in any deck, ever.
             </p>
             <div className="flex gap-1 mb-2">
@@ -356,7 +356,7 @@ export default function ProfileModal() {
             feature="deck-history"
             fallback={
               <div className="px-5 py-4 text-center">
-                <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-1" style={{ color: '#4a4030' }}>Deck History</p>
+                <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-1 text-gold-dim">Deck History</p>
                 <p className="text-[8px] font-body italic" style={{ color: '#3a3020' }}>Arcane members can save and reload up to 20 decks from their grimoire.</p>
               </div>
             }
@@ -366,7 +366,7 @@ export default function ProfileModal() {
               <p className="text-[8px] font-cinzel uppercase tracking-[2px]" style={{ color: '#6a5e44' }}>
                 Deck History
               </p>
-              <span className="text-[8px] font-body italic" style={{ color: '#4a4030' }}>
+              <span className="text-[8px] font-body italic text-gold-dim">
                 {deckHistory.length} / 20
               </span>
             </div>

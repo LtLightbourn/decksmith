@@ -41,7 +41,7 @@ export default function SignInPromptModal({ onClose }: Props) {
           <p className="text-[11px] font-body italic mb-4" style={{ color: '#6a5e44', lineHeight: 1.5 }}>
             Sign in to consult Merlin's wisdom.
             <br />
-            Free accounts receive <span style={{ color: '#c9a060' }}>10 builds</span> at no cost.
+            Free accounts receive <span className="text-gold">10 builds</span> at no cost.
           </p>
 
           <div className="flex flex-col gap-2">

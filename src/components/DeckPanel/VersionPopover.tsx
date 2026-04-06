@@ -52,7 +52,7 @@ function VersionRow({ version, isHovered, onHover, onRestore, onDelete, diff }: 
           <p className="text-[10px] font-cinzel leading-tight" style={{ color: '#c0a060' }}>
             {version.label}
           </p>
-          <p className="text-[8px] font-body mt-0.5" style={{ color: '#4a4030' }}>
+          <p className="text-[8px] font-body mt-0.5 text-gold-dim">
             {formatDate(version.savedAt)} · {version.cardCount} cards
             {version.deckValue > 0 && ` · $${version.deckValue.toFixed(0)}`}
           </p>

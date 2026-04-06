@@ -58,7 +58,7 @@ export default function ExportDropdown({ commander, cards, onClose, onToast }: P
       }}
     >
       <div className="px-3 py-1.5 border-b" style={{ borderColor: 'rgba(50,40,24,0.4)' }}>
-        <p className="text-[8px] font-cinzel uppercase tracking-widest" style={{ color: '#5a5040' }}>
+        <p className="text-[8px] font-cinzel uppercase tracking-widest text-gold-faint">
           Copy as...
         </p>
       </div>
@@ -74,7 +74,7 @@ export default function ExportDropdown({ commander, cards, onClose, onToast }: P
           <span className="text-[10px] font-cinzel uppercase tracking-wide" style={{ color: '#c0a060' }}>
             {f.label}
           </span>
-          <span className="text-[8px] font-body italic" style={{ color: '#4a4030' }}>
+          <span className="text-[8px] font-body italic text-gold-dim">
             {f.hint}
           </span>
         </button>

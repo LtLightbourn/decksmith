@@ -255,7 +255,7 @@ export default function PlaytesterModal({ cards, commander, onClose }: Props) {
             className="flex-shrink-0 flex items-center gap-2 px-3 py-2 border-b flex-wrap"
             style={{ borderColor: 'rgba(50,42,28,0.6)', background: 'rgba(8,6,4,0.7)' }}
           >
-            <span className="text-[10px] font-cinzel" style={{ color: '#c9a060' }}>
+            <span className="text-[10px] font-cinzel text-gold">
               Turn {turn}
             </span>
 
@@ -408,7 +408,7 @@ export default function PlaytesterModal({ cards, commander, onClose }: Props) {
             style={{ borderColor: 'rgba(50,42,28,0.5)', background: 'rgba(6,5,3,0.9)', minHeight: 148 }}
           >
             <div className="flex items-center gap-1 px-2 py-1 border-b" style={{ borderColor: 'rgba(40,32,20,0.4)' }}>
-              <span className="text-[8px] font-cinzel uppercase tracking-widest" style={{ color: '#5a5040' }}>
+              <span className="text-[8px] font-cinzel uppercase tracking-widest text-gold-faint">
                 Hand ({hand.length})
               </span>
               {turn >= 5 && (
@@ -473,7 +473,7 @@ function OpeningHandView({
         style={{ borderColor: 'rgba(80,65,40,0.4)', background: 'rgba(6,4,2,0.7)' }}
       >
         <div>
-          <h2 className="font-cinzel-deco text-base tracking-widest" style={{ color: '#c9a060' }}>
+          <h2 className="font-cinzel-deco text-base tracking-widest text-gold">
             Opening Hand
           </h2>
           {mulliganCount > 0 && (
@@ -587,7 +587,7 @@ function HandCardView({ card, isLand, landDropUsed, onClick }: {
       {!blocked && (
         <div className="absolute inset-0 rounded flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
           style={{ background: 'rgba(0,0,0,0.5)' }}>
-          <span className="text-[8px] font-cinzel uppercase tracking-wide" style={{ color: '#c9a060' }}>Play</span>
+          <span className="text-[8px] font-cinzel uppercase tracking-wide text-gold">Play</span>
         </div>
       )}
     </button>
@@ -766,8 +766,8 @@ function StatsPanel({ cards, statsData, manaData, loading, onRunStats }: {
       style={{ width: 240, borderColor: 'rgba(50,42,28,0.5)', background: 'rgba(8,6,4,0.9)' }}
     >
       <div className="flex-shrink-0 px-3 py-2 border-b" style={{ borderColor: 'rgba(50,42,28,0.4)' }}>
-        <p className="text-[9px] font-cinzel uppercase tracking-[3px]" style={{ color: '#c9a060' }}>◈ Simulation Stats</p>
-        <p className="text-[8px] font-body italic mt-0.5" style={{ color: '#4a4030' }}>200 simulated opening hands</p>
+        <p className="text-[9px] font-cinzel uppercase tracking-[3px] text-gold">◈ Simulation Stats</p>
+        <p className="text-[8px] font-body italic mt-0.5 text-gold-dim">200 simulated opening hands</p>
       </div>
 
       <div className="flex-1 px-3 py-3 space-y-4">
@@ -806,7 +806,7 @@ function StatsPanel({ cards, statsData, manaData, loading, onRunStats }: {
                 <p className="text-[8px] font-cinzel uppercase tracking-widest mb-2" style={{ color: '#6a5e44' }}>Avg Mana by Turn</p>
                 {manaData.map(({ turn, avgMana }) => (
                   <div key={turn} className="flex items-center gap-2 mb-1">
-                    <span className="text-[8px] font-cinzel w-8 flex-shrink-0" style={{ color: '#5a5040' }}>T{turn}</span>
+                    <span className="text-[8px] font-cinzel w-8 flex-shrink-0 text-gold-faint">T{turn}</span>
                     <div className="flex-1 h-2 rounded-sm overflow-hidden" style={{ background: 'rgba(30,24,16,0.6)' }}>
                       <div
                         className="h-full rounded-sm"
@@ -890,7 +890,7 @@ function ActionBtn({ onClick, disabled, highlight, children }: {
 function StatRow({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
     <div className="flex justify-between items-center mb-1">
-      <span className="text-[8px] font-body" style={{ color: '#5a5040' }}>{label}</span>
+      <span className="text-[8px] font-body text-gold-faint">{label}</span>
       <span className="text-[9px] font-cinzel" style={{ color: highlight ? '#c9a060' : '#8a7a5a' }}>{value}</span>
     </div>
   )

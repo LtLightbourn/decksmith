@@ -21,6 +21,7 @@ import UpgradeModal from './components/Auth/UpgradeModal'
 import { ProGate } from './components/Auth/ProGate'
 import { fetchStripeStatus, generateSurpriseDeck } from './utils/claudeApi'
 import SurpriseOverlay from './components/shared/SurpriseOverlay'
+import ErrorBoundary from './components/shared/ErrorBoundary'
 import SharedDeckModal from './components/shared/SharedDeckModal'
 import LandingPage from './pages/LandingPage'
 import { SEO } from './components/SEO/SEO'
@@ -302,10 +303,10 @@ function AppShell() {
             <span className="hidden md:inline animate-flicker text-xl" style={{ filter: 'drop-shadow(0 0 8px rgba(255,150,50,0.8))' }}>🔥</span>
             {/* Import/export — mobile only shortcut */}
             <button
-              className="md:hidden text-[14px]"
-              style={{ color: '#5a5040' }}
+              className="md:hidden text-[14px] text-gold-faint"
               onClick={() => setImportExportOpen(true)}
               title="Import / Export"
+              aria-label="Import / Export"
             >⇅</button>
             <button
               onClick={() => setProfileModalOpen(true)}
@@ -428,7 +429,9 @@ function AppShell() {
             className={`flex-col flex-1 min-h-0 ${mobileTab === 'deck' ? 'flex' : 'hidden'} md:flex lg:border-r`}
             style={{ borderColor: 'rgba(50,42,28,0.6)' }}
           >
-            <DeckPanel onSurprise={handleSurpriseRequest} onRestoreVersion={handleRestoreVersion} />
+            <ErrorBoundary>
+              <DeckPanel onSurprise={handleSurpriseRequest} onRestoreVersion={handleRestoreVersion} />
+            </ErrorBoundary>
           </div>
 
           {/* Stats tab — mobile only, drawer handles tablet, column handles desktop */}
@@ -441,14 +444,18 @@ function AppShell() {
           {/* Desktop analytics sidebar */}
           {analyticsOpen ? (
             <div className="hidden lg:flex flex-col" style={{ flex: '0 0 22%' }}>
-              <AnalyticsSidebar />
+              <ErrorBoundary>
+                <AnalyticsSidebar />
+              </ErrorBoundary>
             </div>
           ) : (
             <div
               className="hidden lg:flex flex-col items-center border-l"
               style={{ width: 28, borderColor: 'rgba(50,42,28,0.6)', background: 'rgba(8,6,4,0.5)' }}
             >
-              <AnalyticsSidebar />
+              <ErrorBoundary>
+                <AnalyticsSidebar />
+              </ErrorBoundary>
             </div>
           )}
         </div>
@@ -458,7 +465,7 @@ function AppShell() {
           className="hidden md:flex flex-shrink-0 items-center gap-3 px-4 py-[5px] border-t"
           style={{ borderColor: 'rgba(50,42,28,0.5)', background: 'rgba(6,4,2,0.6)' }}
         >
-          <span className="text-[9px] font-cinzel tracking-widest uppercase" style={{ color: '#4a4030' }}>
+          <span className="text-[9px] font-cinzel tracking-widest uppercase text-gold-dim">
             The Undying Archives
           </span>
           <div className="flex-1 gold-line" />
@@ -503,7 +510,7 @@ function AppShell() {
                   >Save</button>
                 </div>
                 {savedDecks.length === 0 && (
-                  <p className="px-3 py-2 text-[10px] font-body italic" style={{ color: '#4a4030' }}>No saved decks yet</p>
+                  <p className="px-3 py-2 text-[10px] font-body italic text-gold-dim">No saved decks yet</p>
                 )}
                 {savedDecks.map(d => (
                   <div key={d.id} className="flex items-center gap-1 px-2 py-1 hover:bg-[rgba(180,140,60,0.06)]">
@@ -516,6 +523,7 @@ function AppShell() {
                       onClick={() => deleteSavedDeck(d.id)}
                       className="text-[10px]"
                       style={{ color: '#6a4040' }}
+                      aria-label={`Delete ${d.name}`}
                     >✕</button>
                   </div>
                 ))}
@@ -532,8 +540,7 @@ function AppShell() {
 
           <button
             onClick={() => setImportExportOpen(true)}
-            className="text-[9px] font-cinzel uppercase tracking-widest"
-            style={{ color: '#5a5040' }}
+            className="text-[9px] font-cinzel uppercase tracking-widest text-gold-faint"
           >
             ⇅ Export
           </button>
@@ -639,7 +646,9 @@ function AppShell() {
       )}
 
       {/* Modals */}
-      <WizardModal />
+      <ErrorBoundary>
+        <WizardModal />
+      </ErrorBoundary>
       <CommanderFinderModal />
       {surprisePhase && (
         <SurpriseOverlay

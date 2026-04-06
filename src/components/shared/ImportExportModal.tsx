@@ -66,8 +66,8 @@ export default function ImportExportModal({ onClose }: Props) {
 
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-3 border-b" style={{ borderColor: 'rgba(80,65,40,0.4)' }}>
-          <span className="font-cinzel text-[11px] tracking-[3px] uppercase" style={{ color: '#c9a060' }}>✦ Import / Export</span>
-          <button onClick={onClose} style={{ color: '#5a5040', fontSize: 14 }}>✕</button>
+          <span className="font-cinzel text-[11px] tracking-[3px] uppercase text-gold">✦ Import / Export</span>
+          <button onClick={onClose} style={{ color: '#5a5040', fontSize: 14 }} aria-label="Close">✕</button>
         </div>
 
         {/* Mode tabs */}

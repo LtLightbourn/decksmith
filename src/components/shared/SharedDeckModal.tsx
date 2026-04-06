@@ -163,7 +163,7 @@ export default function SharedDeckModal({ deck, onClose }: Props) {
           >
             B{deck.b} · {bracketInfo.name}
           </div>
-          <span className="text-[9px] font-cinzel" style={{ color: '#5a5040' }}>
+          <span className="text-[9px] font-cinzel text-gold-faint">
             {totalCards} cards
           </span>
           <span className="text-[8px] font-body italic ml-auto" style={{ color: '#3a3020' }}>
@@ -208,7 +208,7 @@ export default function SharedDeckModal({ deck, onClose }: Props) {
 
           {phase === 'loading' && (
             <div className="text-center py-2">
-              <p className="font-cinzel text-[11px] mb-1" style={{ color: '#c9a060' }}>
+              <p className="font-cinzel text-[11px] mb-1 text-gold">
                 Loading deck...
               </p>
               <p className="font-body text-[10px] italic mb-3" style={{ color: '#6a5e44' }}>

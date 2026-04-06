@@ -150,10 +150,10 @@ export default function SearchPanel() {
         className="flex-shrink-0 flex items-center justify-between px-3 py-[5px] border-b"
         style={{ borderColor: 'rgba(50,42,28,0.5)', background: 'rgba(8,6,4,0.4)' }}
       >
-        <span className="text-[9px] font-cinzel tracking-[3px] uppercase" style={{ color: '#c9a060' }}>
+        <span className="text-[9px] font-cinzel tracking-[3px] uppercase text-gold">
           ✦ Results
         </span>
-        <span className="text-[9px] font-cinzel" style={{ color: '#5a5040' }}>
+        <span className="text-[9px] font-cinzel text-gold-faint">
           {isFetching ? 'searching...' : results ? `${results.length} cards` : ''}
         </span>
       </div>

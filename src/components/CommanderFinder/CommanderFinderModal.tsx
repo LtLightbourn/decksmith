@@ -200,8 +200,7 @@ export default function CommanderFinderModal() {
           <div className="p-6 flex flex-col gap-4">
             <div>
               <label
-                className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-2"
-                style={{ color: '#7a6a4a' }}
+                className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-2 text-gold-muted"
               >
                 How do you want to play?
               </label>
@@ -215,7 +214,7 @@ export default function CommanderFinderModal() {
                   if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) handleFind()
                 }}
               />
-              <p className="mt-1 text-[9px] font-body" style={{ color: '#4a4030' }}>
+              <p className="mt-1 text-[9px] font-body text-gold-dim">
                 Mention colors, themes, archetypes, budget, or playstyle — any detail helps.
               </p>
             </div>
@@ -396,7 +395,7 @@ function CommanderCard({ suggestion: s, featured, selected, building, onSelect, 
         )}
 
         {/* Strategy */}
-        <p className="font-body text-[10px] leading-relaxed" style={{ color: '#7a6a4a' }}>
+        <p className="font-body text-[10px] leading-relaxed text-gold-muted">
           {s.strategy}
         </p>
 

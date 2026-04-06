@@ -159,7 +159,7 @@ export default function PlaystyleModal() {
 
         {/* Question */}
         <div className="flex-shrink-0 px-6 pt-3 pb-4">
-          <p className="text-[9px] font-cinzel tracking-[2px] uppercase mb-1" style={{ color: '#5a5040' }}>
+          <p className="text-[9px] font-cinzel tracking-[2px] uppercase mb-1 text-gold-faint">
             Question {step + 1} of 4
           </p>
           <h3 className="font-cinzel text-lg leading-snug" style={{ color: '#d4b870' }}>
@@ -231,10 +231,7 @@ export default function PlaystyleModal() {
 
                   {/* Selected checkmark */}
                   {isSelected && (
-                    <div
-                      className="absolute top-2 right-2 text-[10px] font-cinzel"
-                      style={{ color: '#c9a060' }}
-                    >
+                    <div className="absolute top-2 right-2 text-[10px] font-cinzel text-gold">
                       ✦
                     </div>
                   )}
@@ -258,7 +255,7 @@ export default function PlaystyleModal() {
               <p className="font-cinzel-deco text-base" style={{ color: '#c9a060', letterSpacing: 3 }}>
                 {previewLabel}
               </p>
-              <p className="text-[9px] font-body italic mt-1" style={{ color: '#5a5040' }}>
+              <p className="text-[9px] font-body italic mt-1 text-gold-faint">
                 Merlin will remember this across all deck building sessions.
               </p>
             </div>

@@ -162,7 +162,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
         className="flex-shrink-0 flex items-center justify-between px-3 py-[5px] border-b relative"
         style={{ borderColor: 'rgba(50,42,28,0.5)', background: 'rgba(8,6,4,0.4)' }}
       >
-        <span className="text-[9px] font-cinzel tracking-[3px] uppercase" style={{ color: '#c9a060' }}>
+        <span className="text-[9px] font-cinzel tracking-[3px] uppercase text-gold">
           ✦ Deck
         </span>
         <div className="flex items-center gap-2">
@@ -371,6 +371,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
                 className="text-[9px]"
                 style={{ color: '#6a5040' }}
                 title="Remove commander"
+                aria-label="Remove commander"
               >
                 ✕
               </button>
@@ -404,7 +405,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
           className="flex-shrink-0 flex items-center gap-2 px-3 py-[4px] border-t"
           style={{ borderColor: 'rgba(40,32,20,0.4)', background: 'rgba(6,4,2,0.4)' }}
         >
-          <span className="text-[8px] font-body flex-1" style={{ color: '#4a4030' }}>
+          <span className="text-[8px] font-body flex-1 text-gold-dim">
             {pricesFetching
               ? 'Fetching prices…'
               : priceAgeMinutes === null
@@ -440,7 +441,7 @@ export default function DeckPanel({ onSurprise, onRestoreVersion }: DeckPanelPro
 function StatChip({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col items-center">
-      <span className="text-[7px] font-cinzel uppercase tracking-widest" style={{ color: '#4a4030' }}>{label}</span>
+      <span className="text-[7px] font-cinzel uppercase tracking-widest text-gold-dim">{label}</span>
       <span className="text-[9px] font-cinzel" style={{ color: '#8a7a5a' }}>{value}</span>
     </div>
   )

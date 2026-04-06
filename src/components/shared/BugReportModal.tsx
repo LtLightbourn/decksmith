@@ -41,7 +41,7 @@ export default function BugReportModal({ errorContext, onClose }: Props) {
         <div className="px-5 pt-5 pb-6">
           {status === 'sent' ? (
             <div className="text-center py-4">
-              <p className="text-[11px] font-cinzel uppercase tracking-widest mb-2" style={{ color: '#c9a060' }}>
+              <p className="text-[11px] font-cinzel uppercase tracking-widest mb-2 text-gold">
                 Report Received
               </p>
               <p className="text-[11px] font-body italic" style={{ color: '#6a5e44' }}>
@@ -60,7 +60,7 @@ export default function BugReportModal({ errorContext, onClose }: Props) {
               <h3 className="font-cinzel-deco text-sm mb-1" style={{ color: '#c9a060', letterSpacing: 2 }}>
                 Report a Bug
               </h3>
-              <p className="text-[10px] font-body italic mb-4" style={{ color: '#5a5040' }}>
+              <p className="text-[10px] font-body italic mb-4 text-gold-faint">
                 What were you trying to do when this happened?
               </p>
 
@@ -83,7 +83,7 @@ export default function BugReportModal({ errorContext, onClose }: Props) {
                   className="mb-4 px-3 py-2 rounded-sm"
                   style={{ background: 'rgba(6,4,2,0.8)', border: '1px solid rgba(60,50,30,0.3)' }}
                 >
-                  <p className="text-[8px] font-cinzel uppercase tracking-widest mb-1" style={{ color: '#4a4030' }}>
+                  <p className="text-[8px] font-cinzel uppercase tracking-widest mb-1 text-gold-dim">
                     Error attached automatically
                   </p>
                   <p className="text-[9px] font-body truncate" style={{ color: '#3a3020' }}>

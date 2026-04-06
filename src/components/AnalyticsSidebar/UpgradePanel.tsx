@@ -165,7 +165,7 @@ export default function UpgradePanel() {
     <div className="flex flex-col h-full">
       {/* Budget selector */}
       <div className="px-3 pt-3 pb-2 border-b flex-shrink-0" style={{ borderColor: 'rgba(50,42,28,0.4)' }}>
-        <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-2" style={{ color: '#7a6a4a' }}>
+        <p className="text-[8px] font-cinzel uppercase tracking-[2px] mb-2 text-gold-muted">
           Max add price
         </p>
         <div className="flex gap-1 flex-wrap">
@@ -256,7 +256,7 @@ export default function UpgradePanel() {
                 >
                   {s.impact}
                 </span>
-                <span className="text-[7px] font-cinzel uppercase tracking-wide" style={{ color: '#4a4030' }}>
+                <span className="text-[7px] font-cinzel uppercase tracking-wide text-gold-dim">
                   impact
                 </span>
               </div>

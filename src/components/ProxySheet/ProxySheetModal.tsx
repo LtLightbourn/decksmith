@@ -131,7 +131,7 @@ export default function ProxySheetModal() {
           style={{ borderColor: 'rgba(80,65,40,0.4)', background: 'rgba(8,6,4,0.5)' }}
         >
           <div>
-            <h2 className="font-cinzel-deco text-[13px] tracking-widest" style={{ color: '#c9a060' }}>
+            <h2 className="font-cinzel-deco text-[13px] tracking-widest text-gold">
               ⎙ Proxy Sheet Generator
             </h2>
             <p className="text-[9px] font-body italic mt-px" style={{ color: '#6a5e44' }}>
@@ -173,7 +173,7 @@ export default function ProxySheetModal() {
               <div className="grid grid-cols-2 gap-x-6 gap-y-3">
                 {/* Paper size */}
                 <div>
-                  <p className="text-[8px] font-cinzel uppercase mb-1.5" style={{ color: '#5a5040' }}>Paper Size</p>
+                  <p className="text-[8px] font-cinzel uppercase mb-1.5 text-gold-faint">Paper Size</p>
                   <div className="flex gap-1">
                     {(['letter', 'a4'] as PaperSize[]).map(p => TOGGLE_BTN(
                       options.paper === p,
@@ -185,7 +185,7 @@ export default function ProxySheetModal() {
 
                 {/* Print mode */}
                 <div>
-                  <p className="text-[8px] font-cinzel uppercase mb-1.5" style={{ color: '#5a5040' }}>Cards to Print</p>
+                  <p className="text-[8px] font-cinzel uppercase mb-1.5 text-gold-faint">Cards to Print</p>
                   <div className="flex gap-1">
                     {TOGGLE_BTN(
                       options.printMode === 'proxy',
@@ -202,7 +202,7 @@ export default function ProxySheetModal() {
 
                 {/* Card names */}
                 <div>
-                  <p className="text-[8px] font-cinzel uppercase mb-1.5" style={{ color: '#5a5040' }}>Card Name Below Image</p>
+                  <p className="text-[8px] font-cinzel uppercase mb-1.5 text-gold-faint">Card Name Below Image</p>
                   <div className="flex gap-1">
                     {TOGGLE_BTN(options.cardNames, () => setOptions(o => ({ ...o, cardNames: true })), 'Show')}
                     {TOGGLE_BTN(!options.cardNames, () => setOptions(o => ({ ...o, cardNames: false })), 'Hide')}
@@ -211,7 +211,7 @@ export default function ProxySheetModal() {
 
                 {/* Cut lines */}
                 <div>
-                  <p className="text-[8px] font-cinzel uppercase mb-1.5" style={{ color: '#5a5040' }}>Cut Lines</p>
+                  <p className="text-[8px] font-cinzel uppercase mb-1.5 text-gold-faint">Cut Lines</p>
                   <div className="flex gap-1">
                     {TOGGLE_BTN(options.cutLines, () => setOptions(o => ({ ...o, cutLines: true })), 'Show')}
                     {TOGGLE_BTN(!options.cutLines, () => setOptions(o => ({ ...o, cutLines: false })), 'Hide')}
@@ -350,7 +350,7 @@ export default function ProxySheetModal() {
                       <span className="flex-1 truncate text-[10px] font-body" style={{ color: '#a89860' }}>
                         {c.name}
                       </span>
-                      <span className="flex-shrink-0 text-[8px] font-body italic" style={{ color: '#5a5040' }}>
+                      <span className="flex-shrink-0 text-[8px] font-body italic text-gold-faint">
                         {c.deckNames.join(', ')}
                       </span>
                     </div>

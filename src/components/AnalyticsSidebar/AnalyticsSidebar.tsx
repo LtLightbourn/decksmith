@@ -30,7 +30,7 @@ function StatBar({ label, value, max = 10, color }: { label: string; value: numb
   return (
     <div className="px-3 py-1">
       <div className="flex justify-between mb-1">
-        <span className="text-[9px] font-cinzel tracking-widest uppercase" style={{ color: '#7a6a4a' }}>{label}</span>
+        <span className="text-[9px] font-cinzel tracking-widest uppercase text-gold-muted">{label}</span>
         <span className="text-[9px] font-cinzel" style={{ color: isLow ? '#cc4444' : '#c9a060' }}>
           {value}{isLow ? ' !' : ''}
         </span>
@@ -143,10 +143,10 @@ export default function AnalyticsSidebar() {
         className="flex-shrink-0 flex items-center justify-between px-3 py-[5px] border-b w-full"
         style={{ borderColor: 'rgba(50,42,28,0.5)', background: 'rgba(8,6,4,0.4)' }}
       >
-        <span className="text-[9px] font-cinzel tracking-[3px] uppercase" style={{ color: '#c9a060' }}>
+        <span className="text-[9px] font-cinzel tracking-[3px] uppercase text-gold">
           ✦ Analytics
         </span>
-        <span className="text-[10px]" style={{ color: '#5a5040' }}>{analyticsOpen ? '◀' : '▶'}</span>
+        <span className="text-[10px] text-gold-faint">{analyticsOpen ? '◀' : '▶'}</span>
       </button>
 
       {analyticsOpen && (
@@ -175,7 +175,7 @@ export default function AnalyticsSidebar() {
         <div className="flex-1 overflow-y-auto">
           {/* Mana curve — visible to all users */}
           <div className="px-3 pt-3 pb-1">
-            <p className="text-[9px] font-cinzel tracking-[2px] uppercase mb-2" style={{ color: '#7a6a4a' }}>Mana Curve</p>
+            <p className="text-[9px] font-cinzel tracking-[2px] uppercase mb-2 text-gold-muted">Mana Curve</p>
             <ResponsiveContainer width="100%" height={60}>
               <BarChart data={curveData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
                 <Bar dataKey="count" radius={[2, 2, 0, 0]}>
@@ -192,7 +192,7 @@ export default function AnalyticsSidebar() {
             </ResponsiveContainer>
             <div className="flex justify-between mt-1">
               {curveData.map(d => (
-                <span key={d.cmc} className="text-[8px] font-cinzel" style={{ color: '#4a4030' }}>{d.cmc}</span>
+                <span key={d.cmc} className="text-[8px] font-cinzel text-gold-dim">{d.cmc}</span>
               ))}
             </div>
           </div>
@@ -201,7 +201,7 @@ export default function AnalyticsSidebar() {
             feature="analytics"
             fallback={
               <div className="px-3 py-3 text-center">
-                <p className="text-[8px] font-cinzel uppercase tracking-widest mb-1" style={{ color: '#5a5040' }}>
+                <p className="text-[8px] font-cinzel uppercase tracking-widest mb-1 text-gold-faint">
                   Upgrade for full analytics
                 </p>
                 <p className="text-[8px] font-body italic" style={{ color: '#6a5e44' }}>
@@ -215,8 +215,8 @@ export default function AnalyticsSidebar() {
 
           {/* Avg CMC */}
           <div className="px-3 py-1 flex justify-between">
-            <span className="text-[9px] font-cinzel tracking-widest uppercase" style={{ color: '#7a6a4a' }}>Avg CMC</span>
-            <span className="text-[9px] font-cinzel" style={{ color: '#c9a060' }}>{stats.avgCmc.toFixed(2)}</span>
+            <span className="text-[9px] font-cinzel tracking-widest uppercase text-gold-muted">Avg CMC</span>
+            <span className="text-[9px] font-cinzel text-gold">{stats.avgCmc.toFixed(2)}</span>
           </div>
 
           <div className="gold-line mx-3 my-1" />
@@ -224,7 +224,7 @@ export default function AnalyticsSidebar() {
           {/* Color distribution pie */}
           {pieData.length > 0 && (
             <div className="px-3 py-2">
-              <p className="text-[9px] font-cinzel tracking-[2px] uppercase mb-2" style={{ color: '#7a6a4a' }}>Color Pips</p>
+              <p className="text-[9px] font-cinzel tracking-[2px] uppercase mb-2 text-gold-muted">Color Pips</p>
               <div className="flex items-center gap-2">
                 <PieChart width={60} height={60}>
                   <Pie data={pieData} dataKey="value" cx={28} cy={28} innerRadius={14} outerRadius={28}>
@@ -257,7 +257,7 @@ export default function AnalyticsSidebar() {
 
           {/* Power level */}
           <div className="px-3 py-2">
-            <p className="text-[9px] font-cinzel tracking-[2px] uppercase mb-2" style={{ color: '#7a6a4a' }}>Power Level</p>
+            <p className="text-[9px] font-cinzel tracking-[2px] uppercase mb-2 text-gold-muted">Power Level</p>
             <div className="flex items-center gap-3">
               <span
                 className="font-cinzel-deco leading-none"
@@ -266,9 +266,9 @@ export default function AnalyticsSidebar() {
                 {score}
               </span>
               <div>
-                <p className="text-[10px] font-cinzel" style={{ color: '#c9a060' }}>{label}</p>
+                <p className="text-[10px] font-cinzel text-gold">{label}</p>
                 {flags.length > 0 && (
-                  <p className="text-[9px] font-body italic mt-1" style={{ color: '#7a6a4a' }}>
+                  <p className="text-[9px] font-body italic mt-1 text-gold-muted">
                     {flags.join(', ')}
                   </p>
                 )}
@@ -277,7 +277,7 @@ export default function AnalyticsSidebar() {
           </div>
 
           {cards.length === 0 && (
-            <p className="px-3 pb-3 text-[10px] font-body italic text-center" style={{ color: '#4a4030' }}>
+            <p className="px-3 pb-3 text-[10px] font-body italic text-center text-gold-dim">
               Add cards to see stats
             </p>
           )}
@@ -287,7 +287,7 @@ export default function AnalyticsSidebar() {
             <>
               <div className="gold-line mx-3 my-1" />
               <div className="px-3 py-2">
-                <p className="text-[9px] font-cinzel tracking-[2px] uppercase mb-2" style={{ color: '#7a6a4a' }}>
+                <p className="text-[9px] font-cinzel tracking-[2px] uppercase mb-2 text-gold-muted">
                   Cost Breakdown
                 </p>
 
@@ -295,7 +295,7 @@ export default function AnalyticsSidebar() {
                 {costByType.map(({ label: sLabel, total }) => (
                   <div key={sLabel} className="mb-1">
                     <div className="flex justify-between mb-0.5">
-                      <span className="text-[8px] font-cinzel uppercase" style={{ color: '#5a5040' }}>{sLabel}</span>
+                      <span className="text-[8px] font-cinzel uppercase text-gold-faint">{sLabel}</span>
                       <span className="text-[8px] font-body" style={{ color: '#8a7050' }}>${total.toFixed(0)}</span>
                     </div>
                     <div className="h-[3px] rounded-sm overflow-hidden" style={{ background: 'rgba(30,24,16,0.8)' }}>
@@ -313,7 +313,7 @@ export default function AnalyticsSidebar() {
                 {/* Top 5 expensive */}
                 {top5.length > 0 && (
                   <div className="mt-2">
-                    <p className="text-[8px] font-cinzel uppercase tracking-widest mb-1" style={{ color: '#5a5040' }}>
+                    <p className="text-[8px] font-cinzel uppercase tracking-widest mb-1 text-gold-faint">
                       Most Expensive
                     </p>
                     {top5.map(c => (
@@ -365,7 +365,7 @@ export default function AnalyticsSidebar() {
                             + {swap.add}
                           </span>
                         </div>
-                        <p className="text-[7px] font-body italic mt-0.5" style={{ color: '#5a5040' }}>
+                        <p className="text-[7px] font-body italic mt-0.5 text-gold-faint">
                           {swap.reason}
                         </p>
                       </div>
@@ -381,7 +381,7 @@ export default function AnalyticsSidebar() {
             <>
               <div className="gold-line mx-3 my-1" />
               <div className="px-3 py-2">
-                <p className="text-[9px] font-cinzel tracking-[2px] uppercase mb-2" style={{ color: '#7a6a4a' }}>
+                <p className="text-[9px] font-cinzel tracking-[2px] uppercase mb-2 text-gold-muted">
                   Deck Health
                 </p>
 
@@ -432,7 +432,7 @@ export default function AnalyticsSidebar() {
                           {entry.color}
                         </span>
                         {/* Pip / source counts */}
-                        <span className="flex-1 text-[7px] font-body text-right" style={{ color: '#5a5040' }}>
+                        <span className="flex-1 text-[7px] font-body text-right text-gold-faint">
                           {entry.pipCount} cards / {entry.sourceCount} src
                         </span>
                         {/* Status dot */}

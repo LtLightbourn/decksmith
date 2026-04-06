@@ -341,6 +341,7 @@ export default function WizardModal() {
             className="text-[16px] transition-colors ml-1"
             style={{ color: '#5a5040', lineHeight: 1 }}
             title="Close"
+            aria-label="Close Merlin wizard"
           >✕</button>
         </div>
 
@@ -386,7 +387,7 @@ export default function WizardModal() {
             <div className="p-5 flex-1 overflow-y-auto">
               {tab === 'vibe' && (
                 <div>
-                  <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-2" style={{ color: '#7a6a4a' }}>
+                  <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-2 text-gold-muted">
                     Describe your deck's vibe
                   </label>
                   <textarea
@@ -401,13 +402,13 @@ export default function WizardModal() {
               {tab === 'keywords' && (
                 <div className="space-y-3">
                   <div>
-                    <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-1" style={{ color: '#7a6a4a' }}>Archetype</label>
+                    <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-1 text-gold-muted">Archetype</label>
                     <select value={archetype} onChange={e => setArchetype(e.target.value as DeckArchetype)} style={SELECT_STYLE}>
                       {ARCHETYPES.map(a => <option key={a} value={a}>{a}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-1" style={{ color: '#7a6a4a' }}>Colors</label>
+                    <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-1 text-gold-muted">Colors</label>
                     <div className="flex gap-2">
                       {COLORS_LIST.map(c => (
                         <button
@@ -424,13 +425,13 @@ export default function WizardModal() {
                     </div>
                   </div>
                   <div>
-                    <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-1" style={{ color: '#7a6a4a' }}>Budget</label>
+                    <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-1 text-gold-muted">Budget</label>
                     <select value={budget} onChange={e => setBudget(e.target.value as DeckBudget)} style={SELECT_STYLE}>
                       {BUDGETS.map(b => <option key={b} value={b}>{b}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-1" style={{ color: '#7a6a4a' }}>Notes (optional)</label>
+                    <label className="text-[9px] font-cinzel tracking-[2px] uppercase block mb-1 text-gold-muted">Notes (optional)</label>
                     <textarea
                       style={{ ...INPUT_STYLE, minHeight: 50 }}
                       placeholder="Any special requests..."
@@ -533,7 +534,7 @@ export default function WizardModal() {
                   )
                 }
               >
-                <span className="text-[10px] font-cinzel" style={{ color: '#c9a060' }}>
+                <span className="text-[10px] font-cinzel text-gold">
                   ✦ Refining with Merlin is an Arcane feature —{' '}
                   <span style={{ textDecoration: 'underline', textDecorationColor: 'rgba(200,160,60,0.4)' }}>
                     Upgrade to keep the conversation going →
@@ -578,6 +579,7 @@ export default function WizardModal() {
                   flexShrink: 0,
                 }}
                 title="Send"
+                aria-label="Send message"
               >
                 ✦
               </button>

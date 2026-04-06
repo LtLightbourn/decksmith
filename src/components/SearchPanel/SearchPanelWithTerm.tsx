@@ -117,8 +117,8 @@ export default function SearchPanelWithTerm({ term }: Props) {
         className="flex-shrink-0 flex items-center justify-between px-3 py-[5px] border-b"
         style={{ borderColor: 'rgba(50,42,28,0.5)', background: 'rgba(8,6,4,0.4)' }}
       >
-        <span className="text-[9px] font-cinzel tracking-[3px] uppercase" style={{ color: '#c9a060' }}>✦ Results</span>
-        <span className="text-[9px] font-cinzel" style={{ color: '#5a5040' }}>
+        <span className="text-[9px] font-cinzel tracking-[3px] uppercase text-gold">✦ Results</span>
+        <span className="text-[9px] font-cinzel text-gold-faint">
           {isFetching ? 'searching...' : results ? `${results.length} cards` : ''}
         </span>
       </div>
@@ -130,10 +130,10 @@ export default function SearchPanelWithTerm({ term }: Props) {
           <p className="p-4 text-[11px] font-body text-center" style={{ color: '#7a4a4a' }}>Search failed.</p>
         )}
         {!isFetching && !isError && results?.length === 0 && term.length >= 2 && (
-          <p className="p-4 text-[11px] font-body text-center italic" style={{ color: '#5a5040' }}>No cards found.</p>
+          <p className="p-4 text-[11px] font-body text-center italic text-gold-faint">No cards found.</p>
         )}
         {!isFetching && !isError && !results && (
-          <p className="p-4 text-[11px] font-body text-center italic" style={{ color: '#5a5040' }}>
+          <p className="p-4 text-[11px] font-body text-center italic text-gold-faint">
             Search the arcane archives above...
           </p>
         )}

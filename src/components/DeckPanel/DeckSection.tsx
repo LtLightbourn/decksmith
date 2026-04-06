@@ -31,10 +31,10 @@ export default function DeckSection({ name, cards }: Props) {
           {name}
         </span>
         <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, rgba(120,95,55,0.35), transparent)' }} />
-        <span className="text-[9px] font-cinzel" style={{ color: '#5a5040' }}>
+        <span className="text-[9px] font-cinzel text-gold-faint">
           {total}
         </span>
-        <span className="text-[9px]" style={{ color: '#5a5040' }}>
+        <span className="text-[9px] text-gold-faint">
           {open ? '▾' : '▸'}
         </span>
       </button>

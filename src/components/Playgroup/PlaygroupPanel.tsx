@@ -173,7 +173,7 @@ export default function PlaygroupPanel() {
         className="flex items-center justify-between px-3 py-[5px] w-full border-b"
         style={{ borderColor: 'rgba(50,42,28,0.5)', background: 'rgba(8,6,4,0.4)' }}
       >
-        <span className="text-[9px] font-cinzel tracking-[3px] uppercase" style={{ color: '#c9a060' }}>
+        <span className="text-[9px] font-cinzel tracking-[3px] uppercase text-gold">
           ⚔ Your Playgroup
         </span>
         <div className="flex items-center gap-2">
@@ -182,7 +182,7 @@ export default function PlaygroupPanel() {
               {playgroup.length}/5
             </span>
           )}
-          <span className="text-[10px]" style={{ color: '#5a5040' }}>{isOpen ? '▲' : '▼'}</span>
+          <span className="text-[10px] text-gold-faint">{isOpen ? '▲' : '▼'}</span>
         </div>
       </button>
 
@@ -281,7 +281,7 @@ export default function PlaygroupPanel() {
 
           {/* Empty state */}
           {playgroup.length === 0 && (
-            <p className="px-3 py-3 text-[10px] font-body italic text-center" style={{ color: '#4a4030' }}>
+            <p className="px-3 py-3 text-[10px] font-body italic text-center text-gold-dim">
               Add your opponents' commanders to tailor your build to your pod.
             </p>
           )}
@@ -324,7 +324,7 @@ export default function PlaygroupPanel() {
                     {analysis.threats.map((t, i) => (
                       <div key={i} className="px-2 py-1.5 rounded-sm" style={{ background: 'rgba(20,14,6,0.6)', border: '1px solid rgba(80,50,30,0.3)' }}>
                         <p className="text-[9px] font-cinzel" style={{ color: '#c09050' }}>{t.commander}</p>
-                        <p className="text-[9px] font-body italic mt-0.5 leading-snug" style={{ color: '#7a6a4a' }}>{t.description}</p>
+                        <p className="text-[9px] font-body italic mt-0.5 leading-snug text-gold-muted">{t.description}</p>
                       </div>
                     ))}
 
