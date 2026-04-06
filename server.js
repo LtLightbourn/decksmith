@@ -50,7 +50,12 @@ const usageCountsMemory = new Map()
 const sentEmailsMemory = new Set() // tracks email:* keys in no-Redis mode
 
 // ── Pro status helpers ────────────────────────────────────────────────────
+const ADMIN_USER_IDS = new Set(
+  (process.env.ADMIN_USER_IDS ?? '').split(',').map(s => s.trim()).filter(Boolean)
+)
+
 async function isPro(userId) {
+  if (ADMIN_USER_IDS.has(userId)) return true
   if (redis) {
     try {
       const val = await redis.get(`pro:${userId}`)
@@ -271,6 +276,65 @@ async function proxyToClaude(req, res) {
 // ── Health check ──────────────────────────────────────────────────────────
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true })
+})
+
+// ── Scryfall proxy ────────────────────────────────────────────────────────
+// Proxies requests to Scryfall so the browser never calls api.scryfall.com
+// directly (avoids ad-blocker / extension CORS interference).
+app.get('/api/scryfall/named', async (req, res) => {
+  try {
+    const { exact, fuzzy } = req.query
+    if (!exact && !fuzzy) return res.status(400).json({ error: 'exact or fuzzy param required' })
+    const param = exact ? `exact=${encodeURIComponent(exact)}` : `fuzzy=${encodeURIComponent(fuzzy)}`
+    const upstream = await fetch(`https://api.scryfall.com/cards/named?${param}`, {
+      headers: { 'User-Agent': 'Decksmith/1.0 (decksmith.gg)' },
+    })
+    const data = await upstream.json()
+    res.status(upstream.status).json(data)
+  } catch (err) {
+    res.status(502).json({ error: 'Scryfall unavailable', detail: String(err) })
+  }
+})
+
+app.get('/api/scryfall/search', async (req, res) => {
+  try {
+    const { q, order, page } = req.query
+    if (!q) return res.status(400).json({ error: 'q param required' })
+    const params = new URLSearchParams({ q, ...(order && { order }), ...(page && { page }) })
+    const upstream = await fetch(`https://api.scryfall.com/cards/search?${params}`, {
+      headers: { 'User-Agent': 'Decksmith/1.0 (decksmith.gg)' },
+    })
+    const data = await upstream.json()
+    res.status(upstream.status).json(data)
+  } catch (err) {
+    res.status(502).json({ error: 'Scryfall unavailable', detail: String(err) })
+  }
+})
+
+app.post('/api/scryfall/collection', async (req, res) => {
+  try {
+    const upstream = await fetch('https://api.scryfall.com/cards/collection', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'User-Agent': 'Decksmith/1.0 (decksmith.gg)' },
+      body: JSON.stringify(req.body),
+    })
+    const data = await upstream.json()
+    res.status(upstream.status).json(data)
+  } catch (err) {
+    res.status(502).json({ error: 'Scryfall unavailable', detail: String(err) })
+  }
+})
+
+app.get('/api/scryfall/cards/:id', async (req, res) => {
+  try {
+    const upstream = await fetch(`https://api.scryfall.com/cards/${req.params.id}`, {
+      headers: { 'User-Agent': 'Decksmith/1.0 (decksmith.gg)' },
+    })
+    const data = await upstream.json()
+    res.status(upstream.status).json(data)
+  } catch (err) {
+    res.status(502).json({ error: 'Scryfall unavailable', detail: String(err) })
+  }
 })
 
 // ── Bug report ────────────────────────────────────────────────────────────

@@ -5,7 +5,7 @@ import { scryfallToCard } from '../../utils/colorIdentity'
 import type { ScryfallCard } from '../../types'
 import type { PlaygroupAnalysis, SwapSuggestion } from '../../utils/claudeApi'
 
-const SCRYFALL_BASE = 'https://api.scryfall.com'
+const SCRYFALL_BASE = '/api/scryfall'
 
 const COLOR_DOTS: Record<string, string> = {
   W: '#d8d0a0', U: '#4a7fbb', B: '#8a60b0', R: '#cc3333', G: '#3a8a3a',
@@ -65,7 +65,7 @@ export default function PlaygroupPanel() {
       setIsSearching(true)
       try {
         const q = `is:commander name:${encodeURIComponent(searchTerm)}`
-        const res = await fetch(`${SCRYFALL_BASE}/cards/search?q=${encodeURIComponent(q)}&order=name`)
+        const res = await fetch(`${SCRYFALL_BASE}/search?q=${encodeURIComponent(q)}&order=name`)
         if (res.status === 404) { setSuggestions([]); setShowDropdown(false); return }
         if (!res.ok) return
         const data = await res.json() as { data: ScryfallCard[] }

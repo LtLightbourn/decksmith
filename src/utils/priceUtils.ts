@@ -69,7 +69,7 @@ export function tcgPlayerUrl(name: string): string {
 
 // ── Scryfall batch fetch ──────────────────────────────────────────────────
 
-const SCRYFALL_COLLECTION = 'https://api.scryfall.com/cards/collection'
+const SCRYFALL_COLLECTION = '/api/scryfall/collection'
 const BATCH_SIZE = 75
 
 export async function fetchCardPrices(

@@ -322,7 +322,7 @@ Rules:
     suggestions.map(async (s) => {
       try {
         const res = await fetch(
-          `https://api.scryfall.com/cards/named?exact=${encodeURIComponent(s.name)}`,
+          `/api/scryfall/named?exact=${encodeURIComponent(s.name)}`,
         )
         if (!res.ok) return s
         const card = await res.json() as {

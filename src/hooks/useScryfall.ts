@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react'
 import type { ScryfallCard, SearchFilters } from '../types'
 import { scryfallToCard, buildScryfallQuery } from '../utils/colorIdentity'
 
-const BASE = 'https://api.scryfall.com'
+const BASE = '/api/scryfall'
 
 // Fetch a single card by exact name
 export async function fetchCardByName(name: string) {
-  const res = await fetch(`${BASE}/cards/named?exact=${encodeURIComponent(name)}`)
+  const res = await fetch(`${BASE}/named?exact=${encodeURIComponent(name)}`)
   if (!res.ok) return null
   const sc = await res.json() as ScryfallCard
   return scryfallToCard(sc)
@@ -43,7 +43,7 @@ export async function fetchCardsByNames(names: string[]): Promise<{ found: Retur
 export async function fetchStaples(colorIdentity: string[]): Promise<ReturnType<typeof scryfallToCard>[]> {
   const colors = colorIdentity.join('')
   const query = `id<=${colors || 'C'}+legal:commander+(o:draw+or+o:tutor+or+ramp)+not:extra`
-  const res = await fetch(`${BASE}/cards/search?q=${encodeURIComponent(query)}&order=edhrec&page=1`)
+  const res = await fetch(`${BASE}/search?q=${encodeURIComponent(query)}&order=edhrec&page=1`)
   if (!res.ok) return []
   const data = await res.json() as { data: ScryfallCard[] }
   return data.data.slice(0, 5).map(scryfallToCard)
@@ -64,7 +64,7 @@ export function useScryfallSearch(term: string, filters: SearchFilters) {
   return useQuery({
     queryKey: ['scryfall-search', query],
     queryFn: async () => {
-      const res = await fetch(`${BASE}/cards/search?q=${encodeURIComponent(query)}&order=name`)
+      const res = await fetch(`${BASE}/search?q=${encodeURIComponent(query)}&order=name`)
       if (res.status === 404) return []
       if (!res.ok) throw new Error(`Scryfall error ${res.status}`)
       const data = await res.json() as { data: ScryfallCard[] }
