@@ -237,6 +237,26 @@ function parseCardsSection(text: string): string[] {
   return deduplicateCardNames(names)
 }
 
+const SECTION_HEADERS = /^(RAMP|DRAW|INTERACTION|CREATURES|OTHER|LANDS|CARDS):$/m
+
+function parseSectionedOrFlat(text: string): string[] {
+  // If response uses named sections, collect cards from all of them
+  if (SECTION_HEADERS.test(text)) {
+    const sectionPattern = /^(?:RAMP|DRAW|INTERACTION|CREATURES|OTHER|LANDS|CARDS):\s*\n([\s\S]*?)(?=\n(?:RAMP|DRAW|INTERACTION|CREATURES|OTHER|LANDS|CARDS):|$)/gm
+    const allCards: string[] = []
+    let match
+    while ((match = sectionPattern.exec(text)) !== null) {
+      const sectionCards = parseCardsSection(match[1])
+      allCards.push(...sectionCards)
+    }
+    return deduplicateCardNames(allCards)
+  }
+  // Fallback: old flat CARDS: format
+  const cardsStart = text.indexOf('CARDS:')
+  const cardsText = cardsStart !== -1 ? text.slice(cardsStart + 'CARDS:'.length) : text
+  return parseCardsSection(cardsText)
+}
+
 function bracketGuidance(bracket?: number): string {
   switch (bracket) {
     case 1: return `POWER LEVEL — Bracket 1 (Exhibition): Precon-level. No tutors, no fast mana, no extra turns, no infinite combos, no stax. Minimal synergy. Cards should be straightforward and fair.`
@@ -359,25 +379,27 @@ Respond in EXACTLY this format — no deviations:
 
 COMMANDER: <single commander card name>
 DESCRIPTION: <2-3 sentences describing the deck strategy, feel, and win conditions>
-CARDS:
-<card name>
-<card name>
-...
+RAMP:
+<10-12 ramp cards — mana rocks, land ramp, mana dorks>
+DRAW:
+<8-10 card draw and card advantage pieces>
+INTERACTION:
+<8-10 removal, board wipes, counterspells, or protection pieces>
+CREATURES:
+<18-24 creatures that serve the strategy — do not repeat any card already listed above>
+OTHER:
+<8-14 remaining spells — instants, sorceries, enchantments, artifacts, planeswalkers>
+LANDS:
+<33-36 lands — no more than 20 basic lands, fill the rest with nonbasic lands>
 
 Strict rules:
 - COMMANDER must be a legendary creature or planeswalker that can legally be a commander
-- CARDS section must contain EXACTLY 99 cards — count carefully before responding
-- The commander must NOT appear in the CARDS section
+- The commander must NOT appear in any section
 - Use only real, legal card names that exist in paper Magic: The Gathering
-- All cards must be legal in Commander format
-- All cards must fit within the commander's color identity
-- No numbers, no quantities, no section headers inside CARDS
-- Deck composition must follow this structure: 32-36 lands, 20-28 creatures, 6-10 instants, 5-8 sorceries, 4-7 artifacts, 3-6 enchantments — adjust based on the strategy (combo decks run more tutors/draw, aggro runs more creatures, control runs more interaction)
-- Include at least 8-10 interaction pieces: removal (single-target and board wipes), protection, or counterspells appropriate to the color identity
-- Include at least 8-10 ramp pieces: mana rocks, land ramp, mana dorks — appropriate to the colors
-- Include at least 6-8 draw/card advantage pieces
-- Basic lands should make up no more than 20-25 of the land slots — fill the rest with nonbasic lands (utility lands, dual lands, fetches if budget allows)
-- Every non-land card must serve the deck strategy — no filler`
+- All cards must be legal in Commander format and fit within the commander's color identity
+- No card may appear more than once across all sections
+- No numbers or quantities — one card name per line
+- All sections together must total EXACTLY 99 cards — count carefully`
 
   let userPrompt: string
   if (input.vibe) {
@@ -401,12 +423,12 @@ ${input.notes ? `Notes: ${input.notes}` : ''}`
 
   let description = ''
   if (descStart !== -1) {
-    const end = cardsStart !== -1 ? cardsStart : text.length
-    description = text.slice(descStart + 'DESCRIPTION:'.length, end).trim()
+    const descEnd = cardsStart !== -1 ? cardsStart : text.indexOf('RAMP:') !== -1 ? text.indexOf('RAMP:') : text.length
+    description = text.slice(descStart + 'DESCRIPTION:'.length, descEnd).trim()
   }
 
-  const cardsText = cardsStart !== -1 ? text.slice(cardsStart + 'CARDS:'.length) : ''
-  const cards = parseCardsSection(cardsText)
+  // Support both old flat CARDS: format and new sectioned format
+  const cards = parseSectionedOrFlat(text)
 
   return {
     commander: commanderMatch ? commanderMatch[1].trim() : '',
@@ -426,12 +448,10 @@ function parseDeckBuildResponse(text: string): DeckBuildResult {
     description = text.slice(descStart + 'DESCRIPTION:'.length, end).trim()
   }
 
-  const cardsText = cardsStart !== -1 ? text.slice(cardsStart + 'CARDS:'.length) : ''
-
   return {
     commander: commanderMatch ? commanderMatch[1].trim() : '',
     description,
-    cards: parseCardsSection(cardsText),
+    cards: parseSectionedOrFlat(text),
   }
 }
 
@@ -458,23 +478,27 @@ Respond in EXACTLY this format — no deviations:
 
 COMMANDER: <single commander card name>
 DESCRIPTION: <2-3 sentences describing the deck strategy, feel, and win conditions — capture the flavor and surprise>
-CARDS:
-<card name>
-<card name>
-...
+RAMP:
+<10-12 ramp cards — mana rocks, land ramp, mana dorks>
+DRAW:
+<8-10 card draw and card advantage pieces>
+INTERACTION:
+<8-10 removal, board wipes, counterspells, or protection pieces>
+CREATURES:
+<18-24 creatures that serve the strategy — do not repeat any card already listed above>
+OTHER:
+<8-14 remaining spells — instants, sorceries, enchantments, artifacts, planeswalkers>
+LANDS:
+<33-36 lands — no more than 20 basic lands, fill the rest with nonbasic lands>
 
 Strict rules:
 - COMMANDER must be a legendary creature or planeswalker that can legally be a commander
-- CARDS section must contain EXACTLY 99 cards — count carefully before responding
-- The commander must NOT appear in the CARDS section
+- The commander must NOT appear in any section
 - Use only real, legal card names that exist in paper Magic: The Gathering
-- All cards must be legal in Commander format
-- All cards must fit within the commander's color identity
-- No numbers, no quantities, no section headers inside CARDS
-- Deck composition must follow this structure: 32-36 lands, 20-28 creatures, 6-10 instants, 5-8 sorceries, 4-7 artifacts, 3-6 enchantments — adjust based on the strategy
-- Include at least 8-10 interaction pieces: removal, board wipes, or counterspells appropriate to the color identity
-- Include at least 8-10 ramp pieces: mana rocks, land ramp, mana dorks
-- Include at least 6-8 draw/card advantage pieces
+- All cards must be legal in Commander format and fit within the commander's color identity
+- No card may appear more than once across all sections
+- No numbers or quantities — one card name per line
+- All sections together must total EXACTLY 99 cards — count carefully
 - Basic lands should make up no more than 20-25 of the land slots — fill the rest with nonbasic lands
 - Every non-land card must serve the deck strategy — no filler`
 
