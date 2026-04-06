@@ -148,7 +148,13 @@ export default function WizardModal() {
         ? { vibe, bracket: targetBracket, playgroup: podNames, playstyle: fullGuidance }
         : { archetype, colors: selectedColors, budget, notes, bracket: targetBracket, playgroup: podNames, playstyle: fullGuidance }
 
-      const result = await buildDeck(input)
+      let result = await buildDeck(input)
+
+      // If Claude returned a clearly broken deck (too few unique cards), retry once
+      if (result.cards.length < 70) {
+        setStatusMsg('Refining deck...')
+        result = await buildDeck(input)
+      }
 
       if (!result.commander) {
         throw new Error('Merlin did not name a commander — try again')
