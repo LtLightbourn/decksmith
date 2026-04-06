@@ -237,24 +237,53 @@ function parseCardsSection(text: string): string[] {
   return deduplicateCardNames(names)
 }
 
-const SECTION_HEADERS = /^(RAMP|DRAW|INTERACTION|CREATURES|OTHER|LANDS|CARDS):$/m
+const DECK_SECTIONS = ['RAMP', 'DRAW', 'INTERACTION', 'CREATURES', 'OTHER', 'LANDS', 'CARDS']
+const BASIC_LANDS = new Set(['Mountain', 'Plains', 'Island', 'Swamp', 'Forest', 'Wastes'])
+const MAX_BASICS_PER_TYPE = 20
+
+function capBasicLands(cards: string[]): string[] {
+  const counts = new Map<string, number>()
+  return cards.filter(card => {
+    if (BASIC_LANDS.has(card)) {
+      const n = (counts.get(card) ?? 0) + 1
+      counts.set(card, n)
+      return n <= MAX_BASICS_PER_TYPE
+    }
+    return true
+  })
+}
 
 function parseSectionedOrFlat(text: string): string[] {
-  // If response uses named sections, collect cards from all of them
-  if (SECTION_HEADERS.test(text)) {
-    const sectionPattern = /^(?:RAMP|DRAW|INTERACTION|CREATURES|OTHER|LANDS|CARDS):\s*\n([\s\S]*?)(?=\n(?:RAMP|DRAW|INTERACTION|CREATURES|OTHER|LANDS|CARDS):|$)/gm
-    const allCards: string[] = []
-    let match
-    while ((match = sectionPattern.exec(text)) !== null) {
-      const sectionCards = parseCardsSection(match[1])
-      allCards.push(...sectionCards)
+  const hasSections = DECK_SECTIONS.some(s => text.includes(`${s}:\n`) || text.includes(`${s}:\r\n`))
+
+  let allCards: string[]
+
+  if (hasSections) {
+    // Collect cards from each named section using indexOf so multiline issues don't apply
+    allCards = []
+    for (const section of DECK_SECTIONS) {
+      const header = `${section}:`
+      const start = text.indexOf(header)
+      if (start === -1) continue
+      // Section ends at the next section header or end of string
+      let end = text.length
+      for (const other of DECK_SECTIONS) {
+        if (other === section) continue
+        const otherStart = text.indexOf(`${other}:`, start + header.length)
+        if (otherStart !== -1 && otherStart < end) end = otherStart
+      }
+      allCards.push(...parseCardsSection(text.slice(start + header.length, end)))
     }
-    return deduplicateCardNames(allCards)
+    allCards = deduplicateCardNames(allCards)
+  } else {
+    // Fallback: flat CARDS: format
+    const cardsStart = text.indexOf('CARDS:')
+    const cardsText = cardsStart !== -1 ? text.slice(cardsStart + 'CARDS:'.length) : text
+    allCards = parseCardsSection(cardsText)
   }
-  // Fallback: old flat CARDS: format
-  const cardsStart = text.indexOf('CARDS:')
-  const cardsText = cardsStart !== -1 ? text.slice(cardsStart + 'CARDS:'.length) : text
-  return parseCardsSection(cardsText)
+
+  // Safety net: never let basic lands dominate the deck
+  return capBasicLands(allCards)
 }
 
 function bracketGuidance(bracket?: number): string {
