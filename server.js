@@ -31,6 +31,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 const ANTHROPIC_API = 'https://api.anthropic.com/v1/messages'
 const USAGE_LIMIT = 3
+const PRO_MONTHLY_LIMIT = 200
 
 // ── Upstash Redis ─────────────────────────────────────────────────────────
 // Falls back to in-memory for local dev without Redis credentials.
@@ -114,6 +115,39 @@ async function incrementUsage(userId) {
   const next = (usageCountsMemory.get(userId) ?? 0) + 1
   usageCountsMemory.set(userId, next)
   return next
+}
+
+// ── Pro monthly usage helpers ─────────────────────────────────────────────
+function monthlyKey(userId) {
+  const now = new Date()
+  return `usage:monthly:${userId}:${now.getUTCFullYear()}-${now.getUTCMonth() + 1}`
+}
+
+async function getMonthlyUsage(userId) {
+  if (redis) {
+    try {
+      const val = await redis.get(monthlyKey(userId))
+      return parseInt(val ?? '0', 10)
+    } catch {
+      return 0
+    }
+  }
+  return 0
+}
+
+async function incrementMonthlyUsage(userId) {
+  if (redis) {
+    try {
+      const key = monthlyKey(userId)
+      const count = await redis.incr(key)
+      // Expire at end of month — 35 days is safe
+      if (count === 1) await redis.expire(key, 35 * 24 * 60 * 60)
+      return count
+    } catch {
+      return 0
+    }
+  }
+  return 0
 }
 
 // ── One-shot email flag helpers ────────────────────────────────────────────
@@ -525,6 +559,14 @@ app.post('/api/claude', requireAuth, async (req, res) => {
       return res.status(402).json({ error: 'pro_required', feature: 'merlin_chat' })
     }
 
+    if (clerkClient && userIsPro && !ADMIN_USER_IDS.has(userId)) {
+      const monthlyCount = await getMonthlyUsage(userId)
+      if (monthlyCount >= PRO_MONTHLY_LIMIT) {
+        res.status(402).json({ error: 'Monthly limit reached', limit: PRO_MONTHLY_LIMIT })
+        return
+      }
+    }
+
     if (clerkClient && !userIsPro && count >= USAGE_LIMIT) {
       // Send limit-reached email once (non-blocking)
       claimEmailSlot(`email:limit:${userId}`).then(claimed => {
@@ -563,6 +605,7 @@ app.post('/api/claude', requireAuth, async (req, res) => {
     }
 
     const newCount = await incrementUsage(userId)
+    if (userIsPro && !ADMIN_USER_IDS.has(userId)) await incrementMonthlyUsage(userId)
     const remaining = userIsPro ? 9999 : Math.max(0, USAGE_LIMIT - newCount)
     res.setHeader('X-Usage-Remaining', String(remaining))
 
