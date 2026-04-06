@@ -10,6 +10,7 @@ import type { WizardTab, DeckArchetype, DeckBudget } from '../../types'
 import type { ChatMessage } from '../../utils/claudeApi'
 import { BRACKET_LABELS } from '../../utils/bracketData'
 import { playstyleGuidance } from '../../utils/playstyleProfile'
+import BugReportModal from '../shared/BugReportModal'
 
 const ARCHETYPES: DeckArchetype[] = [
   'Aggro', 'Control', 'Combo', 'Midrange', 'Stax',
@@ -72,6 +73,8 @@ export default function WizardModal() {
   const [chatInput, setChatInput] = useState('')
   const [orbState, setOrbState] = useState<OrbState>('idle')
   const [statusMsg, setStatusMsg] = useState('')
+  const [lastError, setLastError] = useState<string | null>(null)
+  const [bugReportOpen, setBugReportOpen] = useState(false)
 
   const [greeting, setGreeting] = useState<string | null>(null)
   const [greetingLoading, setGreetingLoading] = useState(false)
@@ -189,6 +192,7 @@ export default function WizardModal() {
       setOrbState('error')
       const msg = err instanceof Error ? err.message : 'Unknown error'
       setStatusMsg(`Something went wrong: ${msg}`)
+      setLastError(msg)
       addToast('Merlin failed to conjure your deck', 'error')
       setTimeout(() => setOrbState('idle'), 2000)
     }
@@ -437,9 +441,20 @@ export default function WizardModal() {
               )}
 
               {statusMsg && (
-                <p className="mt-3 text-[10px] font-body italic text-center" style={{ color: orbState === 'error' ? '#cc4444' : '#8a7a5a' }}>
-                  {statusMsg}
-                </p>
+                <div className="mt-3 text-center">
+                  <p className="text-[10px] font-body italic" style={{ color: orbState === 'error' ? '#cc4444' : '#8a7a5a' }}>
+                    {statusMsg}
+                  </p>
+                  {orbState === 'error' && lastError && (
+                    <button
+                      onClick={() => setBugReportOpen(true)}
+                      className="mt-1 text-[9px] font-cinzel uppercase tracking-widest transition-opacity hover:opacity-80"
+                      style={{ color: '#5a5040', textDecoration: 'underline', textDecorationColor: 'rgba(90,80,64,0.4)' }}
+                    >
+                      Report this error →
+                    </button>
+                  )}
+                </div>
               )}
             </div>
 
@@ -570,6 +585,13 @@ export default function WizardModal() {
         )}
       </div>
     </div>
+
+    {bugReportOpen && (
+      <BugReportModal
+        errorContext={lastError ?? undefined}
+        onClose={() => setBugReportOpen(false)}
+      />
+    )}
   )
 }
 

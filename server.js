@@ -273,6 +273,43 @@ app.get('/api/health', (_req, res) => {
   res.json({ ok: true })
 })
 
+// ── Bug report ────────────────────────────────────────────────────────────
+app.post('/api/bug-report', async (req, res) => {
+  const { description, errorContext } = req.body ?? {}
+
+  if (process.env.RESEND_API_KEY) {
+    try {
+      const { Resend } = await import('resend')
+      const resend = new Resend(process.env.RESEND_API_KEY)
+      const FROM = process.env.EMAIL_FROM ?? 'onboarding@resend.dev'
+      const TO = process.env.BUG_REPORT_EMAIL ?? FROM
+
+      await resend.emails.send({
+        from: FROM,
+        to: TO,
+        subject: '[Decksmith Bug] User report',
+        html: `
+          <div style="font-family:Georgia,serif;color:#c9a060;background:#0a0805;padding:24px;">
+            <h2 style="color:#f0d080;margin:0 0 16px;">Bug Report</h2>
+            <p style="color:#7a6a4a;margin:0 0 8px;"><strong style="color:#c9a060;">User description:</strong></p>
+            <p style="color:#a09060;background:#1c160f;padding:12px;border-left:3px solid #6a4a10;margin:0 0 16px;">
+              ${description ? String(description).replace(/</g, '&lt;') : '(no description provided)'}
+            </p>
+            <p style="color:#7a6a4a;margin:0 0 8px;"><strong style="color:#c9a060;">Error context:</strong></p>
+            <pre style="color:#805040;background:#1c160f;padding:12px;font-size:11px;overflow-x:auto;margin:0;">
+${errorContext ? String(errorContext).replace(/</g, '&lt;') : '(none)'}
+            </pre>
+          </div>`,
+      })
+    } catch (err) {
+      console.error('[bug-report] email error:', err)
+    }
+  }
+
+  res.json({ ok: true })
+
+})
+
 // ── Waitlist ──────────────────────────────────────────────────────────────────
 const WAITLIST_FILE = join(__dirname, 'waitlist.json')
 
