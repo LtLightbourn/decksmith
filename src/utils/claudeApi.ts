@@ -372,7 +372,9 @@ Strict rules:
 - All cards must be legal in Commander format
 - All cards must fit within the commander's color identity
 - No numbers, no quantities, no section headers inside CARDS
-- Do not include basic lands unless filling the final remaining slots`
+- Deck composition must follow this rough structure: 30-35 lands, 25-30 creatures, 8-12 instants, 6-10 sorceries, 5-8 artifacts, 4-6 enchantments, remaining slots for planeswalkers or other spells
+- Basic lands should make up no more than 25-30 of the land slots — fill the rest with nonbasic lands that fit the strategy (utility lands, dual lands, etc.)
+- Every card must serve a purpose — no filler, no padding with basic lands beyond a reasonable land count`
 
   let userPrompt: string
   if (input.vibe) {
@@ -466,7 +468,9 @@ Strict rules:
 - All cards must be legal in Commander format
 - All cards must fit within the commander's color identity
 - No numbers, no quantities, no section headers inside CARDS
-- Do not include basic lands unless filling the final remaining slots`
+- Deck composition must follow this rough structure: 30-35 lands, 25-30 creatures, 8-12 instants, 6-10 sorceries, 5-8 artifacts, 4-6 enchantments, remaining slots for planeswalkers or other spells
+- Basic lands should make up no more than 25-30 of the land slots — fill the rest with nonbasic lands that fit the strategy (utility lands, dual lands, etc.)
+- Every card must serve a purpose — no filler, no padding with basic lands beyond a reasonable land count`
 
   const text = await callClaudePro(
     '/api/surprise-deck',
