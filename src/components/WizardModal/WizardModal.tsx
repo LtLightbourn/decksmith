@@ -283,6 +283,7 @@ export default function WizardModal() {
   }
 
   return (
+    <>
     <div
       className="fixed inset-0 z-40 flex items-end md:items-center justify-center"
       style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(2px)' }}
@@ -592,6 +593,7 @@ export default function WizardModal() {
         onClose={() => setBugReportOpen(false)}
       />
     )}
+    </>
   )
 }
 
