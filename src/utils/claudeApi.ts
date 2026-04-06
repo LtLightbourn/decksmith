@@ -404,6 +404,8 @@ ${styleLine}
 ${bracketLine}
 ${podLine}
 
+Important philosophy: Build complete, functional Commander decks — not theme showcases. When someone asks for a "Goblin deck" or any tribal/theme deck, include the best tribal pieces AND the support cards that make the deck function (ramp, draw, removal, protection). A Goblin deck runs Sol Ring, Skullclamp, and Blasphemous Act alongside Goblins — not just Goblins. Every deck needs a full 99-card suite of cards that win games, not just cards that match the theme.
+
 Respond in EXACTLY this format — no deviations:
 
 COMMANDER: <single commander card name>
