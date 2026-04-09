@@ -421,7 +421,7 @@ CREATURES:
 OTHER:
 <8-14 remaining spells — instants, sorceries, enchantments, artifacts, planeswalkers>
 LANDS:
-<33-36 lands — no more than 20 basic lands, fill the rest with nonbasic lands>
+<33-36 lands — MAXIMUM 15 basic lands of any one type. Fill remaining land slots with named nonbasic lands: utility lands, dual lands, or cycle lands. Do NOT pad with basic lands.>
 
 Strict rules:
 - COMMANDER must be a legendary creature or planeswalker that can legally be a commander
@@ -430,7 +430,8 @@ Strict rules:
 - All cards must be legal in Commander format and fit within the commander's color identity
 - No card may appear more than once across all sections
 - No numbers or quantities — one card name per line
-- All sections together must total EXACTLY 99 cards — count carefully`
+- All sections together must total EXACTLY 99 cards — count carefully
+- CRITICAL: The LANDS section must contain real named nonbasic lands (Command Tower, Reliquary Tower, Evolving Wilds, Temple of the False God, etc.) alongside basics. A land section of 30+ identical basic lands is WRONG.`
 
   let userPrompt: string
   if (input.vibe) {
@@ -520,7 +521,7 @@ CREATURES:
 OTHER:
 <8-14 remaining spells — instants, sorceries, enchantments, artifacts, planeswalkers>
 LANDS:
-<33-36 lands — no more than 20 basic lands, fill the rest with nonbasic lands>
+<33-36 lands — MAXIMUM 15 basic lands of any one type. Fill remaining land slots with named nonbasic lands: utility lands, dual lands, or cycle lands. Do NOT pad with basic lands.>
 
 Strict rules:
 - COMMANDER must be a legendary creature or planeswalker that can legally be a commander
