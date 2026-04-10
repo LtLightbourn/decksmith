@@ -151,7 +151,7 @@ export default function WizardModal() {
       let result = await buildDeck(input)
 
       // If Claude returned a clearly broken deck (too few unique cards), retry once
-      if (result.cards.length < 70) {
+      if (result.cards.length < 80) {
         setStatusMsg('Refining deck...')
         result = await buildDeck(input)
       }
@@ -182,6 +182,11 @@ export default function WizardModal() {
         }
         return true
       })
+
+      // If after deduplication and capping we still have too few cards, the build failed
+      if (cleanedCards.length < 60) {
+        throw new Error(`Merlin only returned ${cleanedCards.length} unique cards — please try again`)
+      }
 
       // Fetch commander and deck cards in parallel
       const [commanderCard, { found, notFound }] = await Promise.all([
