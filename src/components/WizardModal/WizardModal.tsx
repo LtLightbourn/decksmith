@@ -148,12 +148,12 @@ export default function WizardModal() {
         ? { vibe, bracket: targetBracket, playgroup: podNames, playstyle: fullGuidance }
         : { archetype, colors: selectedColors, budget, notes, bracket: targetBracket, playgroup: podNames, playstyle: fullGuidance }
 
-      let result = await buildDeck(input)
+      let result = await buildDeck(input, setStatusMsg)
 
       // If Claude returned a clearly broken deck (too few unique cards), retry once
       if (result.cards.length < 80) {
         setStatusMsg('Refining deck...')
-        result = await buildDeck(input)
+        result = await buildDeck(input, setStatusMsg)
       }
 
       if (!result.commander) {

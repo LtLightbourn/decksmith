@@ -407,7 +407,7 @@ async function searchScryfallCards(query: string, maxResults = 100): Promise<str
 
 // ── Public API ────────────────────────────────────────────────────────────
 
-export async function buildDeck(input: WizardPromptInput): Promise<DeckBuildResult> {
+export async function buildDeck(input: WizardPromptInput, onStatus?: (msg: string) => void): Promise<DeckBuildResult> {
   const bracketLine = bracketGuidance(input.bracket)
   const podLine = playgroupGuidance(input.playgroup)
   const styleLine = input.playstyle ?? ''
@@ -421,6 +421,8 @@ export async function buildDeck(input: WizardPromptInput): Promise<DeckBuildResu
       : 'Any colors'
     userPrompt = `Build me a Commander deck. Archetype: ${input.archetype ?? 'Midrange'}, ${colorStr}, Budget: ${input.budget ?? 'Focused'}${input.notes ? `, Notes: ${input.notes}` : ''}`
   }
+
+  onStatus?.('Merlin is choosing your commander...')
 
   // ── Phase 1: Identify commander and theme ────────────────────────────────
   const phase1System = `You are an expert Magic: The Gathering Commander advisor.
@@ -458,6 +460,8 @@ Rules:
 
   if (!commanderName) throw new Error('Merlin did not name a commander — try again')
 
+  onStatus?.(`Commander: ${commanderName} — loading card pool from Scryfall...`)
+
   // ── Fetch commander color identity from Scryfall ──────────────────────────
   const commanderRes = await fetch(`/api/scryfall/named?exact=${encodeURIComponent(commanderName)}`)
   if (!commanderRes.ok) {
@@ -489,6 +493,8 @@ Rules:
   if (totalAvailable < 60) {
     throw new Error('Could not find enough valid cards for this deck — please try again')
   }
+
+  onStatus?.(`${commanderName} — Merlin is selecting ${totalAvailable} real cards...`)
 
   // ── Phase 3: Claude selects from the validated card pool ─────────────────
   const tribeBlock = tribe && tribeFiltered.length > 0
