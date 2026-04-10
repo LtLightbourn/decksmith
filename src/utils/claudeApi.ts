@@ -426,7 +426,8 @@ LANDS:
 Strict rules:
 - COMMANDER must be a legendary creature or planeswalker that can legally be a commander
 - The commander must NOT appear in any section
-- Use only real, legal card names that exist in paper Magic: The Gathering
+- CARD NAME ACCURACY IS CRITICAL: Every card name you write will be looked up on Scryfall. If a name does not match exactly, it is discarded. A deck where most names are wrong produces a broken result for the user. Only write card names you are CERTAIN exist in paper Magic: The Gathering with that exact spelling. If you are uncertain about a card name, use a different well-known card you are sure about instead.
+- Examples of safe, well-known cards you can always rely on: Sol Ring, Arcane Signet, Command Tower, Cultivate, Kodama's Reach, Swords to Plowshares, Cyclonic Rift, Rhystic Study, Smothering Tithe, Skullclamp, Sol Ring, Lightning Greaves, Swiftfoot Boots, Beast Within, Blasphemous Act, Chaos Warp, Vandalblast, Creatures of the Grave, Necropotence, Mulldrifter, Solemn Simulacrum, Eternal Witness, Wood Elves, Rampant Growth, Farseek, Three Visits, Nature's Lore, Demonic Tutor, Vampiric Tutor, Ponder, Preordain, Brainstorm.
 - All cards must be legal in Commander format and fit within the commander's color identity
 - No card may appear more than once across all sections
 - No numbers or quantities — one card name per line
@@ -447,7 +448,7 @@ Budget: ${input.budget ?? 'Focused'}
 ${input.notes ? `Notes: ${input.notes}` : ''}`
   }
 
-  const text = await callClaude([{ role: 'user', content: userPrompt }], system, 0.7)
+  const text = await callClaude([{ role: 'user', content: userPrompt }], system, 0.3)
 
   const commanderMatch = text.match(/^COMMANDER:\s*(.+)$/m)
   const descStart = text.indexOf('DESCRIPTION:')
