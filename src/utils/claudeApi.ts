@@ -542,7 +542,17 @@ Rules:
     0.3,
   )
 
-  const cards = parseSectionedOrFlat(phase3Text)
+  // Build a set of every valid name from Phase 2 — filter out anything Claude invented
+  const validPool = new Set([
+    ...tribeFiltered,
+    ...creaturesFiltered,
+    ...spellsFiltered,
+    ...landsFiltered,
+  ].map(n => n.toLowerCase()))
+
+  const rawCards = parseSectionedOrFlat(phase3Text)
+  // Only keep names that came from Scryfall — drops any hallucinated names entirely
+  const cards = rawCards.filter(name => validPool.has(name.toLowerCase()))
 
   return { commander: commanderName, description, cards }
 }
