@@ -160,8 +160,6 @@ export default function WizardModal() {
         throw new Error('Merlin did not name a commander — try again')
       }
 
-      setStatusMsg(`Commander: ${result.commander} — fetching ${result.cards.length} cards...`)
-
       // Auto-version the current deck before replacing it
       if (cards.length > 0 || commander) {
         saveVersion(`Before Merlin forge — ${result.commander}`)
@@ -188,6 +186,8 @@ export default function WizardModal() {
         throw new Error(`Merlin only returned ${cleanedCards.length} unique cards — please try again`)
       }
 
+      setStatusMsg(`Commander: ${result.commander} — verifying ${cleanedCards.length} cards with Scryfall...`)
+
       // Fetch commander and deck cards in parallel
       const [commanderCard, { found, notFound }] = await Promise.all([
         fetchCardByName(result.commander),
@@ -196,6 +196,13 @@ export default function WizardModal() {
 
       if (!commanderCard) {
         throw new Error(`Could not find commander "${result.commander}" on Scryfall`)
+      }
+
+      // Guard: if Scryfall only validated a handful of cards, Claude hallucinated most names
+      if (found.length < 60) {
+        throw new Error(
+          `Merlin's cards didn't check out — only ${found.length} of ${cleanedCards.length} card names were real. Please try again.`
+        )
       }
 
       const rawDeckCards = found.map(c => ({ card: c, qty: 1 }))

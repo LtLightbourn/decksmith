@@ -175,12 +175,18 @@ function keepScore(dc: DeckCard): number {
   return 3 + dc.card.cmc                                          // everything else: keep high-CMC last
 }
 
+const MAX_PAD = 20 // refuse to pad more than this — a larger gap means Claude hallucinated card names
+
 function enforceCardCount(cards: DeckCard[], colorIdentity: string[]): DeckCard[] {
   const total = cards.reduce((s, dc) => s + dc.qty, 0)
   if (total === 99) return cards
 
   if (total < 99) {
     const needed = 99 - total
+    if (needed > MAX_PAD) {
+      console.warn(`[Merlin] Deck is only ${total}/99 — gap of ${needed} exceeds MAX_PAD (${MAX_PAD}). Skipping pad to avoid basic-land flood.`)
+      return cards
+    }
     const colors = colorIdentity.filter(c => BASIC_LAND_BY_COLOR[c])
     if (colors.length === 0) {
       console.warn(`[Merlin] Deck is ${total}/99 — colorless identity, cannot auto-pad`)
