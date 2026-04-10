@@ -391,48 +391,26 @@ Rules:
   return withImages
 }
 
+// ── Scryfall search helper (returns card names sorted by EDHREC rank) ─────
+
+async function searchScryfallCards(query: string, maxResults = 100): Promise<string[]> {
+  try {
+    const url = `/api/scryfall/search?q=${encodeURIComponent(query)}&order=edhrec&dir=desc`
+    const res = await fetch(url)
+    if (!res.ok) return []
+    const data = await res.json() as { data?: Array<{ name: string }> }
+    return (data.data ?? []).slice(0, maxResults).map(c => c.name)
+  } catch {
+    return []
+  }
+}
+
 // ── Public API ────────────────────────────────────────────────────────────
 
 export async function buildDeck(input: WizardPromptInput): Promise<DeckBuildResult> {
   const bracketLine = bracketGuidance(input.bracket)
   const podLine = playgroupGuidance(input.playgroup)
   const styleLine = input.playstyle ?? ''
-
-  const system = `You are Merlin, an expert Magic: The Gathering Commander deck builder with a wise, mystical personality.
-
-${styleLine}
-${bracketLine}
-${podLine}
-
-Important philosophy: Build complete, functional Commander decks — not theme showcases. When someone asks for a "Goblin deck" or any tribal/theme deck, include the best tribal pieces AND the support cards that make the deck function (ramp, draw, removal, protection). A Goblin deck runs Sol Ring, Skullclamp, and Blasphemous Act alongside Goblins — not just Goblins. Every deck needs a full 99-card suite of cards that win games, not just cards that match the theme.
-
-Respond in EXACTLY this format — no deviations:
-
-COMMANDER: <single commander card name>
-DESCRIPTION: <2-3 sentences describing the deck strategy, feel, and win conditions>
-RAMP:
-<10-12 ramp cards — mana rocks, land ramp, mana dorks>
-DRAW:
-<8-10 card draw and card advantage pieces>
-INTERACTION:
-<8-10 removal, board wipes, counterspells, or protection pieces>
-CREATURES:
-<18-24 creatures that serve the strategy — do not repeat any card already listed above>
-OTHER:
-<8-14 remaining spells — instants, sorceries, enchantments, artifacts, planeswalkers>
-LANDS:
-<33-36 lands — MAXIMUM 15 basic lands of any one type. Fill remaining land slots with named nonbasic lands: utility lands, dual lands, or cycle lands. Do NOT pad with basic lands.>
-
-Strict rules:
-- COMMANDER must be a legendary creature or planeswalker that can legally be a commander
-- The commander must NOT appear in any section
-- CARD NAME ACCURACY IS CRITICAL: Every card name you write will be looked up on Scryfall. If a name does not match exactly, it is discarded. A deck where most names are wrong produces a broken result for the user. Only write card names you are CERTAIN exist in paper Magic: The Gathering with that exact spelling. If you are uncertain about a card name, use a different well-known card you are sure about instead.
-- Examples of safe, well-known cards you can always rely on: Sol Ring, Arcane Signet, Command Tower, Cultivate, Kodama's Reach, Swords to Plowshares, Cyclonic Rift, Rhystic Study, Smothering Tithe, Skullclamp, Sol Ring, Lightning Greaves, Swiftfoot Boots, Beast Within, Blasphemous Act, Chaos Warp, Vandalblast, Creatures of the Grave, Necropotence, Mulldrifter, Solemn Simulacrum, Eternal Witness, Wood Elves, Rampant Growth, Farseek, Three Visits, Nature's Lore, Demonic Tutor, Vampiric Tutor, Ponder, Preordain, Brainstorm.
-- All cards must be legal in Commander format and fit within the commander's color identity
-- No card may appear more than once across all sections
-- No numbers or quantities — one card name per line
-- All sections together must total EXACTLY 99 cards — count carefully
-- CRITICAL: The LANDS section must contain real named nonbasic lands (Command Tower, Reliquary Tower, Evolving Wilds, Temple of the False God, etc.) alongside basics. A land section of 30+ identical basic lands is WRONG.`
 
   let userPrompt: string
   if (input.vibe) {
@@ -441,33 +419,132 @@ Strict rules:
     const colorStr = input.colors && input.colors.length > 0
       ? `Color identity: ${input.colors.join(', ')}`
       : 'Any colors'
-    userPrompt = `Build me a Commander deck.
-Archetype: ${input.archetype ?? 'Midrange'}
-${colorStr}
-Budget: ${input.budget ?? 'Focused'}
-${input.notes ? `Notes: ${input.notes}` : ''}`
+    userPrompt = `Build me a Commander deck. Archetype: ${input.archetype ?? 'Midrange'}, ${colorStr}, Budget: ${input.budget ?? 'Focused'}${input.notes ? `, Notes: ${input.notes}` : ''}`
   }
 
-  const text = await callClaude([{ role: 'user', content: userPrompt }], system, 0.3)
+  // ── Phase 1: Identify commander and theme ────────────────────────────────
+  const phase1System = `You are an expert Magic: The Gathering Commander advisor.
+${styleLine}
+${bracketLine}
 
-  const commanderMatch = text.match(/^COMMANDER:\s*(.+)$/m)
-  const descStart = text.indexOf('DESCRIPTION:')
-  const cardsStart = text.indexOf('CARDS:')
+A player wants a deck built. Identify the best commander and strategy.
 
+Respond in EXACTLY this format:
+COMMANDER: <exact Scryfall card name of a real legendary creature or planeswalker>
+DESCRIPTION: <2-3 sentences about the strategy and win conditions>
+TRIBE: <single creature type if this is tribal, e.g. "Goblin", "Elf", "Zombie", "Dragon" — leave blank if not tribal>
+
+Rules:
+- Use the exact Scryfall card name (e.g. "Krenko, Mob Boss" not just "Krenko")
+- Only choose commanders that genuinely exist in paper Magic: The Gathering
+- TRIBE should be blank unless the deck is clearly centered on a creature type`
+
+  const phase1Text = await callClaude([{ role: 'user', content: userPrompt }], phase1System, 0.3)
+
+  const commanderMatch = phase1Text.match(/^COMMANDER:\s*(.+)$/m)
+  const tribeMatch = phase1Text.match(/^TRIBE:\s*(.*)$/m)
+  const descStart = phase1Text.indexOf('DESCRIPTION:')
+  const tribeStart = phase1Text.indexOf('TRIBE:')
+
+  const commanderName = commanderMatch
+    ? commanderMatch[1].trim().replace(/\s*[\(\[—–-].*$/, '').trim()
+    : ''
+  const tribe = tribeMatch ? tribeMatch[1].trim() : ''
   let description = ''
   if (descStart !== -1) {
-    const descEnd = cardsStart !== -1 ? cardsStart : text.indexOf('RAMP:') !== -1 ? text.indexOf('RAMP:') : text.length
-    description = text.slice(descStart + 'DESCRIPTION:'.length, descEnd).trim()
+    const descEnd = tribeStart !== -1 ? tribeStart : phase1Text.length
+    description = phase1Text.slice(descStart + 'DESCRIPTION:'.length, descEnd).trim()
   }
 
-  // Support both old flat CARDS: format and new sectioned format
-  const cards = parseSectionedOrFlat(text)
+  if (!commanderName) throw new Error('Merlin did not name a commander — try again')
 
-  return {
-    commander: commanderMatch ? commanderMatch[1].trim().replace(/\s*[\(\[—–-].*$/, '').trim() : '',
-    description,
-    cards,
+  // ── Fetch commander color identity from Scryfall ──────────────────────────
+  const commanderRes = await fetch(`/api/scryfall/named?exact=${encodeURIComponent(commanderName)}`)
+  if (!commanderRes.ok) {
+    throw new Error(`Could not find commander "${commanderName}" on Scryfall`)
   }
+  const commanderData = await commanderRes.json() as { color_identity: string[] }
+  const colorId = commanderData.color_identity.map(c => c.toLowerCase()).join('') || 'c'
+
+  // ── Phase 2: Fetch real card pools from Scryfall ──────────────────────────
+  const legalBase = `legal:commander id<=${colorId}`
+
+  const [tribeCards, creatures, spells, lands] = await Promise.all([
+    tribe ? searchScryfallCards(`t:"${tribe}" t:creature ${legalBase}`, 80) : Promise.resolve([] as string[]),
+    searchScryfallCards(`t:creature -t:land ${legalBase}`, 100),
+    searchScryfallCards(`-t:creature -t:land ${legalBase}`, 120),
+    searchScryfallCards(`t:land (id<=${colorId} OR t:basic) legal:commander`, 60),
+  ])
+
+  // Remove commander from all lists; dedupe tribe from general creatures
+  const cmdKey = commanderName.toLowerCase()
+  const excl = (arr: string[]) => arr.filter(n => n.toLowerCase() !== cmdKey)
+  const tribeFiltered = excl(tribeCards)
+  const tribeKeys = new Set(tribeFiltered.map(n => n.toLowerCase()))
+  const creaturesFiltered = excl(creatures).filter(n => !tribeKeys.has(n.toLowerCase()))
+  const spellsFiltered = excl(spells)
+  const landsFiltered = excl(lands)
+
+  const totalAvailable = tribeFiltered.length + creaturesFiltered.length + spellsFiltered.length + landsFiltered.length
+  if (totalAvailable < 60) {
+    throw new Error('Could not find enough valid cards for this deck — please try again')
+  }
+
+  // ── Phase 3: Claude selects from the validated card pool ─────────────────
+  const tribeBlock = tribe && tribeFiltered.length > 0
+    ? `\n${tribe.toUpperCase()} TRIBAL CREATURES (prioritize these in CREATURES section):\n${tribeFiltered.join('\n')}\n`
+    : ''
+
+  const phase3System = `You are Merlin, a Magic: The Gathering Commander deck builder.
+Commander: ${commanderName}
+Strategy: ${description}
+${styleLine}
+${bracketLine}
+${podLine}
+
+CRITICAL: You MUST only choose cards from the lists provided below. All of these are real, legal cards for this deck. Copy names exactly as written — do not modify, abbreviate, or invent names.
+${tribeBlock}
+CREATURES (choose from for CREATURES section):
+${creaturesFiltered.slice(0, 80).join('\n')}
+
+SPELLS (choose from for RAMP, DRAW, INTERACTION, OTHER sections):
+${spellsFiltered.slice(0, 100).join('\n')}
+
+LANDS (choose from for LANDS section):
+${landsFiltered.join('\n')}
+
+Select cards from the above lists only. Respond in EXACTLY this format:
+
+COMMANDER: ${commanderName}
+DESCRIPTION: ${description}
+RAMP:
+<10-12 ramp cards from SPELLS — mana rocks, land ramp>
+DRAW:
+<8-10 card draw pieces from SPELLS>
+INTERACTION:
+<8-10 removal, board wipes, counterspells from SPELLS>
+CREATURES:
+<18-24 creatures${tribe ? ` — lead with ${tribe} tribal creatures from the tribal list above, then fill from CREATURES` : ' from CREATURES list'}>
+OTHER:
+<8-12 remaining spells from SPELLS — enchantments, artifacts, planeswalkers>
+LANDS:
+<33-36 lands from LANDS — mix nonbasics with basics>
+
+Rules:
+- Copy card names EXACTLY from the lists above — zero invented names
+- Each card name appears exactly once across all sections
+- Commander does NOT appear in any section
+- All sections together must total exactly 99 cards`
+
+  const phase3Text = await callClaude(
+    [{ role: 'user', content: `Select cards and build the full 99-card deck for ${commanderName}.` }],
+    phase3System,
+    0.3,
+  )
+
+  const cards = parseSectionedOrFlat(phase3Text)
+
+  return { commander: commanderName, description, cards }
 }
 
 function parseDeckBuildResponse(text: string): DeckBuildResult {
