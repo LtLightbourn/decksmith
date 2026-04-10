@@ -463,7 +463,7 @@ ${input.notes ? `Notes: ${input.notes}` : ''}`
   const cards = parseSectionedOrFlat(text)
 
   return {
-    commander: commanderMatch ? commanderMatch[1].trim() : '',
+    commander: commanderMatch ? commanderMatch[1].trim().replace(/\s*[\(\[—–-].*$/, '').trim() : '',
     description,
     cards,
   }
@@ -481,7 +481,7 @@ function parseDeckBuildResponse(text: string): DeckBuildResult {
   }
 
   return {
-    commander: commanderMatch ? commanderMatch[1].trim() : '',
+    commander: commanderMatch ? commanderMatch[1].trim().replace(/\s*[\(\[—–-].*$/, '').trim() : '',
     description,
     cards: parseSectionedOrFlat(text),
   }
